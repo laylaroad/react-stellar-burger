@@ -1,0 +1,55 @@
+.burger_constructor {
+  width: 600px;
+  height: 912px;
+  margin-top: 100px;
+  row-gap: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: white;
+  margin-bottom: 60px;
+}
+
+.burger_wrapper {
+  flex-direction: column;
+  align-items: flex-end;
+  display: flex;
+  gap: 16px;
+  overflow-y: scroll;
+  padding-right: 8px;
+}
+
+.burger_wrapper::-webkit-scrollbar {
+  width: 12px;
+}
+.burger_wrapper::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.burger_wrapper::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
+}
+
+.button_ingredients {
+  border-radius: 0.5;
+  font-family: "JetBrains Mono", sans-serif;
+}
+
+.burger_element {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.burger_counter {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.burger_dragon {
+  margin-bottom: 24px;
+  margin-left: 8px;
+}

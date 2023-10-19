@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 
 export const ingredientPropType = PropTypes.shape({
-  //укажите здесь prop-types для ингридиента
+  icon: PropTypes.node.isRequired,
+  text: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
 });

@@ -1,0 +1,5 @@
+.burger_tab {
+  display: flex;
+  max-width: 600px;
+  height: 56px;
+}

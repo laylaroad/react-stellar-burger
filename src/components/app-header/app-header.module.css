@@ -1,0 +1,14 @@
+.header {
+  background-color: var(---background, #1c1c21);
+}
+
+.header_menu {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header_nav {
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+}
