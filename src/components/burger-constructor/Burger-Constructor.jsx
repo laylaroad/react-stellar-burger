@@ -55,32 +55,32 @@ function BurgerConstructor() {
     setIsOrderModalOpen(false);
   };
 
-
   return (
     <section className={styles.burger_constructor}>
       <ul className={styles.burger_wrapper}>
         {orderIngredients.map((ingredient, index) => (
           <li style={{ margin: '0', padding: '0', listStyle: 'none' }} key={index}>
-            <DragIcon type="primary"
-              className={styles.burger_dragon} />
-            <ConstructorElement
-              type={ingredient.type}
-              isLocked={ingredient.isLocked}
-              text={ingredient.text}
-              price={ingredient.price}
-              thumbnail={ingredient.thumbnail}
-            />
+            <div className={styles.items_container}>
+              <DragIcon type="primary" />
+              <ConstructorElement
+                type={ingredient.type}
+                isLocked={ingredient.isLocked}
+                text={ingredient.text}
+                price={ingredient.price}
+                thumbnail={ingredient.thumbnail}
+              />
+            </div>
           </li>
         ))}
       </ul>
-      <span className={styles.burger_counter}>
-        <p className="text text_type_digits-medium mr-8 pb-0 mb-0">610
+      <div className={styles.burger_sum}>
+        <p className="text text_type_digits-medium mr-8">610
           <CurrencyIcon type="primary" />
         </p>
         <Button htmlType="button" type="primary" size="medium" onClick={openOrderModal}>
           Оформить заказ
         </Button>
-      </span>
+      </div>
 
       {isOrderModalOpen && (
         <Modal onClose={closeOrderModal}>

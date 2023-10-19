@@ -5,7 +5,6 @@ import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-dev
 
 import HeaderElements from '../header-elements/Header-Elements';
 
-// import PropTypes from 'prop-types';
 
 function AppHeader() {
     return (
@@ -45,10 +44,5 @@ function AppHeader() {
 
     )
 }
-
-// AppHeader.propTypes = {
-//     icon: PropTypes.node.isRequired,
-//     text: PropTypes.string,
-// };
 
 export default AppHeader;

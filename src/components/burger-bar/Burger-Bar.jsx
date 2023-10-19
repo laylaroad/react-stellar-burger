@@ -5,15 +5,21 @@ import styles from './burger-bar.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../ingredient-details/Ingredient-Details';
 import Modal from '../modal/Modal';
+import { ingredientPropType } from '../../utils/prop-types';
+import PropTypes from 'prop-types';
 
 function ShowIngredientDetails({ ingredient, onShowDetails }) {
+
+    let count = 1;
+
     return (
         <section
             className={styles.ingredient_item}
-            onClick={() => onShowDetails(ingredient)}
-        >
-            <img src={ingredient.image} alt={ingredient.name} />
-            <Counter count={1} size="default" extraClass="m-1" />
+            onClick={() => onShowDetails(ingredient)}>
+            <img src={ingredient.image} alt={ingredient.name}
+            />
+            {count && (
+                <Counter count={count} size="default" extraClass="m-1" />)}
             <div className={styles.ingredient_price}>
                 <div className={`${styles.ingredient_price} text_type_digits-default `}>
                     {ingredient.price}
@@ -29,6 +35,8 @@ function ShowIngredientDetails({ ingredient, onShowDetails }) {
 }
 
 function BurgerBar() {
+
+
     const [selectedIngredient, setSelectedIngredient] = useState(null);
 
     const showIngredientDetails = (ingredient) => {
@@ -74,6 +82,7 @@ function BurgerBar() {
                     <ul className={styles.burger_list}>
                         {categorizedData[categoryName].map((ingredient) => (
                             <span
+
                                 className={`${styles.ingredient_item} pl-4`}
                                 key={ingredient._id}>
                                 <ShowIngredientDetails ingredient={ingredient} onShowDetails={showIngredientDetails} />
@@ -92,6 +101,12 @@ function BurgerBar() {
         </section>
     );
 }
+
+ShowIngredientDetails.propTypes = {
+    ingredient: PropTypes.object.isRequired,
+    onShowDetails: PropTypes.func.isRequired,
+}
+
 
 export default BurgerBar;
 

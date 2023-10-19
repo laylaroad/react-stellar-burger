@@ -30,6 +30,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: calc(var(--offset-base-size) * 2);
 }
 
 .ingredient_image {

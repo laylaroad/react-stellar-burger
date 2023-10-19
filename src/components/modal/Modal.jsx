@@ -18,10 +18,11 @@ function Modal({ children, onClose, title }) {
         };
     }, []);
 
+
     return createPortal(
         <ModalOverlay onClick={onClose}>
             <div className={styles.modal}>
-                <div className={styles.modal_content}>
+                <div className={styles.modal_card}>
                     <button className={styles.close_button} onClick={onClose}>
                         <CloseIcon type="primary" />
                     </button>
@@ -29,9 +30,9 @@ function Modal({ children, onClose, title }) {
                         {title}
                     </h2>
                 </div>
-                <div className={styles.modal_content_text}>  {children}</div>
+                {children}
             </div>
-        </ModalOverlay >,
+        </ModalOverlay>,
 
         modal
     );
