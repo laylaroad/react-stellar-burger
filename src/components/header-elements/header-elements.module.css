@@ -5,4 +5,5 @@
   gap: calc(var(--offset-base-size) * 2);
   margin-left: 5px;
   margin-right: 5px;
+  cursor: pointer;
 }

@@ -11,9 +11,9 @@ function BurgerIngredients() {
         <section className={styles.burger_ingredients}>
             <h2 className={`${styles.burger_title} text_type_main-large`}>Соберите бургер</h2>
             <BurgerTab />
-            <div className={styles.burger_container}>
+            <article className={styles.burger_container}>
                 <BurgerBar ingredient={data} />
-            </div>
+            </article>
         </section>
     );
 }

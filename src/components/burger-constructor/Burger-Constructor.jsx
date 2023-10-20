@@ -1,9 +1,8 @@
 import styles from './burger-constructor.module.css';
 import { LockIcon, Button, ConstructorElement, DragIcon, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import Modal from '../modal/Modal';
 import { useState } from 'react';
-import OrderReady from '../order-ready/Order-Ready';
+import OrderDetails from '../order-details/Order-Details';
 
 
 const orderIngredients = [
@@ -60,7 +59,7 @@ function BurgerConstructor() {
       <ul className={styles.burger_wrapper}>
         {orderIngredients.map((ingredient, index) => (
           <li style={{ margin: '0', padding: '0', listStyle: 'none' }} key={index}>
-            <div className={styles.items_container}>
+            <span className={styles.items_container}>
               <DragIcon type="primary" />
               <ConstructorElement
                 type={ingredient.type}
@@ -69,22 +68,22 @@ function BurgerConstructor() {
                 price={ingredient.price}
                 thumbnail={ingredient.thumbnail}
               />
-            </div>
+            </span>
           </li>
         ))}
       </ul>
-      <div className={styles.burger_sum}>
+      <span className={styles.burger_sum}>
         <p className="text text_type_digits-medium mr-8">610
           <CurrencyIcon type="primary" />
         </p>
         <Button htmlType="button" type="primary" size="medium" onClick={openOrderModal}>
           Оформить заказ
         </Button>
-      </div>
+      </span>
 
       {isOrderModalOpen && (
         <Modal onClose={closeOrderModal}>
-          <OrderReady />
+          <OrderDetails />
         </Modal>
       )}
 

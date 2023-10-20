@@ -1,11 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { data } from '../../utils/data';
 import styles from './burger-bar.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../ingredient-details/Ingredient-Details';
 import Modal from '../modal/Modal';
-import { ingredientPropType } from '../../utils/prop-types';
 import PropTypes from 'prop-types';
 
 function ShowIngredientDetails({ ingredient, onShowDetails }) {
@@ -20,16 +19,16 @@ function ShowIngredientDetails({ ingredient, onShowDetails }) {
             />
             {count && (
                 <Counter count={count} size="default" extraClass="m-1" />)}
-            <div className={styles.ingredient_price}>
+            <span className={styles.ingredient_price}>
                 <div className={`${styles.ingredient_price} text_type_digits-default `}>
                     {ingredient.price}
                     <CurrencyIcon type="primary"
                         style={{ margin: '0', padding: '0' }} />
                 </div>
-            </div>
-            <div className={`${styles.ingredient_name} text_type_main-default`}>
+            </span>
+            <span className={`${styles.ingredient_name} text_type_main-default`}>
                 {ingredient.name}
-            </div>
+            </span>
         </section>
     );
 }
@@ -55,18 +54,19 @@ function BurgerBar() {
     });
 
     useEffect(() => {
+
         const typeToCategory = {
             bun: 'Булки',
             sauce: 'Соусы',
             main: 'Начинки',
         };
 
-        const categorizedIngredients = data.reduce((acc, ingredient) => {
+        const categorizedIngredients = data.reduce((result, ingredient) => {
             const category = typeToCategory[ingredient.type];
             if (category) {
-                acc[category].push(ingredient);
+                result[category].push(ingredient);
             }
-            return acc;
+            return result;
         }, { Булки: [], Соусы: [], Начинки: [] });
 
         setCategorizedData(categorizedIngredients);

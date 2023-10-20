@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { data } from "../../utils/data";
 import AppHeader from "../app-header/App-Header";
 import BurgerIngredients from "../burger-ingredients/Burger-Ingredients";
@@ -20,7 +20,7 @@ function request() {
 function App() {
 
   const [IngredientsData, setIngredientsData] = useState([]);
-  const [, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   function getIngredientsData() {
     setIsLoading(true);
