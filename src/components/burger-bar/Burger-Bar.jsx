@@ -9,16 +9,13 @@ import PropTypes from 'prop-types';
 
 function ShowIngredientDetails({ ingredient, onShowDetails }) {
 
-    let count = 1;
 
     return (
         <section
             className={styles.ingredient_item}
             onClick={() => onShowDetails(ingredient)}>
-            <img src={ingredient.image} alt={ingredient.name}
-            />
-            {count && (
-                <Counter count={count} size="default" extraClass="m-1" />)}
+            <img src={ingredient.image} alt={ingredient.name} />
+            <Counter count={1} size="default" extraClass="m-1" />
             <span className={styles.ingredient_price}>
                 <div className={`${styles.ingredient_price} text_type_digits-default `}>
                     {ingredient.price}
@@ -45,7 +42,6 @@ function BurgerBar() {
     const closeIngredientDetails = () => {
         setSelectedIngredient(null);
     };
-
 
     const [categorizedData, setCategorizedData] = useState({
         Buns: [],
@@ -81,12 +77,11 @@ function BurgerBar() {
                     <h2 className={`${styles.ingredient_title} text_type_main-medium pb-6`}>{categoryName}</h2>
                     <ul className={styles.burger_list}>
                         {categorizedData[categoryName].map((ingredient) => (
-                            <span
-
+                            <li
                                 className={`${styles.ingredient_item} pl-4`}
                                 key={ingredient._id}>
                                 <ShowIngredientDetails ingredient={ingredient} onShowDetails={showIngredientDetails} />
-                            </span>
+                            </li>
                         ))}
                     </ul>
                 </article>
