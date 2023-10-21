@@ -17,7 +17,7 @@
   padding-left: 40px;
   text-align: center;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  z-index: 2;
 }
 
 .modal_card {
@@ -37,6 +37,7 @@
   align-items: center;
   justify-content: center;
   padding: 0;
+  z-index: 1;
 }
 
 .modal_title {

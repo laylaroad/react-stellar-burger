@@ -5,24 +5,26 @@ import { useEffect } from 'react';
 import ModalOverlay from '../modal-overlay/Modal-Overlay';
 import PropTypes from 'prop-types';
 
-// Get the modal DOM element
 const modal = document.getElementById('modal-root');
 
 function Modal({ children, onClose, title }) {
+
     useEffect(() => {
-        const handleClickOnEsc = (evt) => {
-            if (evt.key === 'Escape') onClose();
-        }
-        document.addEventListener('keydown', handleClickOnEsc);
+        const handleEscapeKey = (event) => {
+            console.log(event);
+            if (event.key === 'Escape') {
+                onClose();
+            }
+        };
+        document.addEventListener('keydown', handleEscapeKey);
 
         return () => {
-            document.removeEventListener('keydown', handleClickOnEsc);
+            document.removeEventListener('keydown', handleEscapeKey);
         };
-    }, []);
+    }, [onClose]);
 
     return createPortal(
-
-        <ModalOverlay onClick={onClose}>
+        <ModalOverlay onClose={onClose}>
             <div className={styles.modal}>
                 <header className={styles.modal_card}>
                     <h2 className={`${styles.modal_title} text text_type_main-large`}>
@@ -30,6 +32,7 @@ function Modal({ children, onClose, title }) {
                     <button className={styles.close_button} onClick={onClose}>
                         <CloseIcon type="primary" />
                     </button>
+
                 </header>
                 <div>{children}</div>
             </div>
