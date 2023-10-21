@@ -7,7 +7,7 @@ function HeaderElements({ icon, text }) {
     return (
         <span className={styles.header_elements}>
             {icon}
-            <span style={{ marginLeft: '8' }}>{text}</span>
+            <span className={styles.header_text}>{text}</span>
         </span>
     )
 }

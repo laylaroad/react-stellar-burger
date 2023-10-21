@@ -1,7 +1,6 @@
 
 import styles from './ingredient-details.module.css';
 import { ingredientPropType } from '../../utils/prop-types';
-import PropTypes from 'prop-types';
 
 function IngredientDetails({ ingredient }) {
     return (
@@ -35,7 +34,7 @@ function IngredientDetails({ ingredient }) {
 }
 
 IngredientDetails.propTypes = {
-    ingredient: PropTypes.arrayOf(ingredientPropType).isRequired,
+    ingredient: ingredientPropType,
 }
 
 export default IngredientDetails;

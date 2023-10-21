@@ -6,21 +6,27 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import IngredientDetails from '../ingredient-details/Ingredient-Details';
 import Modal from '../modal/Modal';
 import PropTypes from 'prop-types';
+import { ingredientPropType } from '../../utils/prop-types';
 
 function ShowIngredientDetails({ ingredient, onShowDetails }) {
 
+    // if ((ingredient._id === [data[0]._id]) && (ingredient._id === [data[3]._id])) {
+    //     count = 1;
+    // }
+
+    let count = 1;
 
     return (
         <section
             className={styles.ingredient_item}
             onClick={() => onShowDetails(ingredient)}>
             <img src={ingredient.image} alt={ingredient.name} />
-            <Counter count={1} size="default" extraClass="m-1" />
+            {count && (
+                <Counter count={count} size="default" extraClass="m-1" />)}
             <span className={styles.ingredient_price}>
                 <div className={`${styles.ingredient_price} text_type_digits-default `}>
                     {ingredient.price}
-                    <CurrencyIcon type="primary"
-                        style={{ margin: '0', padding: '0' }} />
+                    <CurrencyIcon type="primary" />
                 </div>
             </span>
             <span className={`${styles.ingredient_name} text_type_main-default`}>
@@ -98,55 +104,9 @@ function BurgerBar() {
 }
 
 ShowIngredientDetails.propTypes = {
-    ingredient: PropTypes.object.isRequired,
+    ingredient: ingredientPropType,
     onShowDetails: PropTypes.func.isRequired,
 }
 
 
 export default BurgerBar;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function IngredientItem({ ingredient }) {
-//     return (
-//         <div className={styles.ingredient_item}>
-//             {Object.keys(ingredient).map((category) => (
-//                 <div key={category}>
-//                     <h3 className="text text_type_main-medium">{category}</h3>
-//                     {Array.isArray(ingredient[category]) ? (
-//                         ingredient[category].map((item) => (
-//                             <div key={item._id}>
-//                                 <img src={item.image} alt={item.name} />
-//                                 <Counter count={1} size="default" extraClass="m-1" />
-//                                 <h3 className="text text_type_main-medium">
-//                                     {item.price} <CurrencyIcon type="primary" />
-//                                 </h3>
-//                                 <p className="text text_type_main-default">{item.name}</p>
-//                             </div>
-//                         ))
-//                     ) : (
-//                         <p>Category is not an array</p>
-//                     )}
-//                 </div>
-//             ))}
-//         </div>
-//     );
-// }
-
-// export default IngredientItem;
