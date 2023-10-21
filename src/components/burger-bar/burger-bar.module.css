@@ -8,9 +8,10 @@
 
 .burger_list {
   max-width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two elements in a row */
+  row-gap: 24px;
+  padding-right: 24px;
 }
 
 .ingredient_name {

@@ -93,6 +93,7 @@ function BurgerConstructor() {
       <span className={styles.burger_sum}>
         <p className="text text_type_digits-medium mr-10">610
           <CurrencyIcon type="primary"
+            extraClass={styles.currency}
           /></p>
 
         <Button htmlType="button" type="primary" size="medium" onClick={openModal}>

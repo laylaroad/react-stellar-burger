@@ -7,37 +7,40 @@ import HeaderElements from '../header-elements/Header-Elements';
 
 
 function AppHeader() {
+
+
     return (
 
         <header className={`${styles.header} text_type_main-default pt-4 pb-4`}>
-            <div className={styles.header_menu}>
+            <nav className={styles.header_menu}>
 
-                <nav className={styles.header_nav}>
+                <ul className={styles.header_nav}>
 
                     <HeaderElements
                         icon={<BurgerIcon type="primary" />}
-                        text={'Конструктор'}
+                        text="Конструктор"
                         isActive={true}
-
                     />
 
                     <HeaderElements
                         icon={<ListIcon type="secondary" />}
-                        text={'Лента заказов'}
-
+                        text="Лента заказов"
+                        isActive={false}
                     />
 
-                </nav>
+                </ul>
 
-                <Logo />
+                <div className={styles.logo}>
+                    <Logo />
+                </div>
 
                 <HeaderElements
                     icon={<ProfileIcon type="secondary" />}
-                    text={'Личный кабинет'}
-
+                    text="Личный кабинет"
+                    isActive={false}
                 />
 
-            </div>
+            </nav>
 
         </header>
 
