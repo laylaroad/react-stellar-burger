@@ -3,6 +3,7 @@ import { LockIcon, Button, ConstructorElement, DragIcon, CurrencyIcon } from '@y
 import Modal from '../modal/Modal';
 import useModal from '../../hooks/useModal';
 import OrderDetails from '../order-details/Order-Details';
+import PropTypes from 'prop-types';
 
 
 const orderIngredients = [
@@ -107,5 +108,10 @@ function BurgerConstructor() {
     </section>
   );
 }
+
+BunConstructor.propTypes = {
+  children: PropTypes.element,
+}
+
 
 export default BurgerConstructor;
