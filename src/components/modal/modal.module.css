@@ -1,0 +1,48 @@
+.modal {
+  width: 720px;
+  height: 539px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04),
+    0px 4px 8px 0px rgba(0, 0, 0, 0.04), 0px 16px 24px 0px rgba(0, 0, 0, 0.04),
+    0px 24px 32px 0px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--interface-modal-edge, rgba(76, 76, 255, 0.2));
+  background-color: var(---background, #1c1c21);
+  border-radius: 40px;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  padding-right: 40px;
+  padding-left: 40px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.modal_card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close_button {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 1;
+}
+
+.modal_title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: flex-start;
+  margin: calc((--offset-base-size) * 10);
+}

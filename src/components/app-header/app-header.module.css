@@ -1,0 +1,28 @@
+.header {
+  max-width: 1920px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: var(---background, #1c1c21);
+}
+
+.header_menu {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header_nav {
+  display: flex;
+  align-items: space-around;
+  gap: 48px;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  display: flex;
+  align-self: center;
+  width: 30%;
+}
