@@ -12,15 +12,15 @@ function Modal({ children, onClose, title }) {
     useEffect(() => {
         const handleEscapeKey = (event) => {
             console.log(event);
-            if (event.key === 'f') {
+            if (event.key === 'Escape') {
                 onClose();
             }
         };
-        window.addEventListener('keydown', handleEscapeKey);
+        document.addEventListener('keydown', handleEscapeKey);
 
 
         return () => {
-            window.removeEventListener('keydown', handleEscapeKey);
+            document.removeEventListener('keydown', handleEscapeKey);
         };
     }, []);
 
