@@ -10,10 +10,6 @@ import { ingredientPropType } from '../../utils/prop-types';
 
 function ShowIngredientDetails({ ingredient, onShowDetails }) {
 
-    // if ((ingredient._id === [data[0]._id]) && (ingredient._id === [data[3]._id])) {
-    //     count = 1;
-    // }
-
     let count = 1;
 
     return (

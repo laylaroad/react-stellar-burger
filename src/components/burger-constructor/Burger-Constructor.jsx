@@ -45,7 +45,7 @@ function BunConstructor({ children }) {
         <ConstructorElement key={index}
           type="top"
           isLocked={bun.isLocked}
-          text={`${bun.text}(верх)`}
+          text={`${bun.text} (верх)`}
           price={bun.price}
           thumbnail={bun.thumbnail}
           extraClass={styles.container_bun}
@@ -56,7 +56,7 @@ function BunConstructor({ children }) {
         <ConstructorElement key={index}
           type="bottom"
           isLocked={bun.isLocked}
-          text={`${bun.text}(низ)`}
+          text={`${bun.text} (низ)`}
           price={bun.price}
           thumbnail={bun.thumbnail}
           extraClass={styles.container_bun}

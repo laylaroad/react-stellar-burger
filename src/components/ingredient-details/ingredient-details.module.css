@@ -10,8 +10,7 @@
 .ingredient_title {
   align-self: center;
   display: flex;
-  margin-top: calc(var(--offset-base-size) * 4);
-  margin-bottom: calc(var(--offset-base-size) * 8);
+  margin: calc(var(--offset-base-size) * 10);
 }
 
 .ingredient_ul {

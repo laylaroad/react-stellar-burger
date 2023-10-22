@@ -12,16 +12,17 @@ function Modal({ children, onClose, title }) {
     useEffect(() => {
         const handleEscapeKey = (event) => {
             console.log(event);
-            if (event.key === 'Escape') {
+            if (event.key === 'f') {
                 onClose();
             }
         };
-        document.addEventListener('keydown', handleEscapeKey);
+        window.addEventListener('keydown', handleEscapeKey);
+
 
         return () => {
-            document.removeEventListener('keydown', handleEscapeKey);
+            window.removeEventListener('keydown', handleEscapeKey);
         };
-    }, [onClose]);
+    }, []);
 
     return createPortal(
         <ModalOverlay onClose={onClose}>

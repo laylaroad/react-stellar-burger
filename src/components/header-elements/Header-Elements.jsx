@@ -2,7 +2,6 @@ import styles from './header-elements.module.css';
 
 import PropTypes from 'prop-types';
 
-
 function HeaderElements({ icon, text, isActive }) {
 
     const isActiveText = isActive ? 'false' : 'text_color_active';

@@ -9,7 +9,7 @@
 .burger_list {
   max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two elements in a row */
+  grid-template-columns: repeat(2, 1fr);
   row-gap: 24px;
   padding-right: 24px;
 }
