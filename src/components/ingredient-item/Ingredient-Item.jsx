@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { ingredientPropType } from "../../utils/prop-types";
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './ingredient-item.module.css';
-import { selectBurgerIngredients } from "../../services/reducers/burgerConstructorReducer";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { catchIngredient } from '../../services/reducers/ingredientsReducer';
 
 function IngredientItem() {
 
     const dispatch = useDispatch();
-    const ingredients = useSelector((state) => state.selectBurgerIngredients.ingredients);
+    const ingredients = useSelector((state) => state.ingredients.ingredients);
 
     useEffect(() => {
         dispatch(catchIngredient());
