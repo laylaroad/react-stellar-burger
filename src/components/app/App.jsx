@@ -1,3 +1,41 @@
+
+import { useEffect, useState } from 'react';
+import AppHeader from "../app-header/App-Header";
+import BurgerIngredients from "../burger-ingredients/Burger-Ingredients";
+import { useDispatch } from 'react-redux';
+import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
+import Section from '../section/Section';
+
+
+function App() {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getIngredientsData());
+    }, []);
+
+
+    return (
+        <div>
+            <AppHeader />
+            <Section>
+
+                <BurgerIngredients ingredients={getIngredientsData} />
+            </Section>
+        </div>
+
+    );
+}
+
+export default App;
+
+
+
+
+
+
+
 // import { useEffect, useState } from 'react';
 // import { data } from "../../utils/data";
 // import request from '../../utils/api';
@@ -41,27 +79,3 @@
 // }
 
 // export default App;
-
-
-import { useEffect, useState } from 'react';
-import AppHeader from "../app-header/App-Header";
-import BurgerIngredients from "../burger-ingredients/Burger-Ingredients";
-
-import Section from '../section/Section';
-
-
-function App() {
-
-    return (
-        <div>
-            <AppHeader />
-            <Section>
-
-                <BurgerIngredients />
-            </Section>
-        </div>
-
-    );
-}
-
-export default App;
