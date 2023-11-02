@@ -1,65 +1,53 @@
-import { createSlice, createSelector, createAsyncThunk } from "@reduxjs/toolkit";
-import { apiUrl } from '../../utils/api';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { apiUrl, checkResponse } from '../../utils/api';
 
 const initialState = {
-    ingredients: [],
+    ingredientsData: [],
     currentIngredient: {},
+    ingredientsModal: false,
+    isLoading: false,
+    isError: false,
 }
 
 export const getIngredientsData = createAsyncThunk(
-    'ingredients/getIngredientsData',
-    async () => {
-        console.log('Request initiated');
-        const response = await fetch(`${apiUrl}/ingredients`);
-        if (!response.ok) {
-            console.log(`Request failed with status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log('Request succeeded with data:', data);
-        return data.data;
+    'ingredients/getIngredientsData', () => {
+        return fetch(`${apiUrl}/ingredients`).then(checkResponse);
     }
 );
-
 
 const ingredientsSliceData = createSlice({
     name: 'ingredients',
     initialState,
     reducers: {
-        catchIngredient: (state, action) => {
+        showIngredient: (state, action) => {
             state.currentIngredient = action.payload;
             console.log('Received data:', action.payload);
-
+            state.ingredientsModal = true;
         },
-        returnIngredient: (state) => {
+        closeIngredient: (state) => {
             state.currentIngredient = {};
+            state.ingredientsModal = false;
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(getIngredientsData.fulfilled, (state, action) => {
-            state.ingredients = action.payload.data;
+        builder.addCase(getIngredientsData.pending, (state) => {
+            state.isLoading = true;
+            state.isError = false;
         });
-        builder.addCase(getIngredientsData.rejected, (action) => {
-            console.error(action.error);
+        builder.addCase(getIngredientsData.fulfilled, (state, action) => {
+            state.ingredientsData = action.payload.data;
+            state.isLoading = true;
+            state.isError = false;
+        });
+        builder.addCase(getIngredientsData.rejected, (state) => {
+            state.isLoading = false;
+            state.isError = true;
         });
     }
 });
 
 
-export const { catchIngredient, returnIngredient } =
+export const { showIngredient, closeIngredient } =
     ingredientsSliceData.actions;
 
 export default ingredientsSliceData.reducer;
-
-
-export const selectIngredients = createSelector(
-    [(state) => state],
-    (state) => {
-        console.log('Selected ingredients:', state.ingredients);
-        return state.ingredients.ingredients;
-    }
-);
-
-export const selectCurrentIngredient = createSelector(
-    [(state) => state.ingredients],
-    (ingredients) => ingredients.currentIngredient
-)

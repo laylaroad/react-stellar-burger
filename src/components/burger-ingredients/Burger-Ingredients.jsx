@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './burger-ingredients.module.css';
 import BurgerTab from '../burger-tab/Burger-Tab';
 import IngredientItem from '../ingredient-item/Ingredient-Item';
-import { getIngredientsData, selectIngredients } from '../../services/reducers/ingredientsReducer';
+import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
+import { selectIngredients } from '../../services/selectors/ingredientsSelector';
 
 function BurgerIngredients() {
     const [current, setCurrent] = useState('one');
+    const oneRef = createRef(null);
+    const twoRef = createRef(null);
+    const threeRef = createRef(null);
+
     const dispatch = useDispatch();
-    const tabsRefs = {
-        buns: useRef(),
-        sauces: useRef(),
-        mains: useRef(),
-    };
 
     useEffect(() => {
         console.log('API request initiated');
@@ -29,19 +29,22 @@ function BurgerIngredients() {
     const ingredients = useSelector(selectIngredients);
     console.log(ingredients);
 
-    useEffect(() => {
-        document.addEventListener('scroll', handleScroll);
-        return () => {
-            document.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
     const handleScroll = () => {
-        const result = Object.entries(tabsRefs)
-            .map(([name, ref]) => ({
-                name,
-                coords: ref.current.getBoundingClientRect().top,
-            }))
+        const result = [
+            {
+                name: 'one',
+                coords: oneRef.current.getBoundingClientRect().top,
+            },
+            {
+                name: 'two',
+                coords: twoRef.current.getBoundingClientRect().top,
+            },
+            {
+                name: 'three',
+                coords: threeRef.current.getBoundingClientRect().top,
+            },
+
+        ]
             .filter((el) => el.coords > 0)
             .sort((a, b) => a.coords - b.coords);
 
@@ -50,19 +53,6 @@ function BurgerIngredients() {
         }
     };
 
-    const renderIngredientsByType = (type) => (
-        ingredients.map((ingredient) => {
-            if (ingredient.type === type) {
-                return (
-                    <IngredientItem
-                        key={ingredient._id}
-                        ingredient={ingredient}
-                    />
-                );
-            }
-            return null;
-        })
-    );
     return (
         <section className={styles.burger_ingredients}>
             <h2 className={`${styles.burger_title} text text_type_main-large`}>Соберите бургер</h2>
@@ -70,31 +60,60 @@ function BurgerIngredients() {
             <article className={styles.burger_container} onClick={handleScroll}>
                 {ingredients && (
                     <>
-                        <h3 className="text text_type_main-medium pb-6" ref={tabsRefs.buns}>
+                        <h3 className="text text_type_main-medium pb-6" ref={oneRef}>
                             Булки
                         </h3>
                         <div className={`${styles.ingredients} pl-4`}>
-                            {renderIngredientsByType("bun")}
+                            {ingredients.map((ingredient) => {
+                                if (ingredient.type === 'bun') {
+                                    return (
+                                        <IngredientItem
+                                            key={ingredient._id}
+                                            ingredient={ingredient}
+                                        />
+                                    );
+                                }
+                            })}
                         </div>
 
-                        <h3 className="text text_type_main-medium pb-6" ref={tabsRefs.sauces}>
+                        <h3 className="text text_type_main-medium pb-6" ref={twoRef}>
                             Соусы
                         </h3>
+
                         <div className={`${styles.ingredients} pl-4`}>
-                            {renderIngredientsByType("sauces")}
+                            {ingredients.map((ingredient) => {
+                                if (ingredient.type === 'sauce') {
+                                    return (
+                                        <IngredientItem
+                                            key={ingredient._id}
+                                            ingredient={ingredient}
+                                        />
+                                    );
+                                }
+                            })}
                         </div>
 
-                        <h3 className="text text_type_main-medium pb-6" ref={tabsRefs.mains}>
+                        <h3 className="text text_type_main-medium pb-6" ref={threeRef}>
                             Начинки
                         </h3>
+
                         <div className={`${styles.ingredients} pl-4`}>
-                            {renderIngredientsByType("mains")}
+                            {ingredients.map((ingredient) => {
+                                if (ingredient.type === 'main') {
+                                    return (
+                                        <IngredientItem
+                                            key={ingredient._id}
+                                            ingredient={ingredient}
+                                        />
+                                    );
+                                }
+                            })}
                         </div>
                     </>
                 )}
             </article>
         </section>
     );
-}
+};
 
 export default BurgerIngredients;

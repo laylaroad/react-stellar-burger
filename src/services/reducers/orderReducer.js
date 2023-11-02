@@ -1,4 +1,4 @@
-import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { checkResponse, apiUrl } from '../../utils/api';
 import { deleteIngredient } from './burgerConstructorReducer';
 
@@ -31,9 +31,10 @@ export const getOrderData = createAsyncThunk('order/orderData', async (ingredien
 });
 
 const initialState = {
-    order: {},
+    orderModal: false,
     isLoading: false,
     isError: false,
+    order: {}
 }
 
 const orderSlice = createSlice({
@@ -41,12 +42,18 @@ const orderSlice = createSlice({
     initialState,
 
     extraReducers: (builder) => {
+        builder.addCase(getOrderData.pending, (state) => {
+            state.isLoading = true;
+            state.isError = false;
+        });
         builder.addCase(getOrderData.fulfilled, (state, action) => {
             state.order = action.payload.order;
+            state.orderModal = true;
             state.isLoading = false;
             state.isError = false;
         });
         builder.addCase(getOrderData.rejected, (state, action) => {
+            state.orderModal = false;
             state.isLoading = false;
             state.isError = true;
             console.error(action.error);
@@ -55,19 +62,4 @@ const orderSlice = createSlice({
 });
 
 export default orderSlice.reducer;
-
-export const selectOrderIsLoading = createSelector(
-    [(state) => state.order],
-    (order) => order.isLoading
-);
-
-export const selectOrderNumber = createSelector(
-    [(state) => state.order],
-    (order) => order.number
-);
-
-export const selectOrderIsError = createSelector(
-    [(state) => state.order],
-    (order) => order.isError
-);
 

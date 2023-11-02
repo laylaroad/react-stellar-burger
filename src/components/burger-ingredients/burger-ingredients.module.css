@@ -3,18 +3,32 @@
   flex-direction: column;
   max-width: 600px;
   min-height: 756px;
+  width: 45%;
 }
 
 .burger_container {
+  max-height: 55vh;
+  overflow-y: scroll;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  column-gap: 8px;
-  overflow: auto;
+  flex-direction: column;
+}
+
+.burger_container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.burger_container ::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
+}
+
+.ingredients {
+  max-width: 100%;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 272px);
+  gap: calc(var(--offset-base-size) * 6);
 }
 
 .burger_title {
