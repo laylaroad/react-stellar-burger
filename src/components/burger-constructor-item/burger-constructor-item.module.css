@@ -1,0 +1,11 @@
+.drag_n_drop_constructor {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: calc(var(--offset-base-size) * 2);
+}
+
+.dragging {
+  opacity: 0;
+}

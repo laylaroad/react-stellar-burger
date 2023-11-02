@@ -9,6 +9,10 @@
   margin-top: 60px;
 }
 
+.constructor_empty {
+  border: 1px solid #8585ad;
+}
+
 .container_bun {
   flex-grow: 0;
   width: 568px;

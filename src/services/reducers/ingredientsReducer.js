@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiUrl, checkResponse } from '../../utils/api';
 
 const initialState = {
-    ingredientsData: [],
+    ingredients: [],
     currentIngredient: {},
     ingredientsModal: false,
     isLoading: false,
@@ -35,7 +35,7 @@ const ingredientsSliceData = createSlice({
             state.isError = false;
         });
         builder.addCase(getIngredientsData.fulfilled, (state, action) => {
-            state.ingredientsData = action.payload.data;
+            state.ingredients = action.payload.data;
             state.isLoading = true;
             state.isError = false;
         });

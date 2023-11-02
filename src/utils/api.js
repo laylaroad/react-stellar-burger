@@ -9,6 +9,11 @@ export const checkResponse = async (res) => {
     console.log('Response data:', data);
     return data;
 };
+
+export default function request() {
+    return fetch(apiUrl).then(checkResponse);
+}
+
 export const fetchIngredients = async () => {
     try {
         const response = await fetch(apiUrl);
@@ -20,6 +25,7 @@ export const fetchIngredients = async () => {
         throw new Error(`Ошибка: ${error.message}`);
     }
 };
+
 
 
 

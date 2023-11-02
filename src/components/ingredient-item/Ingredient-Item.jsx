@@ -2,17 +2,23 @@ import React, { useEffect } from "react";
 import { ingredientPropType } from "../../utils/prop-types";
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './ingredient-item.module.css';
+import { useDrag } from 'react-dnd';
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import { catchIngredient } from '../../services/reducers/ingredientsReducer';
+import { showIngredient } from '../../services/reducers/ingredientsReducer';
 
-function IngredientItem() {
+function IngredientItem({ ingredient }) {
 
     const dispatch = useDispatch();
     const ingredients = useSelector((state) => state.ingredients.ingredients);
 
     useEffect(() => {
-        dispatch(catchIngredient());
+        dispatch(showIngredient());
     }, []);
+
+    const [, dragRef] = useDrag({
+        type: "ingredient",
+        item: ingredient,
+    });
 
     return (
         ingredients.map((ingredient) => (

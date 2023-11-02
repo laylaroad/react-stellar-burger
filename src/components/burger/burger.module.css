@@ -1,0 +1,24 @@
+.burger_container {
+  min-height: calc(100vh - 310px);
+  display: flex;
+  flex-direction: column;
+  row-gap: calc(var(--offset-base-size) * 4);
+}
+
+.burger_ingredients {
+  display: flex;
+  flex-direction: column;
+  row-gap: calc(var(--offset-base-size) * 4);
+  max-height: calc(100vh - 504px);
+  overflow: auto;
+}
+
+.burger_ingredients::-webkit-scrollbar {
+  width: 8px;
+}
+.burger_ingredients::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.burger_ingredients::-webkit-scrollbar-thumb {
+  background: #8585ad;
+}

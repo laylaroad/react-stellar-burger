@@ -1,5 +1,11 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector } from "@reduxjs/toolkit";
 
-export const selectBurgerIngredients = state => state.burgerConstructor.ingredients;
+export const selectBurgerIngredients = createSelector(
+    (state) => state.burgerConstructor,
+    (burgerConstructor) => burgerConstructor.ingredients
+)
 
-export const selectBurgerBun = state => state.burgerConstructor.bun;
+export const selectBurgerBun = createSelector(
+    (state) => state.burgerConstructor,
+    (burgerConstructor) => burgerConstructor.bun
+);

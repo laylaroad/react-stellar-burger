@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getIngredientsData } from './ingredientsReducer';
 
 const initialState = {
     bun: null,
@@ -6,6 +7,7 @@ const initialState = {
     isLoading: false,
     isError: null,
 };
+
 
 
 const burgerConstructorSlice = createSlice({

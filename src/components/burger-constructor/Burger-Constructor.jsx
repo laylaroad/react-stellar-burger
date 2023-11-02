@@ -1,118 +1,66 @@
 import styles from './burger-constructor.module.css';
-import { LockIcon, Button, ConstructorElement, DragIcon, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import Modal from '../modal/Modal';
-import useModal from '../../hooks/useModal';
-import OrderDetails from '../order-details/Order-Details';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import { v4 as uuidv4 } from 'uuid';
+import { addIngredient } from '../../services/reducers/burgerConstructorReducer';
+import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+// import Modal from '../modal/Modal';
+// import useModal from '../../hooks/useModal';
+// import OrderDetails from '../order-details/Order-Details';
+import Burger from '../burger/Burger';
 
-
-const orderIngredients = [
-  {
-    text: 'Соус традиционный галактический',
-    price: 30,
-    thumbnail: 'https://code.s3.yandex.net/react/code/sauce-03.png',
-  },
-  {
-    text: 'Мясо бессмертных моллюсков Protostomia',
-    price: 300,
-    thumbnail: 'https://code.s3.yandex.net/react/code/meat-02.png',
-  },
-  {
-    text: 'Плоды Фалленианского дерева',
-    price: 80,
-    thumbnail: 'https://code.s3.yandex.net/react/code/sp_1.png',
-  },
-  {
-    text: 'Хрустящие минеральные кольца',
-    price: 80,
-    thumbnail: 'https://code.s3.yandex.net/react/code/mineral_rings.png',
-  },
-];
-
-const orderBunDetails = [
-  {
-    isLocked: true,
-    text: 'Краторная булка N-200i',
-    price: 20,
-    thumbnail: 'https://code.s3.yandex.net/react/code/bun-02.png',
-  },
-];
-
-function BunConstructor({ children }) {
-  return (
-    <>
-      {orderBunDetails.map((bun, index) => (
-        <ConstructorElement key={index}
-          type="top"
-          isLocked={bun.isLocked}
-          text={`${bun.text} (верх)`}
-          price={bun.price}
-          thumbnail={bun.thumbnail}
-          extraClass={styles.container_bun}
-        />
-      ))}
-      <div>{children}</div>
-      {orderBunDetails.map((bun, index) => (
-        <ConstructorElement key={index}
-          type="bottom"
-          isLocked={bun.isLocked}
-          text={`${bun.text} (низ)`}
-          price={bun.price}
-          thumbnail={bun.thumbnail}
-          extraClass={styles.container_bun}
-        />
-      ))}
-    </>
-  );
-}
 
 function BurgerConstructor() {
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const dispatch = useDispatch();
+
+
+  const [, dropTarget] = useDrop({
+    accept: 'ingredient',
+    drop(item) {
+      const idEl = { ...item, _customId: uuidv4() };
+      dispatch(addIngredient(idEl));
+    },
+  });
+
 
   return (
-    <section className={styles.burger_constructor}>
+    <section className={styles.burger_constructor} ref={dropTarget}>
       <div>
-        <BunConstructor>
-          <ul className={styles.burger_wrapper}>
-            {orderIngredients.map((ingredient, index) => (
-              <li className={styles.burger_list} key={index}>
-                <div className={styles.items_container}>
-                  <DragIcon type="primary" />
-                  <ConstructorElement
-                    type={ingredient.type}
-                    text={ingredient.text}
-                    price={ingredient.price}
-                    thumbnail={ingredient.thumbnail}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </BunConstructor>
+        <Burger />
       </div>
       <span className={styles.burger_sum}>
-        <p className="text text_type_digits-medium mr-10">610
-          <CurrencyIcon type="primary"
-            extraClass={styles.currency}
-          /></p>
-
-        <Button htmlType="button" type="primary" size="medium" onClick={openModal}>
+        <p className="text text_type_digits-medium mr-10">
+          610
+          <CurrencyIcon type="primary" extraClass={styles.currency} />
+        </p>
+        <Button htmlType="button" type="primary" size="medium">
           Оформить заказ
         </Button>
       </span>
-
-      {isModalOpen && (
-        <Modal onClose={closeModal}>
-          <OrderDetails />
-        </Modal>
-      )}
     </section>
   );
 }
 
-BunConstructor.propTypes = {
-  children: PropTypes.element,
-}
-
-
 export default BurgerConstructor;
+
+
+
+// // onClick = { openModal }
+
+
+
+
+{/* {isModalOpen && (
+        <Modal onClose={useModal}>
+          <OrderDetails />
+        </Modal>
+      )} */}
+
+// // const allIngredients = [...ingredients, bun];
+// // const modalIsOpen = () => {
+// //     dispatch(getOrderData({ ingredients: allIngredients.map((item) => item._id) }));
+// //     !isError && dispatch(deleteAllIngredients());
+// //     dispatch(openModal('order'));
+// // };
+// // const isError = useSelector(selectOrderIsError);
+

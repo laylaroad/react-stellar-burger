@@ -1,6 +1,13 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-export const selectIngredients = state => state.ingredients.ingredients;
+export const selectIngredients =
+    createSelector(
+        [(state) => state],
+        (state) => {
+            return state.ingredients.ingredients;
+        }
+    );
+// state => state.ingredients.ingredients;
 
 export const selectIngredientsError = createSelector(
     [(state) => state],
