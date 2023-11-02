@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 import BurgerConstructorItem from '../burger-constructor-item/Burger-Constructor-Item';
-import Burger from '../burger/Burger';
+// import Burger from '../burger/Burger';
 
 function Section() {
 
@@ -19,7 +19,7 @@ function Section() {
         <main className={styles.section}>
             <DndProvider backend={HTML5Backend}>
                 <BurgerIngredients />
-                <Burger />
+                {/* <Burger /> */}
             </DndProvider>
         </main>
     )
