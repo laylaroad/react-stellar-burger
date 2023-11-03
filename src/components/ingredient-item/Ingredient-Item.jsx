@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ingredientPropType } from "../../utils/prop-types";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styles from './ingredient-item.module.css';
 import { useDrag } from 'react-dnd';
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -20,7 +20,7 @@ function IngredientItem({ ingredient }) {
     });
 
     return (
-        <div className={styles.ingredient_item} key={ingredient._id}>
+        <div className={styles.ingredient_item} key={ingredient._id} ref={dragRef}>
             <img src={ingredient.image} alt={ingredient.name}
             />
             <div className={styles.ingredient_price}>

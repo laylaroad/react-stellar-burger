@@ -29,7 +29,7 @@ function BurgerIngredients() {
             },
 
         ]
-            .filter((el) => el.coords > 0)
+            .filter((elem) => elem.coords > 0)
             .sort((a, b) => a.coords - b.coords);
 
         if (result.length) {

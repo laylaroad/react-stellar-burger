@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux'
 import AppHeader from "../app-header/App-Header";
 import BurgerIngredients from "../burger-ingredients/Burger-Ingredients";
 import { useDispatch } from 'react-redux';
@@ -10,17 +11,14 @@ import MainSection from '../mainSection/MainSection';
 
 function App() {
 
-    // const dispatch = useDispatch();
+    // const modalOpen = useSelector(selectIngredientsModal);
 
-    // useEffect(() => {
-    //     dispatch(getIngredientsData());
-    // }, []);
 
     return (
         <div>
             <AppHeader />
-            <MainSection />
 
+            <MainSection />
         </div>
 
     );

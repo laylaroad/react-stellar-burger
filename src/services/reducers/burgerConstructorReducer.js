@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     bun: null,
-    ingredients: [],
+    mains: [],
     isLoading: false,
     isError: null,
 };
@@ -14,24 +14,24 @@ const burgerConstructorSlice = createSlice({
     reducers: {
 
         addIngredient: (state, action) => {
-            if (action.payload.type !== 'bun') {
-                state.ingredients.push(action.payload);
-            } else {
+            if (action.payload.type === 'bun') {
                 state.bun = action.payload;
+            } else {
+                state.mains.push(action.payload);
             }
         },
         deleteIngredient: (state, action) => {
-            state.ingredients = state.ingredients.filter(
+            state.mains = state.mains.filter(
                 (item) => item._customId !== action.payload._customId
             );
         },
         moveIngredient: (state, action) => {
             const { indexFrom, indexTo, ingredient } = action.payload;
-            state.ingredients.splice(indexFrom, 1);
-            state.ingredients.splice(indexTo, 0, ingredient);
+            state.mains.splice(indexFrom, 1);
+            state.mains.splice(indexTo, 0, ingredient);
         },
         deleteAllIngredients: (state) => {
-            state.ingredients = [];
+            state.mains = [];
             state.bun = null;
         },
     },
