@@ -1,14 +1,11 @@
 export const apiUrl = 'https://norma.nomoreparties.space/api';
 
-export const checkResponse = async (res) => {
-    if (!res.ok) {
-        console.log(`Error response status: ${res.status}`);
-        throw new Error(`Ошибка: ${res.status}`);
+export function checkResponse(res) {
+    if (res.ok) {
+        return res.json();
     }
-    const data = await res.json();
-    console.log('Response data:', data);
-    return data;
-};
+    return Promise.reject(`Error: ${res.status}`);
+}
 
 export default function request() {
     return fetch(apiUrl).then(checkResponse);

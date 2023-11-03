@@ -6,8 +6,9 @@ import { useEffect } from 'react';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 import BurgerConstructorItem from '../burger-constructor-item/Burger-Constructor-Item';
-import Burger from '../burger/Burger';
+// import Burger from '../burger/Burger';
 import { selectIngredientsIsLoading } from '../../services/selectors/ingredientsSelector';
+import BurgerConstructor from '../burger-constructor/Burger-Constructor';
 
 function MainSection() {
 
@@ -26,8 +27,7 @@ function MainSection() {
 
                 {isLoading ?
                     <h1>Загрузка...</h1> :
-                    <Burger />}
-
+                    <BurgerConstructor />}
             </DndProvider>
         </main>
     )
