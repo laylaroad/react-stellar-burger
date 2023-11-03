@@ -5,14 +5,20 @@ import styles from './ingredient-item.module.css';
 import { useDrag } from 'react-dnd';
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { showIngredient } from '../../services/reducers/ingredientsReducer';
+import { modalOpen } from '../../services/reducers/modalReducer';
 
 function IngredientItem({ ingredient }) {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    const modalIngredients = () => {
+        dispatch(modalOpen('ingredientDetails'))
         dispatch(showIngredient());
-    }, []);
+    };
+
+    // useEffect(() => {
+    //     dispatch(showIngredient(ingredient));
+    // }, []);
 
     const [, dragRef] = useDrag({
         type: "ingredient",
@@ -20,7 +26,7 @@ function IngredientItem({ ingredient }) {
     });
 
     return (
-        <div className={styles.ingredient_item} key={ingredient._id} ref={dragRef}>
+        <div className={styles.ingredient_item} onClick={modalIngredients} key={ingredient._id} ref={dragRef}>
             <img src={ingredient.image} alt={ingredient.name}
             />
             <div className={styles.ingredient_price}>

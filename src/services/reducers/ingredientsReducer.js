@@ -4,7 +4,6 @@ import { apiUrl, checkResponse } from '../../utils/api';
 const initialState = {
     ingredientsArray: [],
     currentIngredient: {},
-    ingredientsModal: false,
     isLoading: false,
     isError: false,
 }
@@ -22,11 +21,9 @@ const ingredientsSliceData = createSlice({
         showIngredient: (state, action) => {
             state.currentIngredient = action.payload;
             console.log('Received data:', action.payload);
-            state.ingredientsModal = true;
         },
         closeIngredient: (state) => {
             state.currentIngredient = {};
-            state.ingredientsModal = false;
         },
     },
     extraReducers: (builder) => {

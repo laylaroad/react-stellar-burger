@@ -45,6 +45,7 @@ function IngredientsMain({ item, index }) {
 
             <DragIcon />
             <ConstructorElement
+                key={index}
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}

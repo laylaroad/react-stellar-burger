@@ -27,10 +27,13 @@ function BurgerIngredients() {
                 name: 'three',
                 coords: threeRef.current.getBoundingClientRect().top,
             },
-
         ]
             .filter((elem) => elem.coords > 0)
             .sort((a, b) => a.coords - b.coords);
+
+        console.log(oneRef.current.getBoundingClientRect().top)
+        console.log(twoRef.current.getBoundingClientRect().top)
+        console.log(threeRef.current.getBoundingClientRect().top)
 
         if (result.length) {
             setCurrent(result[0].name);

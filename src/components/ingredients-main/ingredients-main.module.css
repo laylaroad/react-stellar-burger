@@ -1,5 +1,5 @@
-/* .main {
+.main {
   display: flex;
   align-items: center;
   gap: calc((--offset-base-size) * 2);
-} */
+}

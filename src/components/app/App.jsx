@@ -7,18 +7,32 @@ import { useDispatch } from 'react-redux';
 // import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 import MainSection from '../mainSection/MainSection';
 
+import { deleteAllIngredients } from '../../services/reducers/burgerConstructorReducer';
+import { modalClose } from '../../services/reducers/modalReducer';
+import { SelectModalType, SelectModalOpen } from '../../services/selectors/modalSelector';
+
+import OrderDetails from '../order-details/Order-Details';
+import IngredientDetails from '../ingredient-details/Ingredient-Details';
+import Modal from '../modal/Modal';
+
+
 
 
 function App() {
-
-    // const modalOpen = useSelector(selectIngredientsModal);
-
+    const dispatch = useDispatch();
+    const modalType = useSelector(SelectModalType);
+    // const isOpen = useSelector(SelectModalOpen);
 
     return (
         <div>
             <AppHeader />
-
             <MainSection />
+
+            {modalType && (
+                <Modal onClose={() => dispatch(modalClose())}>
+                    <OrderDetails />
+                </Modal>)}
+
         </div>
 
     );

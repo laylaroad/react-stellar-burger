@@ -31,7 +31,6 @@ export const getOrderData = createAsyncThunk('order/orderData', async (ingredien
 });
 
 const initialState = {
-    orderModal: false,
     isLoading: false,
     isError: false,
     order: {}
@@ -48,12 +47,10 @@ const orderSlice = createSlice({
         });
         builder.addCase(getOrderData.fulfilled, (state, action) => {
             state.order = action.payload.order;
-            state.orderModal = true;
             state.isLoading = false;
             state.isError = false;
         });
         builder.addCase(getOrderData.rejected, (state, action) => {
-            state.orderModal = false;
             state.isLoading = false;
             state.isError = true;
             console.error(action.error);

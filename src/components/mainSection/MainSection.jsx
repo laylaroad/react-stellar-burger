@@ -19,8 +19,6 @@ function MainSection() {
         dispatch(getIngredientsData());
     }, []);
 
-    // const isLoading = useSelector(selectIngredientsIsLoading);
-
     return (
         <main className={styles.section}>
             <DndProvider backend={HTML5Backend}>
