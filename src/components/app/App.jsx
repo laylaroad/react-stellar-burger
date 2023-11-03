@@ -3,26 +3,24 @@ import { useEffect, useState } from 'react';
 import AppHeader from "../app-header/App-Header";
 import BurgerIngredients from "../burger-ingredients/Burger-Ingredients";
 import { useDispatch } from 'react-redux';
-import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
-import Section from '../section/Section';
+// import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
+import MainSection from '../mainSection/MainSection';
+
 
 
 function App() {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getIngredientsData());
-    }, []);
-
+    // useEffect(() => {
+    //     dispatch(getIngredientsData());
+    // }, []);
 
     return (
         <div>
             <AppHeader />
-            <Section>
+            <MainSection />
 
-                <BurgerIngredients ingredients={getIngredientsData} />
-            </Section>
         </div>
 
     );

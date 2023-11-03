@@ -4,10 +4,9 @@ export const selectIngredients =
     createSelector(
         [(state) => state],
         (state) => {
-            return state.ingredients.ingredients;
+            return state.ingredients.ingredientsArray;
         }
     );
-// state => state.ingredients.ingredients;
 
 export const selectIngredientsError = createSelector(
     [(state) => state],

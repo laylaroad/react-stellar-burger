@@ -36,7 +36,7 @@ const ingredientsSliceData = createSlice({
         });
         builder.addCase(getIngredientsData.fulfilled, (state, action) => {
             state.ingredients = action.payload.data;
-            state.isLoading = true;
+            state.isLoading = false;
             state.isError = false;
         });
         builder.addCase(getIngredientsData.rejected, (state) => {

@@ -3,31 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './burger-ingredients.module.css';
 import BurgerTab from '../burger-tab/Burger-Tab';
 import IngredientItem from '../ingredient-item/Ingredient-Item';
-import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
+// import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 import { selectIngredients } from '../../services/selectors/ingredientsSelector';
 
 function BurgerIngredients() {
+    console.log('Компонент БургерИнгредиентс рендерится');
     const [current, setCurrent] = useState('one');
+    const ingredients = useSelector(selectIngredients);
     const oneRef = createRef(null);
     const twoRef = createRef(null);
     const threeRef = createRef(null);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        console.log('API request initiated');
-        dispatch(getIngredientsData())
-            .then((resultAction) => {
-                console.log('API request successful', resultAction);
+    // useEffect(() => {
+    //     console.log('API request initiated');
+    //     dispatch(getIngredientsData())
+    //         .then((resultAction) => {
+    //             console.log('API request successful', resultAction);
 
-            })
-            .catch((errorAction) => {
-                console.error('API request failed', errorAction);
-            });
-    }, []);
-
-    const ingredients = useSelector(selectIngredients);
-    console.log(ingredients);
+    //         })
+    //         .catch((errorAction) => {
+    //             console.error('API request failed', errorAction);
+    //         });
+    // }, []);
 
     const handleScroll = () => {
         const result = [
