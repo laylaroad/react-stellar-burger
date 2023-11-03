@@ -1,32 +1,17 @@
-import React, { useState, useEffect, createRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, createRef } from 'react';
+import { useSelector } from 'react-redux';
 import styles from './burger-ingredients.module.css';
 import BurgerTab from '../burger-tab/Burger-Tab';
 import IngredientItem from '../ingredient-item/Ingredient-Item';
-// import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 import { selectIngredients } from '../../services/selectors/ingredientsSelector';
 
 function BurgerIngredients() {
-    console.log('Компонент БургерИнгредиентс рендерится');
+
     const [current, setCurrent] = useState('one');
     const ingredients = useSelector(selectIngredients);
     const oneRef = createRef(null);
     const twoRef = createRef(null);
     const threeRef = createRef(null);
-
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     console.log('API request initiated');
-    //     dispatch(getIngredientsData())
-    //         .then((resultAction) => {
-    //             console.log('API request successful', resultAction);
-
-    //         })
-    //         .catch((errorAction) => {
-    //             console.error('API request failed', errorAction);
-    //         });
-    // }, []);
 
     const handleScroll = () => {
         const result = [
@@ -56,10 +41,10 @@ function BurgerIngredients() {
         <section className={styles.burger_ingredients}>
             <h2 className={`${styles.burger_title} text text_type_main-large`}>Соберите бургер</h2>
             <BurgerTab current={current} />
-            <article className={styles.burger_container} onClick={handleScroll}>
+            <article className={styles.container} onScroll={handleScroll}>
                 {ingredients && (
                     <>
-                        <h3 className="text text_type_main-medium pb-6" ref={oneRef}>
+                        <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={oneRef}>
                             Булки
                         </h3>
                         <div className={`${styles.ingredients} pl-4`}>
@@ -75,7 +60,7 @@ function BurgerIngredients() {
                             })}
                         </div>
 
-                        <h3 className="text text_type_main-medium pb-6" ref={twoRef}>
+                        <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={twoRef}>
                             Соусы
                         </h3>
 
@@ -86,13 +71,14 @@ function BurgerIngredients() {
                                         <IngredientItem
                                             key={ingredient._id}
                                             ingredient={ingredient}
+
                                         />
                                     );
                                 }
                             })}
                         </div>
 
-                        <h3 className="text text_type_main-medium pb-6" ref={threeRef}>
+                        <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={threeRef}>
                             Начинки
                         </h3>
 

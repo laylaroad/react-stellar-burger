@@ -9,65 +9,24 @@
   margin-top: 60px;
 }
 
-.constructor_empty {
+.container_empty {
   width: 600px;
   height: 912px;
-  border: 1px solid #8585ad;
+  border: 2 solid #8585ad;
 }
 
-.container_bun {
-  flex-grow: 0;
-  width: 568px;
-  height: 80px;
-  margin-right: 0;
-  margin-left: 70px;
-  display: flex;
-  align-self: flex-end;
+.burger_constructor::-webkit-scrollbar {
+  width: 12px;
 }
-
-.burger_wrapper {
-  flex-direction: column;
-  align-items: flex-end;
-  display: flex;
-  gap: 16px;
-  overflow-y: scroll;
-  padding-right: 8px;
+.burger_constructor::-webkit-scrollbar-track {
+  background: #2f2f37;
 }
-
-.burger_list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  width: 568px;
-}
-
-.items_container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.burger_sum {
-  margin-top: 60px;
-  margin-right: 16px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+.burger_constructor::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
 }
 
 .currency {
   padding-right: 8px;
-}
-
-.burger_wrapper::-webkit-scrollbar {
-  width: 12px;
-}
-.burger_wrapper::-webkit-scrollbar-track {
-  background: #2f2f37;
-}
-.burger_wrapper::-webkit-scrollbar-thumb {
-  background: #8585ad;
-  border: 3px solid #2f2f37;
-  border-radius: 6px;
 }

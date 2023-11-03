@@ -9,7 +9,6 @@ import { showIngredient } from '../../services/reducers/ingredientsReducer';
 function IngredientItem({ ingredient }) {
 
     const dispatch = useDispatch();
-    // const ingredients = useSelector(selectIngredients);
 
     useEffect(() => {
         dispatch(showIngredient());
@@ -25,7 +24,7 @@ function IngredientItem({ ingredient }) {
             <img src={ingredient.image} alt={ingredient.name}
             />
             <div className={styles.ingredient_price}>
-                <p className={`text text_type_digits-default`}>{ingredient.price}</p>
+                <p className={`${styles.ingredient_name} text text_type_digits-default`}>{ingredient.price}</p>
                 <CurrencyIcon type="primary" />
             </div>
             <h4 className="text text_type_main-default">

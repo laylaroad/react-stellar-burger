@@ -1,23 +1,22 @@
 .burger_ingredients {
-  display: flex;
-  flex-direction: column;
-  max-width: 600px;
-  min-height: 756px;
-  width: 45%;
+  box-sizing: border-box;
+  overflow: auto;
+  flex-direction: row;
 }
 
-.burger_container {
-  max-height: 55vh;
+.container {
+  width: 600px;
+  height: 912px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
 
-.burger_container::-webkit-scrollbar {
+.container::-webkit-scrollbar {
   width: 12px;
 }
 
-.burger_container ::-webkit-scrollbar-thumb {
+.container::-webkit-scrollbar-thumb {
   background: #8585ad;
   border: 3px solid #2f2f37;
   border-radius: 6px;
@@ -26,9 +25,13 @@
 .ingredients {
   max-width: 100%;
   display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fit, 272px);
-  gap: calc(var(--offset-base-size) * 6);
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 24px;
+  padding-right: 24px;
+}
+
+.ingredient_title {
+  padding-top: 24px;
 }
 
 .burger_title {
