@@ -6,7 +6,7 @@
 
 .container {
   width: 600px;
-  height: 912px;
+  height: 756px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;

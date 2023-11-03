@@ -10,21 +10,31 @@
 }
 
 .container_empty {
-  width: 600px;
-  height: 912px;
-  border: 2 solid #8585ad;
+  width: 568px;
+  height: 656px;
+  border: 2 solid #c882d1;
+  overflow-y: scroll;
 }
 
-.burger_constructor::-webkit-scrollbar {
+.container_empty::-webkit-scrollbar {
   width: 12px;
 }
-.burger_constructor::-webkit-scrollbar-track {
+.container_empty::-webkit-scrollbar-track {
   background: #2f2f37;
 }
-.burger_constructor::-webkit-scrollbar-thumb {
+.container_empty::-webkit-scrollbar-thumb {
   background: #8585ad;
   border: 3px solid #2f2f37;
   border-radius: 6px;
+}
+
+.burger_sum {
+  margin-top: 60px;
+  margin-right: 16px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 .currency {

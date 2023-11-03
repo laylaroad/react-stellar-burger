@@ -5,7 +5,8 @@ function BurgerConstructor() {
 
     return (
         <section className={styles.burger_constructor}>
-            <div className={styles.container_empty}></div>
+            <div className={styles.container_empty}>
+            </div>
             <span className={styles.burger_sum}>
                 <p className="text text_type_digits-medium mr-10">
                     610
