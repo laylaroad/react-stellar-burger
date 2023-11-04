@@ -1,5 +1,6 @@
 .main {
   display: flex;
   align-items: center;
-  gap: calc((--offset-base-size) * 2);
+  column-gap: 8px;
+  margin-right: 8px;
 }

@@ -21,7 +21,8 @@ function IngredientsMain({ item, index }) {
         return mains.indexOf(item);
     }
 
-    const deleteItem = () => {
+    const handleDelete = () => {
+        console.log('handleDelete function is called');
         dispatch(deleteIngredient(item));
     }
 
@@ -45,11 +46,11 @@ function IngredientsMain({ item, index }) {
 
             <DragIcon />
             <ConstructorElement
-                key={index}
+                key={index._id}
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}
-                hadleClose={deleteItem} />
+                hadleClose={handleDelete} />
 
         </div>
     );

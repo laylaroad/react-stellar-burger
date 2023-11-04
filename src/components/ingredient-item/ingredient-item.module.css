@@ -1,7 +1,9 @@
 .ingredient_name {
-  margin-top: 4px;
+  margin-top: 8px;
   display: flex;
   text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .ingredient_item {
@@ -10,6 +12,7 @@
   align-items: center;
   cursor: pointer;
   position: relative;
+  padding-top: 32px;
 }
 
 .ingredient_price {
@@ -20,4 +23,5 @@
   margin-left: auto;
   margin-right: auto;
   gap: 8px;
+  padding-bottom: 8px;
 }

@@ -1,10 +1,46 @@
-.burger_items {
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
+.burger_wrapper {
+  width: 600px;
+  padding-bottom: 40px;
+  padding-right: 0;
+  margin-right: 0;
 }
 
-.burger_wrapper {
+.mains_wrapper {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  max-width: 600px;
+  height: 300px;
+  gap: 16px;
+  overflow-y: scroll;
+}
+
+.mains_wrapper::-webkit-scrollbar {
+  width: 12px;
+}
+.mains_wrapper::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.mains_wrapper::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
+}
+
+.bun {
   display: flex;
   flex-direction: column;
+  margin-left: 30px;
+}
+
+.add_bun {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+  margin-top: 200px;
+  text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25),
+    0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
 }

@@ -8,7 +8,7 @@ import { getOrderData } from '../../services/reducers/orderReducer';
 import { modalOpen } from '../../services/reducers/modalReducer';
 import { selectPrice, selectAllId, selectBurgerBun } from '../../services/selectors/burgerConstructorSelector';
 import BurgerCreating from '../burger-creating/Burger-Creating';
-// import IngredientsMain from '../ingredients-main/IngredientsMain';
+
 
 function BurgerConstructor() {
 
@@ -23,23 +23,29 @@ function BurgerConstructor() {
         dispatch(modalOpen('orderDetails'));
     };
 
-    const [, dropRef] = useDrop({
+    const [{ isHover }, dropTarget] = useDrop({
         accept: 'ingredient',
         drop(ingredient) {
             const newIngredient = { ...ingredient, _customId: uuidv4() };
             dispatch(addIngredient(newIngredient));
         },
+        collect: (monitor) => ({
+            isHover: monitor.isOver(),
+        }),
     });
 
 
     return (
-        <section className={styles.burger_constructor} ref={dropRef}>
+        <section className={` ${styles.burger_constructor} ${isHover || '' === 0 ? styles.container_empty : ""
+            } `}
+            ref={dropTarget}>
 
-            <div className={styles.container_empty}>
+            <div>
+
                 <BurgerCreating />
             </div>
             <span className={styles.burger_sum}>
-                <p className="text text_type_digits-medium mr-10">
+                <p className={`${styles.currency} text text_type_digits-medium mr-10`}>
                     {price}
                     <CurrencyIcon type="primary" extraClass={styles.currency} />
                 </p>
@@ -54,7 +60,7 @@ function BurgerConstructor() {
                     )}
             </span>
 
-        </section>
+        </section >
     );
 };
 

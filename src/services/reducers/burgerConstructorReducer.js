@@ -21,6 +21,7 @@ const burgerConstructorSlice = createSlice({
             }
         },
         deleteIngredient: (state, action) => {
+            console.log(action.payload);
             state.mains = state.mains.filter(
                 (item) => item._customId !== action.payload._customId
             );

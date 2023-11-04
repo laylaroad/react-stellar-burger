@@ -21,11 +21,11 @@ function BurgerCreating() {
                         text={`${bun.name}(верх)`}
                         price={bun.price}
                         thumbnail={bun.image}
-                        extraClass={`${styles.bun} mr-4`} />
+                        extraClass={styles.bun} />
 
-                    <div>
+                    <div className={styles.mains_wrapper}>
                         {mains.map((item, index) => {
-                            return <IngredientsMain item={item} index={index} />
+                            return <IngredientsMain item={item} key={item._customId} index={index} />
                         })}
                     </div>
 
@@ -35,10 +35,10 @@ function BurgerCreating() {
                         text={`${bun.name}(низ)`}
                         price={bun.price}
                         thumbnail={bun.image}
-                        extraClass={`${styles.bun} mr-4`} />
+                        extraClass={styles.bun} />
                 </>)
                 : (
-                    <span>Добавьте булку</span>
+                    <span className={`${styles.add_bun} text text_type_main-medium mt-4 mb-8`}>Добавьте булку</span>
                 )}
 
         </div>

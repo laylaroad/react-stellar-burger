@@ -16,10 +16,6 @@ function IngredientItem({ ingredient }) {
         dispatch(showIngredient());
     };
 
-    // useEffect(() => {
-    //     dispatch(showIngredient(ingredient));
-    // }, []);
-
     const [, dragRef] = useDrag({
         type: "ingredient",
         item: ingredient,
@@ -30,10 +26,10 @@ function IngredientItem({ ingredient }) {
             <img src={ingredient.image} alt={ingredient.name}
             />
             <div className={styles.ingredient_price}>
-                <p className={`${styles.ingredient_name} text text_type_digits-default`}>{ingredient.price}</p>
+                <span className={`${styles.ingredient_name} text text_type_digits-default`}>{ingredient.price}</span>
                 <CurrencyIcon type="primary" />
             </div>
-            <h4 className="text text_type_main-default">
+            <h4 className={`${styles.ingredient_name} text text_type_main-default`}>
                 {ingredient.name}
             </h4>
             <Counter count={ingredient.count} size="default" extraClass="m-1" />
