@@ -38,8 +38,4 @@ function IngredientDetails() {
     );
 }
 
-IngredientDetails.propTypes = {
-    ingredient: ingredientPropType,
-}
-
 export default IngredientDetails;

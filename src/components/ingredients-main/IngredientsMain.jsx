@@ -1,6 +1,7 @@
 
 import { selectBurgerIngredients } from '../../services/selectors/burgerConstructorSelector';
 import styles from './ingredients-main.module.css';
+import Proptypes from 'prop-types';
 import { moveIngredient } from '../../services/reducers/burgerConstructorReducer';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -57,7 +58,11 @@ function IngredientsMain({ item, index }) {
         </div>
     );
 
-
 }
 
 export default IngredientsMain;
+
+IngredientsMain.propTypes = {
+    index: Proptypes.number,
+    id: Proptypes.number,
+}

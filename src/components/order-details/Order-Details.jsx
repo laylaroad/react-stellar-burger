@@ -5,7 +5,6 @@ import { selectOrderNumber } from '../../services/selectors/orderSelector';
 
 function OrderDetails() {
     const orderNumber = useSelector(selectOrderNumber);
-    console.log(orderNumber);
 
     return (
         <section className={styles.order_section}>

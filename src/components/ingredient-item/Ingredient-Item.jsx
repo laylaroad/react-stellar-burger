@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { ingredientPropType } from "../../utils/prop-types";
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import styles from './ingredient-item.module.css';
 import { useDrag } from 'react-dnd';
@@ -47,32 +48,34 @@ function IngredientItem({ ingredient, _id }) {
     });
 
     return (
-        <div className={`${styles.ingredient_item} ${isDragging ? styles.draggable : ''}`}
-            onClick={modalIngredients}
-            key={ingredient._id}
-            ref={dragRef}>
-            <img src={ingredient.image} alt={ingredient.name}
-            />
-            <div className={styles.ingredient_price}>
-                <span className={`${styles.ingredient_name} text text_type_digits-default`}>{ingredient.price}</span>
-                <CurrencyIcon type="primary" />
+        <>
+            <div className={`${styles.ingredient_item} ${isDragging ? styles.draggable : ''}`}
+                onClick={modalIngredients}
+                key={ingredient._id}
+                ref={dragRef}>
+                <img src={ingredient.image} alt={ingredient.name}
+                />
+                <div className={styles.ingredient_price}>
+                    <span className={`${styles.ingredient_name} text text_type_digits-default`}>{ingredient.price}</span>
+                    <CurrencyIcon type="primary" />
+                </div>
+                <h4 className={`${styles.ingredient_name} text text_type_main-default`}>
+                    {ingredient.name}
+                </h4>
+                {count && <Counter count={count} size="default" extraClass="m-1" />}
             </div>
-            <h4 className={`${styles.ingredient_name} text text_type_main-default`}>
-                {ingredient.name}
-            </h4>
-            {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
 
             {modalType === 'ingredientDetails' && (
                 <Modal onClose={() => dispatch(modalClose())}>
                     <IngredientDetails />
                 </Modal>)}
-
-        </div>
+        </>
     );
 }
 
 IngredientItem.propTypes = {
-    ingredients: ingredientPropType,
+    ingredient: PropTypes.array,
+    id: ingredientPropType,
 };
 
 export default IngredientItem;

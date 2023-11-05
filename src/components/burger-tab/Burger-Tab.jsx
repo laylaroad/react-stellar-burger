@@ -2,6 +2,7 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-tab.module.css';
 import { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 
 const BurgerTab = forwardRef(({ current, setCurrent }, ref) => {
   return (
@@ -20,3 +21,9 @@ const BurgerTab = forwardRef(({ current, setCurrent }, ref) => {
 });
 
 export default BurgerTab;
+
+BurgerTab.propTypes = {
+  current: PropTypes.string,
+  setCurrent: PropTypes.string,
+  ref: PropTypes.string,
+}

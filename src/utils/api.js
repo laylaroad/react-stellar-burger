@@ -15,10 +15,8 @@ export const fetchIngredients = async () => {
     try {
         const response = await fetch(apiUrl);
         const data = await checkResponse(response);
-        console.log('Fetched data:', data);
         return data;
     } catch (error) {
-        console.error('API request error:', error);
         throw new Error(`Ошибка: ${error.message}`);
     }
 };
