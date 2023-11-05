@@ -20,7 +20,7 @@
   flex-direction: column;
   row-gap: 16px;
   overflow-y: scroll;
-  min-height: calc(100vh - 536px);
+  max-height: calc(100vh - 536px);
   overflow: auto;
 }
 
@@ -37,8 +37,9 @@
 }
 
 .bun {
+  flex-grow: 0;
   align-self: flex-end;
-  justify-content: flex-end;
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
   margin-left: 30px;
