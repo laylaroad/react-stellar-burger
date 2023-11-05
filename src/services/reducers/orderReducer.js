@@ -13,7 +13,6 @@ export const getOrderData = createAsyncThunk('order/orderData', async (ingredien
         };
 
         const response = await fetch(`${apiUrl}/orders`, orderRequestConfig);
-
         if (!response.ok) {
             throw new Error(`Ошибка! Статус: ${response.status}`);
         }
@@ -24,7 +23,7 @@ export const getOrderData = createAsyncThunk('order/orderData', async (ingredien
 
         thunkAPI.dispatch(deleteIngredient());
 
-        return data.data;
+        return data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
     }
@@ -33,7 +32,8 @@ export const getOrderData = createAsyncThunk('order/orderData', async (ingredien
 const initialState = {
     isLoading: false,
     isError: false,
-    order: {}
+    isSuccess: false,
+    number: 0,
 }
 
 const orderSlice = createSlice({
@@ -44,15 +44,18 @@ const orderSlice = createSlice({
         builder.addCase(getOrderData.pending, (state) => {
             state.isLoading = true;
             state.isError = false;
+            state.isSuccess = false;
         });
         builder.addCase(getOrderData.fulfilled, (state, action) => {
-            state.order = action.payload.order;
+            state.number = action.payload.order.number;
             state.isLoading = false;
             state.isError = false;
+            state.isSuccess = true;
         });
         builder.addCase(getOrderData.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
+            state.isSuccess = false;
             console.error(action.error);
         });
     }

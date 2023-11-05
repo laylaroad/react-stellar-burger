@@ -12,7 +12,7 @@ function BurgerCreating() {
     const mains = useSelector(selectBurgerIngredients);
 
     return (
-        <div className={styles.burger_wrapper}>
+        <div className={`${styles.burger_wrapper} ${bun === null ? styles.burger_empty : ""}`}>
             {bun ? (
                 <>
                     <ConstructorElement
@@ -21,7 +21,7 @@ function BurgerCreating() {
                         text={`${bun.name}(верх)`}
                         price={bun.price}
                         thumbnail={bun.image}
-                        extraClass={styles.bun} />
+                        extraClass={`${styles.bun} mr-8`} />
 
                     <div className={styles.mains_wrapper}>
                         {mains.map((item, index) => {
@@ -35,7 +35,7 @@ function BurgerCreating() {
                         text={`${bun.name}(низ)`}
                         price={bun.price}
                         thumbnail={bun.image}
-                        extraClass={styles.bun} />
+                        extraClass={`${styles.bun} mr-4`} />
                 </>)
                 : (
                     <span className={`${styles.add_bun} text text_type_main-medium mt-4 mb-8`}>Добавьте булку</span>

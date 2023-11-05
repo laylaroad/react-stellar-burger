@@ -5,9 +5,14 @@ import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import { addIngredient } from '../../services/reducers/burgerConstructorReducer';
 import { getOrderData } from '../../services/reducers/orderReducer';
-import { modalOpen } from '../../services/reducers/modalReducer';
+import { selectOrderIsLoading, selectOrderIsError, selectOrderSuccess } from '../../services/selectors/orderSelector';
+import { modalOpen, modalClose } from '../../services/reducers/modalReducer';
 import { selectPrice, selectAllId, selectBurgerBun } from '../../services/selectors/burgerConstructorSelector';
 import BurgerCreating from '../burger-creating/Burger-Creating';
+import { deleteAllIngredients } from '../../services/reducers/burgerConstructorReducer';
+import OrderDetails from '../order-details/Order-Details';
+import Modal from '../modal/Modal';
+import { SelectModalType } from '../../services/selectors/modalSelector';
 
 
 function BurgerConstructor() {
@@ -18,9 +23,16 @@ function BurgerConstructor() {
     const ingredientsAllId = useSelector(selectAllId);
     const bun = useSelector(selectBurgerBun);
 
+    const orderSuccess = useSelector(selectOrderSuccess);
+    const orderError = useSelector(selectOrderIsError);
+    const orderIsLoading = useSelector(selectOrderIsLoading);
+
+    const modalType = useSelector(SelectModalType);
+
     const makeTheOrder = () => {
         dispatch(getOrderData({ ingredients: ingredientsAllId }));
         dispatch(modalOpen('orderDetails'));
+        dispatch(deleteAllIngredients());
     };
 
     const [{ isHover }, dropTarget] = useDrop({
@@ -35,13 +47,13 @@ function BurgerConstructor() {
     });
 
 
+
     return (
-        <section className={` ${styles.burger_constructor} ${isHover || '' === 0 ? styles.container_empty : ""
-            } `}
+        <section className={styles.burger_constructor}
             ref={dropTarget}>
 
-            <div>
-
+            <div className={` ${styles.burger_wrapper} ${isHover ? styles.container_empty : ""
+                } `}>
                 <BurgerCreating />
             </div>
             <span className={styles.burger_sum}>
@@ -58,6 +70,16 @@ function BurgerConstructor() {
                             Оформить заказ
                         </Button>
                     )}
+                {makeTheOrder && modalType === "orderDetails" && (
+                    <Modal onClose={() => dispatch(modalClose())}>
+                        {orderIsLoading ? (
+                            <span className="text text_type_main-medium mt-8 mb-8">Загрузка...</span>
+                        ) : orderError ? (
+                            <span className="text text_type_main-medium mt-8 mb-8">Произошла ошибка</span>
+                        ) : orderSuccess && <OrderDetails />}
+                    </Modal>
+                )}
+
             </span>
 
         </section >

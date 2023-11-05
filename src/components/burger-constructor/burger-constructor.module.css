@@ -1,22 +1,20 @@
 .burger_constructor {
-  max-width: 600px;
-  height: 912px;
+  width: 600px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 60px;
 }
 
 .container_empty {
-  max-width: 600px;
-  border: 3px rgba(42, 70, 197, 0.432) dotted;
-  margin-bottom: 40px;
-}
-
-.constructor_wrapper {
+  min-height: calc(100vh - 410px);
+  padding-right: 0;
+  margin-right: 0;
+  border: 4px rgba(35, 1, 129, 0.698) dotted;
 }
 
 .burger_sum {
+  padding-top: 40px;
   padding-left: 40px;
   display: flex;
   align-items: center;

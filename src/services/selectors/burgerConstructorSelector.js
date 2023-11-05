@@ -1,15 +1,5 @@
 
-// export const selectBurgerIngredients = createSelector(
-//     (state) => state.burgerConstructor,
-//     (burgerConstructor) => burgerConstructor.ingredients
-// )
-
 export const selectBurgerIngredients = (store) => store.burgerConstructor.mains;
-
-// export const selectBurgerBun = createSelector(
-//     (state) => state.burgerConstructor,
-//     (burgerConstructor) => burgerConstructor.bun
-// );
 
 export const selectBurgerBun = (store) => store.burgerConstructor.bun;
 
@@ -30,7 +20,21 @@ export const selectAllId = (store) => {
             const mainsId = store.burgerConstructor.mains.map(
                 (item) => item._id
             );
-            return [...mainsId, store, store.burgerConstructor.bun._id];
+            return [...mainsId, store.burgerConstructor.bun._id];
         }
     }
 };
+
+
+// export const selectCount = (store, id) => {
+//     if (store.burgerConstructor.bun) {
+//         if (store.burgerConstructor.mains) {
+//             const allIngredients = [store.burgerConstructor.bun, store.burgerConstructor.mains];
+//             return allIngredients.filter((item) => item && item._id === id).length || 0;
+//         } else {
+//             return 0; // No mains, return 0
+//         }
+//     } else {
+//         return 0; // No bun, return 0
+//     }
+// };

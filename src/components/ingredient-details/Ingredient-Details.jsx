@@ -1,8 +1,13 @@
 
 import styles from './ingredient-details.module.css';
 import { ingredientPropType } from '../../utils/prop-types';
+import { selectCurrentIngredient } from '../../services/selectors/ingredientsSelector';
+import { useSelector } from 'react-redux';
 
-function IngredientDetails({ ingredient }) {
+function IngredientDetails() {
+
+    const ingredient = useSelector(selectCurrentIngredient);
+
     return (
         <section className={`${styles.ingredient_section}`}>
             <img

@@ -46,23 +46,3 @@ export const {
 } = burgerConstructorSlice.actions;
 
 export default burgerConstructorSlice.reducer;
-
-
-
-
-
-// setIngredients: (state, action) => {
-//     console.log('Received data:', action.payload);
-
-//     state.ingredients = action.payload;
-//     state.isLoading = false;
-//     state.isError = null;
-// },
-// setIngredientsLoading: (state) => {
-//     state.isLoading = true;
-//     state.isError = null;
-// },
-// setIngredientsError: (state, action) => {
-//     state.isLoading = false;
-//     state.isError = action.payload;
-// },

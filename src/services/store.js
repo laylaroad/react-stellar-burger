@@ -5,7 +5,6 @@ import burgerConstructorReducer from './reducers/burgerConstructorReducer.js';
 import modalReducer from './reducers/modalReducer.js';
 
 
-
 export const store = configureStore({
     reducer: {
         ingredients: ingredientsReducer,

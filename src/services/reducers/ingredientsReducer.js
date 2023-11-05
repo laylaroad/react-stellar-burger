@@ -20,7 +20,6 @@ const ingredientsSliceData = createSlice({
     reducers: {
         showIngredient: (state, action) => {
             state.currentIngredient = action.payload;
-            console.log('Received data:', action.payload);
         },
         closeIngredient: (state) => {
             state.currentIngredient = {};

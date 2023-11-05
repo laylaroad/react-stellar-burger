@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './burger-ingredients.module.css';
 import BurgerTab from '../burger-tab/Burger-Tab';
@@ -12,6 +12,7 @@ function BurgerIngredients() {
     const oneRef = useRef(null);
     const twoRef = useRef(null);
     const threeRef = useRef(null);
+    const tabRef = useRef(null);
 
     const handleScroll = () => {
         const result = [
@@ -32,16 +33,24 @@ function BurgerIngredients() {
             .sort((a, b) => a.coords - b.coords);
 
         if (result.length) {
-            console.log(result[0].name);
             setCurrent(result[0].name);
         }
     };
+
+    // const handleScrollToTab = (tab) => {
+    //     if (tabRef.current) {
+    //         const el = tabRef.current.querySelector(`[value="${tab}"]`);
+    //         if (el) {
+    //             el.scrollIntoView({ behavior: 'smooth' });
+    //         }
+    //     }
+    // };
 
 
     return (
         <section className={styles.burger_ingredients}>
             <h2 className={`${styles.burger_title} text text_type_main-large`}>Соберите бургер</h2>
-            <BurgerTab current={current} setCurrent={setCurrent} oneRef={oneRef} twoRef={twoRef} threeRef={threeRef} />
+            <BurgerTab current={current} setCurrent={setCurrent} ref={tabRef} />
             <article className={styles.container} onScroll={handleScroll}>
                 {ingredients && (
                     <>
@@ -54,6 +63,7 @@ function BurgerIngredients() {
                                     return (
                                         <IngredientItem
                                             key={ingredient._id}
+                                            _id={ingredient._id}
                                             ingredient={ingredient}
                                         />
                                     );
@@ -61,7 +71,7 @@ function BurgerIngredients() {
                             })}
                         </div>
 
-                        <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={twoRef}>
+                        <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={twoRef} >
                             Соусы
                         </h3>
 
@@ -71,6 +81,7 @@ function BurgerIngredients() {
                                     return (
                                         <IngredientItem
                                             key={ingredient._id}
+                                            _id={ingredient._id}
                                             ingredient={ingredient}
 
                                         />
@@ -89,6 +100,7 @@ function BurgerIngredients() {
                                     return (
                                         <IngredientItem
                                             key={ingredient._id}
+                                            _id={ingredient._id}
                                             ingredient={ingredient}
                                         />
                                     );

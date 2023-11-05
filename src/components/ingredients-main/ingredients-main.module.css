@@ -1,6 +1,10 @@
 .main {
   display: flex;
   align-items: center;
-  column-gap: 8px;
-  margin-right: 8px;
+  column-gap: 12px;
+  margin-right: 12px;
+}
+
+.draggable {
+  transition: ease-in-out;
 }

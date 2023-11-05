@@ -12,9 +12,12 @@ function IngredientsMain({ item, index }) {
     const mains = useSelector(selectBurgerIngredients);
     const dispatch = useDispatch();
 
-    const [, dragRef] = useDrag({
+    const [{ isDragging }, dragRef] = useDrag({
         type: 'sort',
         item: { ingredient: item },
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+        })
     });
 
     const findIndex = (item) => {
@@ -22,7 +25,6 @@ function IngredientsMain({ item, index }) {
     }
 
     const handleDelete = () => {
-        console.log('handleDelete function is called');
         dispatch(deleteIngredient(item));
     }
 
@@ -42,7 +44,7 @@ function IngredientsMain({ item, index }) {
     });
 
     return (
-        <div className={styles.main} ref={(node) => dropRef(dragRef(node))}>
+        <div className={`${styles.main} ${isDragging ? styles.draggable : ''} `} ref={(node) => dropRef(dragRef(node))}>
 
             <DragIcon />
             <ConstructorElement
@@ -50,7 +52,7 @@ function IngredientsMain({ item, index }) {
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}
-                hadleClose={handleDelete} />
+                handleClose={handleDelete} />
 
         </div>
     );

@@ -3,26 +3,20 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-tab.module.css';
 import { forwardRef } from 'react';
 
-function BurgerTab({ current, setCurrent }) {
-  // const [current, setCurrent] = React.useState('one')
-
-  // const setScroll = (ref) => {
-  //   ref.scrollIntoView({ behavior: 'smooth' });
-
-
+const BurgerTab = forwardRef(({ current, setCurrent }, ref) => {
   return (
     <div className={styles.burger_tab}>
-      <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+      <Tab ref={ref} value="one" active={current === 'one'} onClick={setCurrent}>
         Булки
       </Tab>
-      <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+      <Tab ref={ref} value="two" active={current === 'two'} onClick={setCurrent}>
         Соусы
       </Tab>
-      <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+      <Tab ref={ref} value="three" active={current === 'three'} onClick={setCurrent}>
         Начинки
       </Tab>
     </div>
-  )
-}
+  );
+});
 
 export default BurgerTab;
