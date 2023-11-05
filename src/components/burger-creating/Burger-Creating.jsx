@@ -38,7 +38,7 @@ function BurgerCreating() {
                         extraClass={`${styles.bun} mr-4`} />
                 </>)
                 : (
-                    <span className={`${styles.add_bun} text text_type_main-medium mt-4 mb-8`}>Добавьте булку</span>
+                    <span className={`${styles.add_bun} text text_type_main-medium mt-4 mb-8`}>Начните составлять бургер</span>
                 )}
 
         </div>
