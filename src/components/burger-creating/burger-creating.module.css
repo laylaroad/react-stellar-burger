@@ -1,5 +1,5 @@
 .burger_wrapper {
-  min-height: calc(100vh - 536px);
+  min-height: calc(100vh - 410px);
   padding-right: 0;
   margin-right: 0;
   justify-content: space-between;
@@ -17,6 +17,8 @@
 .mains_wrapper {
   padding-top: 16px;
   padding-bottom: 16px;
+  padding-right: 12px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -40,11 +42,10 @@
 }
 
 .bun {
-  align-self: flex-end;
-  justify-content: space-between;
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  flex-grow: 10;
+  margin-left: 25px;
 }
 
 .add_ingredient_span {

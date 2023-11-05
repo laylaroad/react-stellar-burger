@@ -70,7 +70,7 @@ function IngredientItem({ ingredient, _id }) {
                 <h4 className={`${styles.ingredient_name} text text_type_main-default`}>
                     {ingredient.name}
                 </h4>
-                {count && <Counter count={count} size="default" extraClass="m-1" />}
+                {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
             </div>
 
             {modalType === 'ingredientDetails' && (
