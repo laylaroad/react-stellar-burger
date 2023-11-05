@@ -4,7 +4,7 @@ import { ingredientPropType } from "../../utils/prop-types";
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import styles from './ingredient-item.module.css';
-import { useDrag } from 'react-dnd';
+import { DragPreviewImage, useDrag } from 'react-dnd';
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { showIngredient } from '../../services/reducers/ingredientsReducer';
 import { modalOpen, modalClose } from '../../services/reducers/modalReducer';
@@ -39,7 +39,7 @@ function IngredientItem({ ingredient, _id }) {
         dispatch(modalOpen('ingredientDetails'));
     };
 
-    const [{ isDragging }, dragRef] = useDrag({
+    const [{ isDragging }, dragRef, preview] = useDrag({
         type: "ingredient",
         item: ingredient,
         collect: (monitor) => ({
@@ -53,6 +53,7 @@ function IngredientItem({ ingredient, _id }) {
                 onClick={modalIngredients}
                 key={ingredient._id}
                 ref={dragRef}>
+                <DragPreviewImage connect={preview} src={ingredient.image} />
                 <img src={ingredient.image} alt={ingredient.name}
                 />
                 <div className={styles.ingredient_price}>
