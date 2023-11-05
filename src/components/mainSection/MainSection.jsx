@@ -23,9 +23,9 @@ function MainSection() {
         <main className={styles.section}>
             <DndProvider backend={HTML5Backend}>
                 {isLoading ? (
-                    <span>Идет загрузка...</span>)
+                    <span className={styles.loading_text}>Идет загрузка...</span>)
                     : isError ? (
-                        <span>Произошла ошибка</span>)
+                        <span className={styles.loading_text}>Произошла ошибка</span>)
                         : (
                             <> <BurgerIngredients />
                                 <BurgerConstructor />
