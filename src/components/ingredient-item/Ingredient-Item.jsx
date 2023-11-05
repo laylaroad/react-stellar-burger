@@ -75,7 +75,7 @@ function IngredientItem({ ingredient, _id }) {
 }
 
 IngredientItem.propTypes = {
-    ingredient: PropTypes.array,
+    ingredient: ingredientPropType.isRequired,
     id: ingredientPropType,
 };
 

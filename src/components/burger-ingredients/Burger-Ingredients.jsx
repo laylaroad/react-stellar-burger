@@ -5,6 +5,7 @@ import BurgerTab from '../burger-tab/Burger-Tab';
 import IngredientItem from '../ingredient-item/Ingredient-Item';
 import { selectIngredients } from '../../services/selectors/ingredientsSelector';
 
+
 function BurgerIngredients() {
 
     const [current, setCurrent] = useState('one');
@@ -37,20 +38,19 @@ function BurgerIngredients() {
         }
     };
 
-    // const handleScrollToTab = (tab) => {
-    //     if (tabRef.current) {
-    //         const el = tabRef.current.querySelector(`[value="${tab}"]`);
-    //         if (el) {
-    //             el.scrollIntoView({ behavior: 'smooth' });
-    //         }
-    //     }
-    // };
+    const handleScrollToTab = (tab, tabRef) => {
+        setCurrent(tab);
+        if (tabRef.current) {
+            const element = document.getElementById(tab);
+            if (element) element.scrollIntoView({ behavior: "smooth" });
+        }
+    };
 
 
     return (
         <section className={styles.burger_ingredients}>
             <h2 className={`${styles.burger_title} text text_type_main-large`}>Соберите бургер</h2>
-            <BurgerTab current={current} setCurrent={setCurrent} ref={tabRef} />
+            <BurgerTab current={current} onTabClick={handleScrollToTab} tabRef={tabRef} />
             <article className={styles.container} onScroll={handleScroll}>
                 {ingredients && (
                     <>
