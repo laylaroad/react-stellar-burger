@@ -1,27 +1,34 @@
 import { useSelector } from 'react-redux';
-import { useMemo } from 'react';
-import { ingredientPropType } from "../../utils/prop-types";
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useMemo } from 'react';
+
+import { ingredientPropType } from "../../utils/prop-types";
+
 import styles from './ingredient-item.module.css';
+
 import { DragPreviewImage, useDrag } from 'react-dnd';
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
+
 import { showIngredient } from '../../services/reducers/ingredientsReducer';
 import { modalOpen, modalClose } from '../../services/reducers/modalReducer';
+import Modal from '../modal/Modal';
+
+import { selectIngredientsIsLoading, selectIngredientsError } from '../../services/selectors/ingredientsSelector';
 import { SelectModalType } from '../../services/selectors/modalSelector';
 import { selectBurgerBun, selectAllId } from '../../services/selectors/burgerConstructorSelector';
+
 import IngredientDetails from '../ingredient-details/Ingredient-Details';
-import Modal from '../modal/Modal';
+
 
 function IngredientItem({ ingredient, _id }) {
     const dispatch = useDispatch();
 
     const modalType = useSelector(SelectModalType);
+    const ingredientDetailsIsLoading = useSelector(selectIngredientsIsLoading);
+    const ingredientDetailsIsError = useSelector(selectIngredientsError);
 
     const bun = useSelector(selectBurgerBun);
-
     const allIdIngredients = useSelector(selectAllId);
-
     const allIdArray = Array.isArray(allIdIngredients) ? allIdIngredients : [];
 
     const count = useMemo(() => {
@@ -68,8 +75,15 @@ function IngredientItem({ ingredient, _id }) {
 
             {modalType === 'ingredientDetails' && (
                 <Modal onClose={() => dispatch(modalClose())}>
-                    <IngredientDetails />
-                </Modal>)}
+                    {ingredientDetailsIsLoading ? (
+                        <span className="text text_type_main-medium mt-8 mb-8">Загрузка...</span>
+                    ) : ingredientDetailsIsError ? (
+                        <span className="text text_type_main-medium mt-8 mb-8">Ошибка</span>
+                    ) : (
+                        <IngredientDetails />
+                    )}
+                </Modal>
+            )}
         </>
     );
 }

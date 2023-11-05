@@ -1,8 +1,11 @@
 
 import styles from './burger-creating.module.css';
+
+import { useSelector } from 'react-redux';
+
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { selectBurgerBun, selectBurgerIngredients } from '../../services/selectors/burgerConstructorSelector';
-import { useSelector } from 'react-redux';
+
 import IngredientsMain from '../ingredients-main/IngredientsMain';
 
 

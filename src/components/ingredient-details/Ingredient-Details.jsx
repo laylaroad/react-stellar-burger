@@ -1,6 +1,6 @@
 
 import styles from './ingredient-details.module.css';
-import { ingredientPropType } from '../../utils/prop-types';
+
 import { selectCurrentIngredient } from '../../services/selectors/ingredientsSelector';
 import { useSelector } from 'react-redux';
 

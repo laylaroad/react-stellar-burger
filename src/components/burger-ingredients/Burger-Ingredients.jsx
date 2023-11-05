@@ -1,8 +1,11 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
+
 import styles from './burger-ingredients.module.css';
+
 import BurgerTab from '../burger-tab/Burger-Tab';
 import IngredientItem from '../ingredient-item/Ingredient-Item';
+
 import { selectIngredients } from '../../services/selectors/ingredientsSelector';
 
 
@@ -10,6 +13,7 @@ function BurgerIngredients() {
 
     const [current, setCurrent] = useState('one');
     const ingredients = useSelector(selectIngredients);
+
     const oneRef = useRef(null);
     const twoRef = useRef(null);
     const threeRef = useRef(null);
@@ -45,7 +49,6 @@ function BurgerIngredients() {
             if (element) element.scrollIntoView({ behavior: "smooth" });
         }
     };
-
 
     return (
         <section className={styles.burger_ingredients}>
