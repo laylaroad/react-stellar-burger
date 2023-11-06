@@ -4,25 +4,23 @@ export const selectBurgerIngredients = (store) => store.burgerConstructor.mains;
 export const selectBurgerBun = (store) => store.burgerConstructor.bun;
 
 export const selectPrice = (store) => {
-    if (store.burgerConstructor.bun) {
-        return store.burgerConstructor.mains.reduce(
-            (sum, thePrice) => (sum += thePrice.price),
-            2 * store.burgerConstructor.bun.price
-        );
-    } else {
-        return 0;
-    }
-};
+    const bun = store.burgerConstructor.bun;
+    const mains = store.burgerConstructor.mains;
 
+    return bun
+        ? 2 * bun.price + mains.reduce((sum, thePrice) => sum + thePrice.price, 0)
+        : 0;
+};
 export const selectAllId = (store) => {
-    if (store.burgerConstructor.bun) {
-        if (store.burgerConstructor.mains) {
-            const mainsId = store.burgerConstructor.mains.map(
-                (item) => item._id
-            );
-            return [...mainsId, store.burgerConstructor.bun._id];
-        }
+    const bun = store.burgerConstructor.bun;
+    const mains = store.burgerConstructor.mains;
+
+    if (bun && mains) {
+        const mainsId = mains.map((item) => item._id);
+        return [...mainsId, bun._id];
     }
+
+    return [];
 };
 
 
