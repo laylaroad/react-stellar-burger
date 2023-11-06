@@ -44,7 +44,7 @@
 .bun {
   display: flex;
   flex-direction: column;
-  flex-grow: 10;
+  flex-grow: 1;
   margin-left: 25px;
 }
 
