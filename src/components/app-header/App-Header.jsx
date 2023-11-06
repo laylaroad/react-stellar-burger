@@ -3,7 +3,7 @@ import styles from './app-header.module.css';
 
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import HeaderElements from '../header-elements/Header-Elements';
+import HeaderElements from '../header-elements/header-elements';
 
 
 function AppHeader() {

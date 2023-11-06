@@ -21,11 +21,11 @@
   width: 600px;
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
+  justify-content: space-between;
   row-gap: 16px;
   box-sizing: border-box;
   overflow-y: scroll;
-  max-height: calc(100vh - 536px);
+  max-height: calc(100vh - 446px);
   overflow: auto;
 }
 

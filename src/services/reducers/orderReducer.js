@@ -3,31 +3,27 @@ import { checkResponse, apiUrl } from '../../utils/api';
 import { deleteIngredient } from './burgerConstructorReducer';
 
 export const getOrderData = createAsyncThunk('order/orderData', async (ingredients, thunkAPI) => {
-    try {
-        const orderRequestConfig = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(ingredients),
-        };
+    const orderRequestConfig = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(ingredients),
+    };
 
-        const response = await fetch(`${apiUrl}/orders`, orderRequestConfig);
-        if (!response.ok) {
-            throw new Error(`Ошибка! Статус: ${response.status}`);
-        }
+    const response = await fetch(`${apiUrl}/orders`, orderRequestConfig);
+    const data = await checkResponse(response);
 
-        const data = await checkResponse(response);
+    thunkAPI.dispatch(deleteIngredient());
 
-        console.log('Received data from API:', data);
-
-        thunkAPI.dispatch(deleteIngredient());
-
-        return data;
-    } catch (error) {
-        return thunkAPI.rejectWithValue(error.message);
-    }
+    return data;
 });
+
+
+
+
+
+
 
 const initialState = {
     isLoading: false,

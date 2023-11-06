@@ -10,22 +10,12 @@ import { DragPreviewImage, useDrag } from 'react-dnd';
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { showIngredient } from '../../services/reducers/ingredientsReducer';
-import { modalOpen, modalClose } from '../../services/reducers/modalReducer';
-import Modal from '../modal/Modal';
+import { modalOpen } from '../../services/reducers/modalReducer';
 
-import { selectIngredientsIsLoading, selectIngredientsError } from '../../services/selectors/ingredientsSelector';
-import { SelectModalType } from '../../services/selectors/modalSelector';
 import { selectBurgerBun, selectAllId } from '../../services/selectors/burgerConstructorSelector';
-
-import IngredientDetails from '../ingredient-details/Ingredient-Details';
-
 
 function IngredientItem({ ingredient, _id }) {
     const dispatch = useDispatch();
-
-    const modalType = useSelector(SelectModalType);
-    const ingredientDetailsIsLoading = useSelector(selectIngredientsIsLoading);
-    const ingredientDetailsIsError = useSelector(selectIngredientsError);
 
     const bun = useSelector(selectBurgerBun);
     const allIdIngredients = useSelector(selectAllId);
@@ -55,36 +45,22 @@ function IngredientItem({ ingredient, _id }) {
     });
 
     return (
-        <>
-            <div className={`${styles.ingredient_item} ${isDragging ? styles.draggable : ''}`}
-                onClick={modalIngredients}
-                key={ingredient._id}
-                ref={dragRef}>
-                <DragPreviewImage connect={preview} src={ingredient.image} />
-                <img src={ingredient.image} alt={ingredient.name}
-                />
-                <div className={styles.ingredient_price}>
-                    <span className={`${styles.ingredient_name} text text_type_digits-default`}>{ingredient.price}</span>
-                    <CurrencyIcon type="primary" />
-                </div>
-                <h4 className={`${styles.ingredient_name} text text_type_main-default`}>
-                    {ingredient.name}
-                </h4>
-                {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
+        <div className={`${styles.ingredient_item} ${isDragging ? styles.draggable : ''}`}
+            onClick={modalIngredients}
+            key={ingredient._id}
+            ref={dragRef}>
+            <DragPreviewImage connect={preview} src={ingredient.image} />
+            <img src={ingredient.image} alt={ingredient.name}
+            />
+            <div className={styles.ingredient_price}>
+                <span className={`${styles.ingredient_name} text text_type_digits-default`}>{ingredient.price}</span>
+                <CurrencyIcon type="primary" />
             </div>
-
-            {modalType === 'ingredientDetails' && (
-                <Modal onClose={() => dispatch(modalClose())}>
-                    {ingredientDetailsIsLoading ? (
-                        <span className="text text_type_main-medium mt-8 mb-8">Загрузка...</span>
-                    ) : ingredientDetailsIsError ? (
-                        <span className="text text_type_main-medium mt-8 mb-8">Ошибка</span>
-                    ) : (
-                        <IngredientDetails />
-                    )}
-                </Modal>
-            )}
-        </>
+            <h4 className={`${styles.ingredient_name} text text_type_main-default`}>
+                {ingredient.name}
+            </h4>
+            {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
+        </div>
     );
 }
 

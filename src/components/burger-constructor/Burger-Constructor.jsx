@@ -1,18 +1,23 @@
 import styles from './burger-constructor.module.css';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
+
 import { addIngredient } from '../../services/reducers/burgerConstructorReducer';
 import { getOrderData } from '../../services/reducers/orderReducer';
+
+import { SelectModalType } from '../../services/selectors/modalSelector';
 import { selectOrderIsLoading, selectOrderIsError, selectOrderSuccess } from '../../services/selectors/orderSelector';
 import { modalOpen, modalClose } from '../../services/reducers/modalReducer';
-import { selectPrice, selectAllId, selectBurgerBun } from '../../services/selectors/burgerConstructorSelector';
-import BurgerCreating from '../burger-creating/Burger-Creating';
 import { deleteAllIngredients } from '../../services/reducers/burgerConstructorReducer';
-import OrderDetails from '../order-details/Order-Details';
-import Modal from '../modal/Modal';
-import { SelectModalType } from '../../services/selectors/modalSelector';
+import { selectPrice, selectAllId, selectBurgerBun } from '../../services/selectors/burgerConstructorSelector';
+
+import BurgerCreating from '../burger-creating/burger-creating';
+import OrderDetails from '../order-details/order-details';
+import Modal from '../modal/modal';
+
 
 
 function BurgerConstructor() {
@@ -61,15 +66,15 @@ function BurgerConstructor() {
                     {price}
                     <CurrencyIcon type="primary" extraClass={styles.currency} />
                 </p>
-                {bun ? (
-                    <Button htmlType="button" type="primary" size="medium" onClick={makeTheOrder}>
-                        Оформить заказ
-                    </Button>)
-                    : (
-                        <Button htmlType="button" type="primary" size="medium" disabled>
-                            Оформить заказ
-                        </Button>
-                    )}
+                <Button
+                    disabled={!bun}
+                    htmlType="button"
+                    type="primary"
+                    size="medium"
+                    onClick={makeTheOrder}
+                >
+                    Оформить заказ
+                </Button>
                 {makeTheOrder && modalType === "orderDetails" && (
                     <Modal onClose={() => dispatch(modalClose())}>
                         {orderIsLoading ? (

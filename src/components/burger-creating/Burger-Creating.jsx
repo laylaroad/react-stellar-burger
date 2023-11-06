@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { selectBurgerBun, selectBurgerIngredients } from '../../services/selectors/burgerConstructorSelector';
 
-import IngredientsMain from '../ingredients-main/IngredientsMain';
+import IngredientsMain from '../ingredients-main/ingredients-main';
 
 
 function BurgerCreating() {
@@ -28,7 +28,7 @@ function BurgerCreating() {
 
                     <div className={styles.mains_wrapper}>
                         {mains.map((item, index) => {
-                            return <IngredientsMain item={item} key={item._customId} index={index} />
+                            return <IngredientsMain item={item} key={item.type + index} index={index} />;
                         })}
                     </div>
 
