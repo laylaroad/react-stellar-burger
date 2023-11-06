@@ -20,11 +20,6 @@ export const getOrderData = createAsyncThunk('order/orderData', async (ingredien
 });
 
 
-
-
-
-
-
 const initialState = {
     isLoading: false,
     isError: false,
