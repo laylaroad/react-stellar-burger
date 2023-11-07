@@ -8,16 +8,6 @@ function ModalOverlay({ children, onClose }) {
         }
     }
 
-    // const handleClickOnEscape = (evt) => {
-    //     console.log(evt);
-    //     if (evt.key === 'Escape') {
-    //         onClose();
-    //     }
-    // }
-
-    // document.addEventListener('keypress', handleClickOnEscape);
-
-
     return (
         <div className={styles.modal_overlay} onClick={handleOverlay}>
             {children}
