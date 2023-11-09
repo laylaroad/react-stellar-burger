@@ -1,13 +1,13 @@
-import styles from './forgot-password.module.css';
+import styles from './reset-password.module.css';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { Link } from 'react-router-dom';
 
-function ForgotPassword() {
+function ResetPassword() {
 
     return (
-        <section className={styles.forgot_password}>
-            <h2 className={`${styles.forgot_password_h2} text text_type_main-medium`}>Восстановление пароля</h2>
+        <section className={styles.reset_password}>
+            <h2 className={`${styles.reset_password_title} text text_type_main-medium`}>Восстановление пароля</h2>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <PasswordInput
@@ -25,7 +25,7 @@ function ForgotPassword() {
                 Сохранить
             </Button>
 
-            <p className={`${styles.p_forgot_password} text_type_main-default text_color_inactive`}>Вспомнили пароль?{''}
+            <p className={`${styles.reset_password_paragraph} text_type_main-default text_color_inactive`}>Вспомнили пароль?{''}
                 <Link to={'/login'}>
 
                     <Button htmlType="button" type="secondary" size="medium">
@@ -38,4 +38,4 @@ function ForgotPassword() {
     )
 }
 
-export default ForgotPassword;
+export default ResetPassword;

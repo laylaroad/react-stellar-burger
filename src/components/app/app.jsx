@@ -5,7 +5,7 @@ import MainSection from '../../pages/main-section/main-section';
 
 import Register from '../../pages/register/register';
 import Login from '../../pages/login/login';
-import ForgotPassword from '../../pages/forgot-password/forgot-password';
+import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
 import NoPage from '../../pages/no-page/no-page';
 
@@ -19,7 +19,7 @@ function App() {
                 <Route path="/" element={<MainSection />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="*" element={<NoPage />} />
             </Routes>

@@ -7,7 +7,7 @@ import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-co
 
 function Profile({ isActive }) {
 
-    const isActiveText = isActive ? `${styles.link_disactive}` : `${styles.link_active}`;
+    const isActiveText = isActive ? `${styles.link_active}` : `${styles.link_disactive}`;
 
     return (
         <section className={styles.profile_section}>
