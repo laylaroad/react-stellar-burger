@@ -6,17 +6,9 @@ function ProfileEdit() {
 
     return (
 
-        <section className={styles.profile_edit}>
-            <div>
-                <ul className="text text_type_main-medium mt-8 mb-8">
-                    <li>Профиль</li>
-                    <li>История заказов</li>
-                    <li>Выход</li>
-                </ul>
-                <p className="text_type_main-default text_color_inactive">В этом разделе вы можете изменить свои персональные данные.</p>
-            </div>
+        <section className={styles.profile}>
 
-            <div>
+            <div className={styles.profile_edit}>
 
                 <Input type={'text'} placeholder={'Имя'} extraClass="mb-2" />
                 <Input type={'text'} placeholder={'Логин'} extraClass="mb-2" />
@@ -29,16 +21,15 @@ function ProfileEdit() {
                         extraClass="mb-2"
                     />
                 </div>
-
-                <Button htmlType="button" type="secondary" size="medium">
-                    Отмена
-                </Button>
-
-                <Button htmlType="button" type="primary" size="medium">
-                    Сохранить
-                </Button>
-
             </div>
+            <Button htmlType="button" type="secondary" size="medium">
+                Отмена
+            </Button>
+
+            <Button htmlType="button" type="primary" size="medium">
+                Сохранить
+            </Button>
+
         </section>
     )
 }

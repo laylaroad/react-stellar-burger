@@ -6,7 +6,7 @@ import MainSection from '../../pages/main-section/main-section';
 import Register from '../../pages/register/register';
 import Login from '../../pages/login/login';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
-import ProfileEdit from '../../pages/profile-edit/profile-edit';
+import Profile from '../../pages/profile/profile';
 import NoPage from '../../pages/no-page/no-page';
 
 
@@ -20,7 +20,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/profile-edit" element={<ProfileEdit />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="*" element={<NoPage />} />
             </Routes>
         </>

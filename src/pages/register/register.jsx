@@ -17,7 +17,7 @@ function Register() {
 
     return (
         <section className={styles.section_register}>
-            <h2 className={`${styles.register_h2} text text_type_main-large`}>Регистрация</h2>
+            <h2 className={`${styles.register_h2} text text_type_main-medium`}>Регистрация</h2>
 
             <Input type={'text'} placeholder={'Имя'} extraClass="mb-2" />
 

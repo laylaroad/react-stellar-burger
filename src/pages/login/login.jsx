@@ -10,7 +10,7 @@ function Login() {
     return (
         <section className={styles.section_login}>
 
-            <h2 className={styles.login_h2}>Вход</h2>
+            <h2 className={`${styles.login_h2} text text_type_main-medium`}>Вход</h2>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <EmailInput
@@ -34,23 +34,25 @@ function Login() {
                 Войти
             </Button>
 
-            <p className={`${styles.p} text_type_main-default text_color_inactive`}>Вы – новый пользователь?{''}
-                <Link to={'/register'}>
+            <div className={styles.paragraph_login}>
+                <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Вы – новый пользователь?{''}
+                    <Link to={'/register'}>
 
-                    <Button htmlType="button" type="secondary" size="medium">
-                        Зарегистрироваться
-                    </Button>
-                </Link>
-            </p>
+                        <Button htmlType="button" type="secondary" size="medium">
+                            Зарегистрироваться
+                        </Button>
+                    </Link>
+                </p>
 
-            <p className={`${styles.p} text_type_main-default text_color_inactive`}>Забыли пароль?{''}
-                <Link to={'/forgot-password'}>
+                <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Забыли пароль?{''}
+                    <Link to={'/forgot-password'}>
 
-                    <Button htmlType="button" type="secondary" size="medium">
-                        Восстановить пароль
-                    </Button>
-                </Link>
-            </p>
+                        <Button htmlType="button" type="secondary" size="medium">
+                            Восстановить пароль
+                        </Button>
+                    </Link>
+                </p>
+            </div>
 
         </section>
 

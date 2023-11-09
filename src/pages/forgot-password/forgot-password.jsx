@@ -7,7 +7,7 @@ function ForgotPassword() {
 
     return (
         <section className={styles.forgot_password}>
-            <h2 className={styles.forgot_password_h2}>Восстановление пароля</h2>
+            <h2 className={`${styles.forgot_password_h2} text text_type_main-medium`}>Восстановление пароля</h2>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <PasswordInput
