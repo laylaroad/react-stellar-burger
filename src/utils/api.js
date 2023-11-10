@@ -34,21 +34,21 @@ export async function fetchIngredients() {
 
 
 
-// export async function resetPassword(password) {
-//     await request('./password-reset', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ password }),
-//     });
-// };
+export async function resetPassword(password) {
+    await request('./password-reset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+    });
+};
 
-// export async function forgotPassword(email) {
-//     await request('./password-reset', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ email }),
-//     });
-// }
+export async function forgotPassword(email) {
+    await request('./password-reset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+    });
+}
 
 
 
