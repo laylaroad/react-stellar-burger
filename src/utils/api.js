@@ -16,21 +16,39 @@ export async function fetchIngredients() {
     return request('ingredients').then((res) => res.data);
 };
 
-export async function resetPassword(password) {
-    await request('./password-reset', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-    });
-};
 
-export async function forgotPassword(email) {
-    await request('./password-reset', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-    });
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export async function resetPassword(password) {
+//     await request('./password-reset', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ password }),
+//     });
+// };
+
+// export async function forgotPassword(email) {
+//     await request('./password-reset', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ email }),
+//     });
+// }
 
 
 
