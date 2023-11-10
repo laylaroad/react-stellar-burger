@@ -9,3 +9,13 @@
 .header_text {
   margin-left: 8px;
 }
+
+.link_active {
+  color: rgba(242, 242, 243, 1);
+  text-decoration: none;
+}
+
+.link_disactive {
+  text-decoration: none;
+  color: rgba(133, 133, 173, 1);
+}

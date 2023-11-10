@@ -20,12 +20,14 @@ function AppHeader() {
                         icon={<BurgerIcon type="primary" />}
                         text="Конструктор"
                         isActive={true}
+                        link={'/'}
                     />
 
                     <HeaderElements
                         icon={<ListIcon type="secondary" />}
                         text="Лента заказов"
                         isActive={false}
+                        link={'/profile/order'}
                     />
 
                 </ul>
@@ -38,6 +40,7 @@ function AppHeader() {
                     icon={<ProfileIcon type="secondary" />}
                     text="Личный кабинет"
                     isActive={false}
+                    link={'/profile'}
                 />
 
             </nav>

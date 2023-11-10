@@ -7,16 +7,16 @@ import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-co
 
 function Profile({ isActive }) {
 
-    const isActiveText = isActive ? `${styles.link_active}` : `${styles.link_disactive}`;
+    const isActiveLink = isActive ? `${styles.link_active}` : `${styles.link_disactive}`;
 
     return (
         <section className={styles.profile_section}>
 
             <div className={styles.profile_wrapper}>
                 <ul className={`${styles.profile_nav} text text_type_main-medium mt-8 mb-8`}>
-                    <NavLink to={'/profile'} className={isActiveText}>Профиль</NavLink>
-                    <NavLink to={'/profile/orders'} className={isActiveText}>История заказов</NavLink>
-                    <NavLink to={'/'} className={isActiveText}>Выход</NavLink>
+                    <NavLink to={'/profile'} className={isActiveLink}>Профиль</NavLink>
+                    <NavLink to={'/profile/orders'} className={isActiveLink}>История заказов</NavLink>
+                    <NavLink to={'/'} className={isActiveLink}>Выход</NavLink>
                 </ul>
                 <p className="text_type_main-default text_color_inactive mb-20">В этом разделе вы можете изменить свои персональные данные.</p>
             </div>

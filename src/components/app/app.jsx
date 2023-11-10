@@ -12,7 +12,6 @@ import Profile from '../../pages/profile/profile';
 import NoPage from '../../pages/no-page/no-page';
 
 
-
 function App() {
     return (
         <>
