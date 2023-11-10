@@ -18,6 +18,8 @@ import BurgerCreating from '../burger-creating/burger-creating';
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 
+import { useNavigate } from 'react-router-dom';
+
 
 
 function BurgerConstructor() {
@@ -34,11 +36,18 @@ function BurgerConstructor() {
 
     const modalType = useSelector(SelectModalType);
 
+    const navigate = useNavigate();
+
+    const handleLogin = () => {
+        navigate('/login');
+    }
+
     const makeTheOrder = () => {
         dispatch(getOrderData({ ingredients: ingredientsAllId }));
         dispatch(modalOpen('orderDetails'));
         dispatch(deleteAllIngredients());
     };
+
 
     const [{ isHover }, dropTarget] = useDrop({
         accept: 'ingredient',
@@ -71,11 +80,11 @@ function BurgerConstructor() {
                     htmlType="button"
                     type="primary"
                     size="medium"
-                    onClick={makeTheOrder}
+                    onClick={handleLogin}
                 >
                     Оформить заказ
                 </Button>
-                {makeTheOrder && modalType === "orderDetails" && (
+                {handleLogin && modalType === "orderDetails" && (
                     <Modal onClose={() => dispatch(modalClose())}>
                         {orderIsLoading ? (
                             <span className="text text_type_main-medium mt-8 mb-8">Загрузка...</span>
