@@ -1,7 +1,7 @@
 
-import styles from './no-page.module.css';
+import styles from './not-found-404.module.css';
 
-function NoPage() {
+function NotFound404() {
   return (
     <>
       <h1 className={`${styles.not_found_text} text text_type_main-large mt-8`}>404</h1>
@@ -10,4 +10,4 @@ function NoPage() {
   )
 };
 
-export default NoPage;
+export default NotFound404;

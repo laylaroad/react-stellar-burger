@@ -9,7 +9,7 @@ import Login from '../../pages/login/login';
 import ResetPassword from '../../pages/reset-password/reset-password';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import Profile from '../../pages/profile/profile';
-import NoPage from '../../pages/no-page/no-page';
+import NotFound404 from '../../pages/not-found-404/not-found-404';
 
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="*" element={<NoPage />} />
+                <Route path="*" element={<NotFound404 />} />
             </Routes>
         </>
     );
