@@ -18,7 +18,7 @@ function ResetPassword() {
 
     const handleResetPassword = async () => {
         const apiUrl = 'https://norma.nomoreparties.space/api';
-        const endPoint = './password-reset/reset';
+        const endPoint = '/password-reset/reset';
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
