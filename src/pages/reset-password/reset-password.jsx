@@ -23,17 +23,15 @@ function ResetPassword() {
         <section className={styles.reset_password}>
             <h2 className={`${styles.reset_password_title} text text_type_main-medium`}>Восстановление пароля</h2>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <PasswordInput
-                    onChange={onChange}
-                    value={password}
-                    name={'password'}
-                    icon={'ShowIcon'}
-                    error={false}
-                    placeholder={'Введите новый пароль'}
-                    extraClass="mb-2"
-                />
-            </div>
+            <PasswordInput
+                onChange={onChange}
+                value={password}
+                name={'password'}
+                icon={'ShowIcon'}
+                error={false}
+                placeholder={'Введите новый пароль'}
+                extraClass="mb-2"
+            />
 
             <Input
                 type={'text'}

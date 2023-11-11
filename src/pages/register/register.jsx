@@ -1,19 +1,37 @@
 import styles from './register.module.css';
+
+import { registerUser } from '../../utils/api';
+
 import { Input, EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { Link } from 'react-router-dom';
 
 function Register() {
+    // const dispatch = useDispatch();
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
 
-    // const [value, setValue] = React.useState('password')
-    // const onChange = e => {
-    //     setValue(e.target.value)
-    // }
+    // const onChangeEmail = (evt) => {
+    //     setEmail(evt.target.value);
+    // };
+    // const onChangePass = (evt) => {
+    //     setPassword(evt.target.value);
+    // };
 
-    // const [value, setValue] = React.useState('bob@example.com')
-    // const onChange = e => {
-    //     setValue(e.target.value)
-    // }
+    // const handleCLick = () => {
+    //     dispatch(login(email, password));
+    // };
+
+
+    // Example user data
+    const newUser = {
+        name: 'exampleUser',
+        email: 'user@example.com',
+        password: 'securePassword',
+    };
+
+    registerUser(newUser);
+
 
     return (
         <section className={styles.section_register}>

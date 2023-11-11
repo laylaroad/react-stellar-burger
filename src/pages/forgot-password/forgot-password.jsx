@@ -1,7 +1,6 @@
 import styles from './forgot-password.module.css';
 
 import { useState } from 'react';
-
 import { useNavigate } from 'react-router';
 
 import { forgotPassword } from '../../utils/api';
@@ -20,7 +19,7 @@ function ForgotPassword() {
         setEmail(event.target.value);
     };
 
-    const handleToRestorePassword = () => {
+    const handleToRestorePass = () => {
         forgotPassword(email).then((res) => {
             res.success && navigate('./reset-password');
         });
@@ -30,18 +29,17 @@ function ForgotPassword() {
 
         <section className={styles.forgot_password}>
             <h2 className={`${styles.forgot_password_title} text text_type_main-medium`}>Восстановление пароля</h2>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <EmailInput
-                    onChange={handleEmailChange}
-                    email={email}
-                    name={'email'}
-                    isIcon={false}
-                />
-            </div>
+
+            <EmailInput
+                onChange={handleEmailChange}
+                email={email}
+                name={'email'}
+                isIcon={false}
+            />
 
             <Button
                 htmlType="button"
-                onClick={handleToRestorePassword}
+                onClick={handleToRestorePass}
                 type="primary"
                 size="large">
                 Воссстановить
