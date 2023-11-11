@@ -3,7 +3,7 @@ import styles from './forgot-password.module.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { forgotPassword } from '../../utils/api';
+import { apiUrl, forgotPassword } from '../../utils/api';
 
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -20,16 +20,32 @@ function ForgotPassword() {
     };
 
     const handleToRestorePass = async () => {
-        try {
-            const res = await forgotPassword(email);
-
-            console.log(res);
-            if (res.success) {
-                navigate('./reset-password');
-            }
-        } catch (error) {
-            console.log(error);
+        const apiUrl = 'https://norma.nomoreparties.space/api';
+        const endPoint = './password-reset';
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({ email }),
         }
+
+        const res = await fetch(`${apiUrl}/${endPoint}`, options)
+        const data = await res.json();
+
+        if (data.success) {
+            navigate('/reset-password');
+        }
+
+
+        // try {
+        //     const res = await forgotPassword(email);
+
+        //     console.log(res);
+        //     if (res.success) {
+        //         navigate('./reset-password');
+        //     }
+        // } catch (error) {
+        //     console.log(error);
+        // }
     }
 
     return (
