@@ -19,11 +19,18 @@ function ForgotPassword() {
         setEmail(event.target.value);
     };
 
-    const handleToRestorePass = () => {
-        forgotPassword(email).then((res) => {
-            res.success && navigate('./reset-password');
-        });
-    };
+    const handleToRestorePass = async () => {
+        try {
+            const res = await forgotPassword(email);
+
+            console.log(res);
+            if (res.success) {
+                navigate('./reset-password');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
 
@@ -32,7 +39,7 @@ function ForgotPassword() {
 
             <EmailInput
                 onChange={handleEmailChange}
-                email={email}
+                value={email}
                 name={'email'}
                 isIcon={false}
             />
@@ -47,7 +54,6 @@ function ForgotPassword() {
 
             <p className={`${styles.forgot_password_paragraph} text_type_main-default text_color_inactive`}>Вспомнили пароль?{''}
                 <Link to={'/login'}>
-
                     <Button htmlType="button" type="secondary" size="medium">
                         Войти
                     </Button>

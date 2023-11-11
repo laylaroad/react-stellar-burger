@@ -7,8 +7,6 @@ import { EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer
 
 import { Link } from 'react-router-dom';
 
-import { login } from '../../services/actions/user-actions';
-
 function Login() {
 
     const dispatch = useDispatch();
@@ -22,9 +20,9 @@ function Login() {
         setPassword(evt.target.value);
     };
 
-    const handleCLick = () => {
-        dispatch(login(email, password));
-    };
+    // const handleCLick = () => {
+    //     dispatch(login(email, password));
+    // };
 
     return (
         <section className={styles.section_login}>
@@ -53,7 +51,6 @@ function Login() {
 
             <Button
                 htmlType="button"
-                onClick={handleCLick}
                 type="primary"
                 size="large">
                 Войти
