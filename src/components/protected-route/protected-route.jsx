@@ -1,9 +1,22 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+
+import { setAuthChecked, setUser } from '../../services/reducers/userReducer';
+import { checkUserAuth } from '../../utils/api';
+import { selectisAuthChecked, selectUser } from '../../services/selectors/userSelector';
 
 const Protected = ({ onlyUnAuth = false, component }) => {
-    const isAuthChecked = useSelector((store) => store.user.isAuthChecked);
-    const user = useSelector((store) => store.user.user);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setAuthChecked(false));
+        dispatch(checkUserAuth());
+    }, [dispatch]);
+
+    const isAuthChecked = useSelector(selectisAuthChecked);
+    const user = useSelector(selectUser);
     const location = useLocation();
 
     if (!isAuthChecked) {

@@ -1,6 +1,6 @@
 import styles from './register.module.css';
 
-import { userRegister } from '../../utils/api';
+// import { userRegister } from '../../utils/api';
 
 import { Input, EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -25,12 +25,12 @@ function Register() {
 
     // Example user data
 
-    const name = 'exampleUser';
-    const email = 'user@example.com';
-    const password = 'securePassword';
+    // const name = 'exampleUser';
+    // const email = 'user@example.com';
+    // const password = 'securePassword';
 
 
-    userRegister(email, password, name);
+    // userRegister(email, password, name);
 
 
     return (

@@ -2,8 +2,6 @@ import styles from './reset-password.module.css';
 
 import { useState } from 'react';
 
-import { resetPassword } from '../../utils/api';
-
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { Link } from 'react-router-dom';

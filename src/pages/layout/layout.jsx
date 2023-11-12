@@ -1,5 +1,5 @@
 
-import styles from './main-section.module.css';
+import styles from './layout.module.css';
 
 import { DndProvider } from 'react-dnd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ import BurgerConstructor from '../../components/burger-constructor/burger-constr
 
 import { selectIngredientsIsLoading, selectIngredientsError } from '../../services/selectors/ingredientsSelector';
 
-function MainSection() {
+function Layout() {
 
     const dispatch = useDispatch();
 
@@ -41,4 +41,4 @@ function MainSection() {
     )
 };
 
-export default MainSection;
+export default Layout;

@@ -3,6 +3,8 @@ import styles from './login.module.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+// import { authLogin } from '../../utils/api';
+
 import { EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { Link } from 'react-router-dom';
@@ -21,7 +23,7 @@ function Login() {
     };
 
     // const handleCLick = () => {
-    //     dispatch(login(email, password));
+    //     dispatch(authLogin(email, password));
     // };
 
     return (
@@ -51,6 +53,7 @@ function Login() {
 
             <Button
                 htmlType="button"
+                // onClick={handleCLick}
                 type="primary"
                 size="large">
                 Войти
