@@ -16,16 +16,17 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
     }, [dispatch]);
 
     const isAuthChecked = useSelector(selectisAuthChecked);
+    console.log(isAuthChecked);
     const user = useSelector(selectUser);
     const location = useLocation();
 
     if (!isAuthChecked) {
-
+        console.log("Происходит авторизация, подождите...");
         return null;
     }
 
     if (onlyUnAuth && user) {
-
+        console.log("Пользователь не авторизован");
         const { from } = location.state || { from: { pathname: "/" } };
         return <Navigate to={from} />;
     }
@@ -35,7 +36,7 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
         return <Navigate to="/login" state={{ from: location }} />;
     }
 
-
+    console.log("User is authenticated. Rendering component:", user);
     return component;
 };
 
