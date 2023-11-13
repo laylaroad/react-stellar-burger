@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import AppHeader from '../../components/app-header/app-header';
 
-function Home() {
+function Layout() {
     return (
         <>
             <AppHeader />
@@ -14,4 +14,4 @@ function Home() {
     )
 };
 
-export default Home;
+export default Layout;

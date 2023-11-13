@@ -1,9 +1,11 @@
 import styles from './login.module.css';
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 
-// import { authLogin } from '../../utils/api';
+import { login } from '../../services/thunk/user-thunk';
+import { setAuthChecked } from '../../services/reducers/userReducer';
 
 import { EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -12,6 +14,7 @@ import { Link } from 'react-router-dom';
 function Login() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -22,16 +25,24 @@ function Login() {
         setPassword(evt.target.value);
     };
 
-    // const handleCLick = () => {
-    //     dispatch(authLogin(email, password));
-    // };
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            dispatch(login(email, password));
+            dispatch(setAuthChecked(true))
+            navigate('/');
+        } catch (error) {
+            console.error("Ошибка", error);
+            navigate('/forgot-password');
+        }
+    };
 
     return (
         <section className={styles.section_login}>
 
             <h2 className={`${styles.login_h2} text text_type_main-medium`}>Вход</h2>
-
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <form className={styles.form}
+                onSubmit={handleLogin}>
                 <EmailInput
                     value={email}
                     onChange={onChangeEmail}
@@ -39,9 +50,7 @@ function Login() {
                     name={'email'}
                     isIcon={false}
                 />
-            </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <PasswordInput
                     value={password}
                     placeholder="Пароль"
@@ -49,39 +58,39 @@ function Login() {
                     name={'password'}
                     extraClass="mb-2"
                 />
-            </div>
 
-            <Button
-                htmlType="button"
-                // onClick={handleCLick}
-                type="primary"
-                size="large">
-                Войти
-            </Button>
 
-            <div className={styles.paragraph_login}>
-                <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Вы – новый пользователь?{''}
-                    <Link to={'/register'}>
+                <Button
+                    htmlType="submit"
+                    type="primary"
+                    size="large">
+                    Войти
+                </Button>
 
-                        <Button htmlType="button"
-                            type="secondary"
-                            size="medium">
-                            Зарегистрироваться
-                        </Button>
-                    </Link>
-                </p>
+                <div className={styles.paragraph_login}>
+                    <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Вы – новый пользователь?{''}
+                        <Link to={'/register'}>
 
-                <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Забыли пароль?{''}
-                    <Link to={'/forgot-password'}>
+                            <Button htmlType="button"
+                                type="secondary"
+                                size="medium">
+                                Зарегистрироваться
+                            </Button>
+                        </Link>
+                    </p>
 
-                        <Button htmlType="button"
-                            type="secondary"
-                            size="medium">
-                            Восстановить пароль
-                        </Button>
-                    </Link>
-                </p>
-            </div>
+                    <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Забыли пароль?{''}
+                        <Link to={'/forgot-password'}>
+
+                            <Button htmlType="button"
+                                type="secondary"
+                                size="medium">
+                                Восстановить пароль
+                            </Button>
+                        </Link>
+                    </p>
+                </div>
+            </form>
 
         </section>
 

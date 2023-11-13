@@ -1,14 +1,15 @@
 import styles from './forgot-password.module.css';
 
+//hooks
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+//serves
 import { fetchForgotPass } from '../../services/thunk/user-thunk';
 import { setEmailChecked } from '../../services/reducers/userReducer';
 
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import { Link } from 'react-router-dom';
 
 function ForgotPassword() {
