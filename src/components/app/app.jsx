@@ -7,12 +7,16 @@ import Register from '../../pages/register/register';
 import Login from '../../pages/login/login';
 import ResetPassword from '../../pages/reset-password/reset-password';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
-import ProfileMenu from '../../pages/profile-menu/profile-menu';
 import NotFound404 from '../../pages/not-found-404/not-found-404';
-import IngredientPage from '../../pages/ingredients-page/ingredients-page';
+import IngredientPage from '../../pages/ingredient-page/ingredient-page';
 import Layout from '../../pages/layout-page/layout-page';
 import Home from '../../pages/home-page/home-page';
-import Orders from '../../pages/orders/orders';
+
+//profile
+import ProfileMain from '../../pages/profile/profile-main/profile-main';
+import ProfileNavigation from '../../pages/profile/profile-navigation/profile-navigation';
+import Orders from '../../pages/profile/orders/orders';
+
 
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
 import { checkUserAuth } from '../../utils/api';
@@ -43,16 +47,19 @@ function App() {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route
-                        path="/register"
+                        path="register"
                         element={<OnlyUnAuth component={<Register />} />}
                     />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/reset-password" element={<ResetPassword />} />
-                    <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route
-                        path="/profile"
-                        element={<ProfileMenu />} />
-                    <Route path="/orders" element={<Orders />} />
+                    <Route path="login" element={<Login />} />
+                    <Route path="reset-password" element={<ResetPassword />} />
+                    <Route path="forgot-password" element={<ForgotPassword />} />
+
+                    <Route path="profile" element={<ProfileNavigation />}>
+                        <Route index element={<ProfileMain />} />
+                        <Route path="orders" element={<Orders />} />
+                    </Route>
+
+
                     <Route path="ingredients/:id" element={<IngredientPage />} />
                     <Route path="*" element={<NotFound404 />} />
                 </Route>
