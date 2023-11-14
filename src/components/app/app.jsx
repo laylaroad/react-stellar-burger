@@ -50,11 +50,11 @@ function App() {
                         path="register"
                         element={<OnlyUnAuth component={<Register />} />}
                     />
-                    <Route path="login" element={<Login />} />
-                    <Route path="reset-password" element={<ResetPassword />} />
+                    <Route path="login" element={<OnlyUnAuth component={<Login />} />} />
+                    <Route path="reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
                     <Route path="forgot-password" element={<ForgotPassword />} />
 
-                    <Route path="profile" element={<ProfileNavigation />}>
+                    <Route path="profile" element={<OnlyAuth component={<ProfileNavigation />} />}>
                         <Route index element={<ProfileMain />} />
                         <Route path="orders" element={<Orders />} />
                     </Route>
