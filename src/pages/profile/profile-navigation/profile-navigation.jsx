@@ -5,6 +5,7 @@ import { logout } from '../../../services/thunk/user-thunk';
 
 import { NavLink, Outlet } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
 
 function ProfileNavigation({ isActive }) {
 
@@ -50,3 +51,8 @@ function ProfileNavigation({ isActive }) {
 }
 
 export default ProfileNavigation;
+
+
+ProfileNavigation.propTypes = {
+    isActive: PropTypes.bool,
+}

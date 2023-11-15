@@ -66,28 +66,3 @@ function ForgotPassword() {
 }
 
 export default ForgotPassword;
-
-
-
-
-
-
-
-
-
-    // const handleToRestorePass = async () => {
-    //     const apiUrl = 'https://norma.nomoreparties.space/api';
-    //     const endPoint = './password-reset';
-    //     const options = {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json;charset=utf-8' },
-    //         body: JSON.stringify({ email }),
-    //     }
-
-    //     const res = await fetch(`${apiUrl}/${endPoint}`, options)
-    //     const data = await res.json();
-
-    //     if (data.success) {
-    //         navigate('/reset-password');
-    //     }
-    // };
