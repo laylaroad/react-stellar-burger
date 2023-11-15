@@ -38,7 +38,8 @@ function ResetPassword() {
     return (
         <section className={styles.reset_password}>
             <h2 className={`${styles.reset_password_title} text text_type_main-medium`}>Восстановление пароля</h2>
-            <form onSubmit={handletoRestorePass}>
+            <form className={styles.form}
+                onSubmit={handletoRestorePass}>
                 <PasswordInput
                     onChange={handlePasswordChange}
                     value={password}

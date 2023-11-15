@@ -118,25 +118,37 @@ export const getUserData = createAsyncThunk(
 export const register = createAsyncThunk(
     'auth/register',
     async ({ email, password, name }) => {
-        const res = await fetchWithRefresh('auth/register', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify({ email, password, name }),
-        });
+        try {
+            console.log('Registration initiated:', { email, name });
 
-        const data = await checkResponse(res);
-        if (data.success) {
-            localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("refreshToken", data.refreshToken);
-        } else {
-            return Promise.reject("Ошибка данных с сервера");
+            const res = await fetchWithRefresh('auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify({ email, password, name }),
+            });
+
+            console.log('Registration response:', res);
+
+            const data = await checkResponse(res);
+            console.log('Response data:', data);
+
+            if (data.success) {
+                localStorage.setItem('accessToken', data.accessToken);
+                localStorage.setItem('refreshToken', data.refreshToken);
+            } else {
+                console.error('Server error during registration:', data.errorMessage);
+                return Promise.reject('Ошибка данных с сервера');
+            }
+
+            return data;
+        } catch (error) {
+            console.error('Error during registration:', error);
+            return Promise.reject('Ошибка при регистрации пользователя');
         }
-
-        return data;
     }
-)
+);
 
 export const pathUserData = createAsyncThunk(
     'auth/pathUserData',
