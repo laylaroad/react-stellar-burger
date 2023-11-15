@@ -22,17 +22,3 @@ export const selectAllId = (store) => {
 
     return [];
 };
-
-
-// export const selectCount = (store, id) => {
-//     if (store.burgerConstructor.bun) {
-//         if (store.burgerConstructor.mains) {
-//             const allIngredients = [store.burgerConstructor.bun, store.burgerConstructor.mains];
-//             return allIngredients.filter((item) => item && item._id === id).length || 0;
-//         } else {
-//             return 0; // No mains, return 0
-//         }
-//     } else {
-//         return 0; // No bun, return 0
-//     }
-// };

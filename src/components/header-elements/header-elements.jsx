@@ -2,14 +2,16 @@ import styles from './header-elements.module.css';
 
 import PropTypes from 'prop-types';
 
-function HeaderElements({ icon, text, isActive }) {
+import { NavLink } from 'react-router-dom';
 
-    const isActiveText = isActive ? 'false' : 'text_color_active';
+function HeaderElements({ icon, text, link, isActive }) {
+
+    const isActiveLink = isActive ? `${styles.link_active}` : `${styles.link_disactive}`;
 
     return (
         <span className={styles.header_elements}>
             {icon}
-            <span className={`{styles.header_text} ${isActiveText}`}>{text}</span>
+            <NavLink to={link} className={`{styles.header_text} ${isActiveLink}`}>{text}</NavLink>
         </span>
     )
 }

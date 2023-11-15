@@ -18,6 +18,8 @@ import BurgerCreating from '../burger-creating/burger-creating';
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 
+import { useNavigate } from 'react-router-dom';
+import { selectUser } from '../../services/selectors/userSelector';
 
 
 function BurgerConstructor() {
@@ -34,10 +36,18 @@ function BurgerConstructor() {
 
     const modalType = useSelector(SelectModalType);
 
+    const navigate = useNavigate();
+    const user = useSelector(selectUser);
+
+
     const makeTheOrder = () => {
-        dispatch(getOrderData({ ingredients: ingredientsAllId }));
-        dispatch(modalOpen('orderDetails'));
-        dispatch(deleteAllIngredients());
+        if (user) {
+            dispatch(getOrderData({ ingredients: ingredientsAllId }));
+            dispatch(modalOpen('orderDetails'));
+            dispatch(deleteAllIngredients());
+        } else {
+            navigate('/login');
+        }
     };
 
     const [{ isHover }, dropTarget] = useDrop({
@@ -50,8 +60,6 @@ function BurgerConstructor() {
             isHover: monitor.isOver(),
         }),
     });
-
-
 
     return (
         <section className={styles.burger_constructor}

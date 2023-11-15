@@ -1,61 +1,40 @@
+
+import { setAuthChecked, setUser } from "../services/reducers/userReducer";
+
+import { getUserData } from '../services/thunk/user-thunk';
+
 export const apiUrl = 'https://norma.nomoreparties.space/api';
 
 export function checkResponse(res) {
     if (res.ok) {
         return res.json();
     }
-    return Promise.reject(`Error: ${res.status}`);
+    return res.json().then((err) => Promise.reject(err));
 }
 
-async function request(endPoints, options) {
-    const res = await fetch(`${apiUrl}/${endPoints}`, options);
-    return checkResponse(res);
+function request(endPoint, options) {
+    return fetch(`${apiUrl}/${endPoint}`, options).then(checkResponse);
 }
 
 export async function fetchIngredients() {
     return request('ingredients').then((res) => res.data);
 };
 
-// export async function getOrderData(ingredients) {
-//     return request('orders', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(ingredients),
-//     })
-// };
 
 
-// export const getOrderData = createAsyncThunk('order/orderData', async (ingredients, thunkAPI) => {
-//     const orderRequestConfig = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(ingredients),
-//     };
-
-//     const response = await fetch(`${apiUrl}/orders`, orderRequestConfig);
-//     const data = await checkResponse(response);
-
-//     thunkAPI.dispatch(deleteIngredient());
-
-//     return data;
-// });
-
-
-// export const fetchIngredients = async () => {
-//     try {
-//         const response = await fetch(apiUrl);
-//         const data = await checkResponse(response);
-//         return data;
-//     } catch (error) {
-//         throw new Error(`Ошибка: ${error.message}`);
-//     }
-// };
-
-
-
-
-
+export const checkUserAuth = () => {
+    return (dispatch) => {
+        if (localStorage.getItem("accessToken")) {
+            dispatch(getUserData())
+                .catch((error) => {
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("refreshToken");
+                    dispatch(setUser(null));
+                })
+                .finally(() => dispatch(setAuthChecked(true)));
+        } else {
+            dispatch(setAuthChecked(true));
+            dispatch(setUser(null));
+        }
+    };
+};
