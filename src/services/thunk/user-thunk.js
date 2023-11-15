@@ -40,7 +40,7 @@ export const fetchResetPass = createAsyncThunk(
 export const login = createAsyncThunk(
     'auth/login',
     async ({ email, password }) => {
-        const res = await request('/auth/login', {
+        const res = await fetchWithRefresh('auth/login', {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -69,7 +69,7 @@ export const logout = createAsyncThunk(
     'auth/logout',
     async () => {
         const token = localStorage.getItem("refreshToken");
-        const res = await request('/auth/logout', {
+        const res = await fetchWithRefresh('auth/logout', {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -96,7 +96,7 @@ export const logout = createAsyncThunk(
 export const getUserData = createAsyncThunk(
     'auth/getUserData',
     async () => {
-        const res = await request('/auth/user', {
+        const res = await fetchWithRefresh('auth/user', {
             method: "GET",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -118,7 +118,7 @@ export const getUserData = createAsyncThunk(
 export const register = createAsyncThunk(
     'auth/register',
     async ({ email, password, name }) => {
-        const res = await request('/auth/register', {
+        const res = await fetchWithRefresh('auth/register', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -141,7 +141,7 @@ export const register = createAsyncThunk(
 export const pathUserData = createAsyncThunk(
     'auth/pathUserData',
     async ({ email, password, name }) => {
-        const res = await fetchWithRefresh("/auth/user", {
+        const res = await fetchWithRefresh("auth/user", {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -165,7 +165,7 @@ export const pathUserData = createAsyncThunk(
 );
 
 export const refreshToken = () => {
-    return request('/auth/token', {
+    return request('auth/token', {
         method: "POST",
         headers: {
             Accept: "application/json",

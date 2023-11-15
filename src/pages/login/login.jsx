@@ -28,7 +28,7 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            dispatch(login(email, password));
+            dispatch(login({ email, password }));
             dispatch(setAuthChecked(true))
             navigate('/');
         } catch (error) {
