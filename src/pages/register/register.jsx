@@ -1,62 +1,61 @@
 import styles from './register.module.css';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
-// import { userRegister } from '../../utils/api';
+import { register } from '../../services/thunk/user-thunk';
 
 import { Input, EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { Link } from 'react-router-dom';
 
 function Register() {
-    // const dispatch = useDispatch();
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
 
-    // const onChangeEmail = (evt) => {
-    //     setEmail(evt.target.value);
-    // };
-    // const onChangePass = (evt) => {
-    //     setPassword(evt.target.value);
-    // };
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
 
-    // const handleCLick = () => {
-    //     dispatch(login(email, password));
-    // };
+    const onSubmitRegister = async (e) => {
+        e.preventDefault();
+        dispatch(register({ email, password: password, name }))
+            .then(() => {
+                navigate("/");
+            })
+            .catch((error) => {
+                console.error("Ошибка при регистрации пользователя ", error);
+            });
+    };
 
-
-    // Example user data
-
-    // const name = 'exampleUser';
-    // const email = 'user@example.com';
-    // const password = 'securePassword';
-
-
-    // userRegister(email, password, name);
 
 
     return (
         <section className={styles.section_register}>
             <h2 className={`${styles.register_h2} text text_type_main-medium`}>Регистрация</h2>
+            <form onSubmit={onSubmitRegister}>
 
-            <Input type={'text'} placeholder={'Имя'} extraClass="mb-2" />
+                <Input
+                    type={'text'}
+                    placeholder={'Имя'}
+                    value={name}
+                    name={"name"}
+                    onChange={(e) => setName(e.target.value)}
+                    extraClass="mb-2"
+                />
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <EmailInput
-                    // onChange={onChange}
-                    // value={value}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                     name={'email'}
                     isIcon={false}
                 />
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <PasswordInput
-                    // onChange={onChange}
-                    // value={value}
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                     name={'password'}
                     extraClass="mb-2"
                 />
-            </div>
 
-
+            </form>
             <Button htmlType="button" type="primary" size="large">
                 Зарегистрироваться
             </Button>
