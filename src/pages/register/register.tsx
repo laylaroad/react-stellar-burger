@@ -1,6 +1,6 @@
 import styles from './register.module.css';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 
 import { register } from '../../services/thunk/user-thunk';
 import { useNavigate } from 'react-router';
@@ -9,7 +9,7 @@ import { Input, EmailInput, Button, PasswordInput } from '@ya.praktikum/react-de
 
 import { Link } from 'react-router-dom';
 
-function Register() {
+const Register: FC = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -17,10 +17,11 @@ function Register() {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
 
-    const onSubmitRegister = async (e) => {
+    const onSubmitRegister = async (e: FormEvent) => {
         e.preventDefault();
 
         try {
+            //@ts-ignore
             dispatch(register({ email, password, name }));
             navigate("/");
         } catch (error) {

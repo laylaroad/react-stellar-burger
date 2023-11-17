@@ -1,6 +1,6 @@
 import styles from './reset-password.module.css';
 
-import { useState } from 'react';
+import { FC, FormEvent, ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,24 +10,25 @@ import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burg
 
 import { Link } from 'react-router-dom';
 
-function ResetPassword() {
+const ResetPassword: FC = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('');
 
-    const handlePasswordChange = (event) => {
+    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
     };
 
-    const handleToken = (event) => {
+    const handleToken = (event: ChangeEvent<HTMLInputElement>) => {
         setToken(event.target.value);
     };
 
-    const handletoRestorePass = async (e) => {
+    const handletoRestorePass = async (e: FormEvent) => {
         e.preventDefault();
         try {
+            //@ts-ignore
             dispatch(fetchResetPass({ password, token }));
             navigate('/login');
         } catch (error) {
@@ -45,6 +46,7 @@ function ResetPassword() {
                     value={password}
                     name={'password'}
                     icon={'ShowIcon'}
+                      //@ts-ignore
                     error={false}
                     placeholder={'Введите новый пароль'}
                     extraClass="mb-2"
