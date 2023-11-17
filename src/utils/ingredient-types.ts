@@ -14,3 +14,6 @@ export interface Ingredient {
         __v: number,
 
 }
+
+
+export type IngredientId = Ingredient & { _customId: string };
