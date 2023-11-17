@@ -1,10 +1,11 @@
 
 import styles from './ingredient-details.module.css';
+import {FC} from 'react';
 
 import { selectCurrentIngredient } from '../../services/selectors/ingredientsSelector';
 import { useSelector } from 'react-redux';
 
-function IngredientDetails() {
+const IngredientDetails : FC = () => {{
 
     const ingredient = useSelector(selectCurrentIngredient);
 
@@ -36,6 +37,7 @@ function IngredientDetails() {
             </ul>
         </section>
     );
+}
 }
 
 export default IngredientDetails;

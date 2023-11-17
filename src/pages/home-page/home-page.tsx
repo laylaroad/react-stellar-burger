@@ -1,6 +1,8 @@
 
 import styles from './home-page.module.css';
 
+import {FC} from 'react';
+
 import { DndProvider } from 'react-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -8,7 +10,6 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
-import AppHeader from '../../components/app-header/app-header';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 
@@ -16,7 +17,7 @@ import { selectIngredientsIsLoading, selectIngredientsError } from '../../servic
 
 import { checkUserAuth } from '../../utils/api';
 
-function Home() {
+const Home: FC = () => {
 
     const dispatch = useDispatch();
 
