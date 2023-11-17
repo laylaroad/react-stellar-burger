@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectOrderNumber } from '../../services/selectors/orderSelector';
 
 const OrderDetails: FC = () => {
-    const orderNumber = useSelector(selectOrderNumber);
+    const orderNumber = useSelector(selectOrderNumber) as number;
 
     return (
         <section className={styles.order_section}>

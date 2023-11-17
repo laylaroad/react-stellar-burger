@@ -7,3 +7,4 @@ export const selectIngredientsIsLoading = (store) => store.ingredients.isLoading
 
 export const selectCurrentIngredient = (store) => store.ingredients.currentIngredient;
 
+export const selectIngredientById = (id) => (store) => store.ingredients.ingredients.find((ingredients) => ingredients._id === id);

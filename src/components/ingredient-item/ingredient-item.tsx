@@ -11,7 +11,7 @@ import { modalOpen } from '../../services/reducers/modalReducer';
 
 import { selectBurgerBun, selectAllId } from '../../services/selectors/burgerConstructorSelector';
 
-import {Ingredient } from '../../utils/ingredient-types';
+import {Ingredient, IngredientId } from '../../utils/ingredient-types';
 
 interface IngredientItemProps {
   ingredient: Ingredient;

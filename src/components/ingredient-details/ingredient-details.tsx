@@ -1,13 +1,17 @@
 
 import styles from './ingredient-details.module.css';
-import {FC} from 'react';
+import {FC } from 'react';
 
-import { selectCurrentIngredient } from '../../services/selectors/ingredientsSelector';
+import { selectIngredientById } from '../../services/selectors/ingredientsSelector';
 import { useSelector } from 'react-redux';
+import {useParams} from 'react-router-dom';
+import { Ingredient } from '../../utils/ingredient-types';
+
 
 const IngredientDetails : FC = () => {{
 
-    const ingredient = useSelector(selectCurrentIngredient);
+    const { id } = useParams<{ id: string }>();
+    const ingredient = useSelector(selectIngredientById(id)) as Ingredient;
 
     return (
         <section className={`${styles.ingredient_section}`}>
