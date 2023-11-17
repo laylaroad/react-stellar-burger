@@ -25,7 +25,7 @@ import { selectUser } from '../../services/selectors/userSelector';
 
 import {Ingredient, IngredientId} from '../../utils/ingredient-types';
 
-
+  
 const BurgerConstructor: FC = () => {{
 
     const dispatch = useDispatch();
@@ -66,19 +66,15 @@ const BurgerConstructor: FC = () => {{
         }),
     });
 
+
+
     return (
         <section className={styles.burger_constructor}
             ref={dropTarget}>
 
             <div className={` ${styles.burger_wrapper} ${isHover ? styles.container_empty : ""
                 } `}>
-             {ingredientsAllId.map((ingredient: Ingredient, index: number) => (
-        <BurgerCreating
-          key={ingredient._customId}
-          item={ingredient}
-          index={index}
-        />
-      ))}
+      <BurgerCreating/>
             </div>
             <span className={styles.burger_sum}>
                 <p className={`${styles.currency} text text_type_digits-medium mr-10`}>

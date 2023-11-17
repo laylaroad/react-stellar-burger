@@ -11,12 +11,8 @@ import { selectBurgerBun, selectBurgerIngredients } from '../../services/selecto
 import IngredientsMain from '../ingredients-main/ingredients-main';
 import {Ingredient, IngredientId} from '../../utils/ingredient-types';
 
-interface IBurgerCreating {
-    item: Ingredient
-    index: number
-}
 
-const BurgerCreating: FC<IBurgerCreating> = () => {
+const BurgerCreating: FC = () => {
 
     const bun = useSelector(selectBurgerBun) as IngredientId;
     const mains = useSelector(selectBurgerIngredients) as Array<IngredientId>;
