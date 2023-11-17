@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import  { FC } from 'react';
 
 //pages
 import Register from '../../pages/register/register';
@@ -27,7 +28,7 @@ import { modalClose } from '../../services/reducers/modalReducer';
 
 
 
-function App() {
+const App: FC = () => {{
 
     const dispatch = useDispatch();
     const location = useLocation();
@@ -72,7 +73,7 @@ function App() {
                             path="ingredients/:id" element={
                                 <Modal
                                     title={'Детали ингредиента'}
-                                    handleClose={handleClose}>
+                                    onClose={handleClose}>
                                     <IngredientDetails />
                                 </Modal>
                             } />
@@ -81,6 +82,7 @@ function App() {
             }
         </>
     )
+};
 };
 
 export default App;

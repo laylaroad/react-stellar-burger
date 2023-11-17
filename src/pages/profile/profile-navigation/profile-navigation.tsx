@@ -8,7 +8,7 @@ import { logout } from '../../../services/thunk/user-thunk';
 import { NavLink, Outlet } from 'react-router-dom';
 
 interface ProfileNavigationProps {
-    isActive: boolean
+    isActive?: boolean
 }
 
 const ProfileNavigation: FC<ProfileNavigationProps> = ({ isActive })=>  {
