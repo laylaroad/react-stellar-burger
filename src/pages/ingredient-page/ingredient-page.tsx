@@ -3,12 +3,15 @@ import { selectIngredients } from '../../services/selectors/ingredientsSelector'
 
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
+
+import { Ingredient } from '../../utils/ingredient-types';
 
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
 import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
-function IngredientPage() {
+
+const IngredientPage: FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredientsData());
@@ -27,7 +30,7 @@ function IngredientPage() {
 
   }
 
-  const ingredient = ingredients.find((ingredient) => ingredient._id.toString() === id);
+  const ingredient = ingredients.find((ingredient: Ingredient) => ingredient._id.toString() === id);
 
   if (!ingredient) {
     console.log("Не найден ингредиент со следующим id:", id);
