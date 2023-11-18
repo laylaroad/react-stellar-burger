@@ -1,5 +1,5 @@
 import styles from './ingredient-page.module.css';
-import {FC, ReactNode} from 'react';
+import {FC, ReactNode, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {selectIngredientById} from '../../services/selectors/ingredientsSelector';
@@ -13,6 +13,9 @@ const IngredientPage: FC = () => {
   const { id } = useParams<{ id: string }>();
 
    const ingredient = useSelector(selectIngredientById(id)) as Array<Ingredient>;
+
+    console.log('Ingredient in ConnectedIngredientPage:', ingredient);
+
 
   return ingredient? (
     
