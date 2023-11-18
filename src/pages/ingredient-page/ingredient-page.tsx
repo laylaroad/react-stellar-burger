@@ -1,18 +1,30 @@
 import styles from './ingredient-page.module.css';
-import {FC,} from 'react';
+import {FC, ReactNode} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {useParams} from 'react-router-dom';
+import {selectIngredientById} from '../../services/selectors/ingredientsSelector';
+import {Ingredient} from '../../utils/ingredient-types';
 
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
+import NotFound404 from '../not-found-404/not-found-404';
+
 
 const IngredientPage: FC = () => {
-    return (
-      <div className={styles.ingredient_section}>
-        <IngredientDetails />
-      </div>
-    );
-  }
-  
-  export default IngredientPage;
+  const { id } = useParams<{ id: string }>();
 
+   const ingredient = useSelector(selectIngredientById(id)) as Array<Ingredient>;
+
+  return ingredient? (
+    
+    <div className={styles.ingredient_section}>
+      <IngredientDetails {...ingredient}/>
+    </div>
+) : (
+  <NotFound404 />
+);
+}
+
+export default IngredientPage;
 
 
 
