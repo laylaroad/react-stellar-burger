@@ -37,6 +37,6 @@ interface IngredientDetailsProps {
             </ul>
         </section>
     );
-}
+  }
 
 export default IngredientDetails;

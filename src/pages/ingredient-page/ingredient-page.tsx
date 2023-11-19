@@ -28,7 +28,9 @@ const IngredientPage: FC = () => {
 
   return ingredient ? (
     <div className={styles.ingredient_section}>
-      <IngredientDetails ingredient={ingredient} />
+      <h1 className="text text_type_main-large">Детали ингредиента</h1>
+      <IngredientDetails 
+      ingredient={ingredient} />
     </div>
   ) : (
     <div>Данные грузятся</div>
