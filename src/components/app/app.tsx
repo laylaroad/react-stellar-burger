@@ -67,7 +67,7 @@ const App: FC = () => {{
                     </Route>
 
 
-                    <Route path="ingredients/:id" element={<IngredientPage />} />
+                    <Route path="ingredients/:id" element={<IngredientPage ingredient />} />
                     <Route path="*" element={<NotFound404 />} />
                 </Route>
             </Routes>
