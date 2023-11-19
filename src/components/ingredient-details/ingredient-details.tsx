@@ -1,13 +1,7 @@
-
 import styles from './ingredient-details.module.css';
 
-import { selectCurrentIngredient, selectIngredientById, selectIngredients } from '../../services/selectors/ingredientsSelector';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Ingredient } from '../../utils/ingredient-types';
-import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
-
 
 interface IngredientDetailsProps {
     ingredient: Ingredient;

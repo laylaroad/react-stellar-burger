@@ -1,19 +1,16 @@
 import styles from './ingredient-page.module.css';
-import { selectIngredientById, selectIngredients } from '../../services/selectors/ingredientsSelector';
+import {  selectIngredients } from '../../services/selectors/ingredientsSelector';
 
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import  { FC, useEffect, ReactElement } from 'react';
+import  { FC, useEffect} from 'react';
 import { Ingredient } from '../../utils/ingredient-types';
 
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
 import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
-interface IngredientPageProps {
-  ingredient: any
-}
 
-const IngredientPage: FC<IngredientPageProps> = () => {
+const IngredientPage: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,7 +23,7 @@ const IngredientPage: FC<IngredientPageProps> = () => {
   const ingredientsArray = useSelector(selectIngredients);
   console.log(ingredientsArray);
 
-  const ingredient = ingredientsArray.find((ingredient: any) => ingredient._id === id) as Ingredient;
+  const ingredient = ingredientsArray.find((ingredient: Ingredient) => ingredient._id === id);
   console.log(ingredient);
 
   return ingredient ? (
