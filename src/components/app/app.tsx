@@ -37,8 +37,8 @@ const App: FC = () => {{
     const dispatch = useDispatch();
     const location = useLocation();
     const background = location.state && location.state.background;
-    
-    // const ingredient = useSelector(selectIngredientById(id));
+    const params = useParams();
+    const ingredient = useSelector(selectIngredientById(params.id));
 
     useEffect(() => {
         dispatch(checkUserAuth());
@@ -65,8 +65,6 @@ const App: FC = () => {{
                         <Route index element={<ProfileMain />} />
                         <Route path="orders" element={<Orders />} />
                     </Route>
-
-
                     <Route path="ingredients/:id" element={<IngredientPage />} />
                     <Route path="*" element={<NotFound404 />} />
                 </Route>
@@ -80,7 +78,7 @@ const App: FC = () => {{
                                 <Modal
                                     title={'Детали ингредиента'}
                                     onClose={handleClose}>
-                                    <IngredientDetailsFoo />
+                                    <IngredientDetails ingredient={ingredient}/>
                                    
                                 </Modal>
                             } />
@@ -92,14 +90,6 @@ const App: FC = () => {{
 };
 };
 
-function IngredientDetailsFoo() {
-    const params = useParams();
-    const ingredient = useSelector(selectIngredientById(params.id));
-
-    console.log('App', ingredient);
-
-    return <IngredientDetails ingredient={ingredient}/>
-}
 
 export default App;
 
