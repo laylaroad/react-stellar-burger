@@ -9,12 +9,11 @@ import { Ingredient } from '../../utils/ingredient-types';
 import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
 
-function IngredientDetails({ ingredient }) {
-
-    // const { id } = useParams();
-
-    // const ingredient = useSelector(selectIngredientById(id));
-
+interface IngredientDetailsProps {
+    ingredient: Ingredient;
+  }
+  
+  const IngredientDetails: FC<IngredientDetailsProps> = ({ ingredient }) => {
 
     return (
         <section className={`${styles.ingredient_section}`}>
