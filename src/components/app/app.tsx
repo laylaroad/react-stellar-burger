@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import  { FC } from 'react';
 
 //pages
@@ -26,6 +26,9 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { modalClose } from '../../services/reducers/modalReducer';
 
+import {selectCurrentIngredient} from '../../services/selectors/ingredientsSelector';
+import { Ingredient } from '../../utils/ingredient-types';
+
 
 
 const App: FC = () => {{
@@ -33,6 +36,7 @@ const App: FC = () => {{
     const dispatch = useDispatch();
     const location = useLocation();
     const background = location.state && location.state.background;
+    const ingredient = useSelector(selectCurrentIngredient) as Ingredient;
 
     useEffect(() => {
         dispatch(checkUserAuth());
@@ -74,7 +78,7 @@ const App: FC = () => {{
                                 <Modal
                                     title={'Детали ингредиента'}
                                     onClose={handleClose}>
-                                    <IngredientDetails />
+                                    <IngredientDetails ingredient={ingredient}/>
                                 </Modal>
                             } />
                     </Routes>

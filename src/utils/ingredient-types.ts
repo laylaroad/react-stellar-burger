@@ -12,7 +12,7 @@ export interface Ingredient {
         calories: number,
         price: number,
         __v: number,
-        // _customId: string,
+        
 }
 
 export type IngredientId = Ingredient & { _customId: string };

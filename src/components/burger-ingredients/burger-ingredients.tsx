@@ -10,7 +10,7 @@ import { modalClose } from '../../services/reducers/modalReducer';
 import Modal from '../modal/modal';
 import { SelectModalType } from '../../services/selectors/modalSelector';
 
-import { selectIngredients } from '../../services/selectors/ingredientsSelector';
+import { selectIngredients, selectCurrentIngredient } from '../../services/selectors/ingredientsSelector';
 import { selectIngredientsIsLoading, selectIngredientsError } from '../../services/selectors/ingredientsSelector';
 
 import IngredientDetails from '../ingredient-details/ingredient-details';
@@ -28,6 +28,7 @@ const BurgerIngredients: FC = () => {
     const modalType = useSelector(SelectModalType);
     const ingredientDetailsIsLoading = useSelector(selectIngredientsIsLoading);
     const ingredientDetailsIsError = useSelector(selectIngredientsError);
+    const ingredient = useSelector(selectCurrentIngredient) as Ingredient;
 
     const oneRef = useRef<HTMLHeadingElement>(null);
     const twoRef = useRef<HTMLHeadingElement>(null);
@@ -133,7 +134,7 @@ const BurgerIngredients: FC = () => {
                     ) : ingredientDetailsIsError ? (
                         <span className="text text_type_main-medium mt-8 mb-8">Ошибка</span>
                     ) : (
-                        <IngredientDetails />
+                        <IngredientDetails ingredient={ingredient} />
                     )}
                 </Modal>
             )}
