@@ -81,13 +81,13 @@ const App: FC = () => {{
                                     title={'Детали ингредиента'}
                                     onClose={handleClose}>
                                     <IngredientDetailsFoo />
-                                    {/* <IngredientDetails ingredient={ingredient}/> */}
+                                   
                                 </Modal>
                             } />
                     </Routes>
                 )
             }
-        </>
+    </>
     )
 };
 };
@@ -103,5 +103,3 @@ function IngredientDetailsFoo() {
 
 export default App;
 
-
-//id нужно написать во вспомогательной функции и вызвать эту функцию в скоупе как свойство
