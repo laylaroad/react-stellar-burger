@@ -1,9 +1,9 @@
 import styles from './ingredient-page.module.css';
-import { selectIngredients } from '../../services/selectors/ingredientsSelector';
+import { selectIngredientById, selectIngredients } from '../../services/selectors/ingredientsSelector';
 
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
 import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
@@ -12,33 +12,22 @@ function IngredientPage() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredientsData());
-  }, []);
+  }, [getIngredientsData]);
 
   const { id } = useParams();
-  console.log("id предполагаемого ингредиента", id);
+  console.log(id);
 
-  const ingredients = useSelector(selectIngredients);
-  console.log("Ингредиенты:", ingredients);
+  const ingredientsArray = useSelector(selectIngredients);
+  console.log(ingredientsArray);
 
-  if (ingredients.length === 0) {
-    console.log("Не обнаружено ни одного ингредиента");
-  } else {
-    console.log("Обнаружены следующие ингредиенты:", ingredients);
-
-  }
-
-  const ingredient = ingredients.find((ingredient) => ingredient._id.toString() === id);
-
-  if (!ingredient) {
-    console.log("Не найден ингредиент со следующим id:", id);
-  } else {
-    console.log("Ингредиент с id:", ingredient);
-  }
-
-  return (
+  const ingredient = ingredientsArray.find((ingredient) => ingredient._id === id);
+  console.log(ingredient);
+  return ingredient ? (
     <div className={styles.ingredient_section}>
       <IngredientDetails ingredient={ingredient} />
     </div>
+  ) : (
+    <div>Данные грузятся</div>
   );
 
 }

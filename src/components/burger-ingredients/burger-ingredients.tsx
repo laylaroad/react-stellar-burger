@@ -134,7 +134,7 @@ const BurgerIngredients: FC = () => {
                     ) : ingredientDetailsIsError ? (
                         <span className="text text_type_main-medium mt-8 mb-8">Ошибка</span>
                     ) : (
-                        <IngredientDetails ingredient={ingredient} />
+                        <IngredientDetails ingredient={ingredient}/>
                     )}
                 </Modal>
             )}

@@ -26,8 +26,9 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { modalClose } from '../../services/reducers/modalReducer';
 
-import {selectCurrentIngredient} from '../../services/selectors/ingredientsSelector';
+import {selectCurrentIngredient, selectIngredients, selectIngredientById} from '../../services/selectors/ingredientsSelector';
 import { Ingredient } from '../../utils/ingredient-types';
+import { useParams } from 'react-router';
 
 
 
@@ -36,7 +37,8 @@ const App: FC = () => {{
     const dispatch = useDispatch();
     const location = useLocation();
     const background = location.state && location.state.background;
-    const ingredient = useSelector(selectCurrentIngredient) as Ingredient;
+    
+    // const ingredient = useSelector(selectIngredientById(id));
 
     useEffect(() => {
         dispatch(checkUserAuth());
@@ -78,7 +80,8 @@ const App: FC = () => {{
                                 <Modal
                                     title={'Детали ингредиента'}
                                     onClose={handleClose}>
-                                    <IngredientDetails ingredient={ingredient}/>
+                                    <IngredientDetailsFoo />
+                                    {/* <IngredientDetails ingredient={ingredient}/> */}
                                 </Modal>
                             } />
                     </Routes>
@@ -89,4 +92,16 @@ const App: FC = () => {{
 };
 };
 
+function IngredientDetailsFoo() {
+    const params = useParams();
+    const ingredient = useSelector(selectIngredientById(params.id));
+
+    console.log('App', ingredient);
+
+    return <IngredientDetails ingredient={ingredient}/>
+}
+
 export default App;
+
+
+//id нужно написать во вспомогательной функции и вызвать эту функцию в скоупе как свойство

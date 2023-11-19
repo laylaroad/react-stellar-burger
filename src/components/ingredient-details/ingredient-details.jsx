@@ -1,16 +1,19 @@
 
 import styles from './ingredient-details.module.css';
 
-import { selectCurrentIngredient } from '../../services/selectors/ingredientsSelector';
-import { useSelector } from 'react-redux';
-import {FC} from 'react';
-import {Ingredient} from '../../utils/ingredient-types';
+import { selectCurrentIngredient, selectIngredientById, selectIngredients } from '../../services/selectors/ingredientsSelector';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
+import { FC, useEffect } from 'react';
+import { Ingredient } from '../../utils/ingredient-types';
+import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
-interface IngredientDetailsProps {
-    ingredient: Ingredient;
-}
 
-const IngredientDetails:FC<IngredientDetailsProps> = ({ ingredient }) => {
+function IngredientDetails({ ingredient }) {
+
+    // const { id } = useParams();
+
+    // const ingredient = useSelector(selectIngredientById(id));
 
 
     return (
