@@ -11,7 +11,13 @@ import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
 
 const IngredientPage: FC = () => {
- 
+
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+      dispatch(getIngredientsData());
+    }, [getIngredientsData]);
+
   const { id } = useParams();
   console.log(id);
 
@@ -28,7 +34,7 @@ const IngredientPage: FC = () => {
       ingredient={ingredient} />
     </div>
   ) : (
-    <div>Данные грузятся</div>
+    <h2 className="text text_type_main-large">Данные грузятся</h2>
   );
 };
 
