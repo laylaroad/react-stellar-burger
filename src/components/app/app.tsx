@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import  { FC } from 'react';
 
 //pages
@@ -18,7 +19,7 @@ import ProfileMain from '../../pages/profile/profile-main/profile-main';
 import ProfileNavigation from '../../pages/profile/profile-navigation/profile-navigation';
 import Orders from '../../pages/profile/orders/orders';
 
-
+//protected-route
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
 import { checkUserAuth } from '../../utils/api';
 
@@ -26,9 +27,8 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { modalClose } from '../../services/reducers/modalReducer';
 
-import {selectCurrentIngredient, selectIngredients, selectIngredientById} from '../../services/selectors/ingredientsSelector';
-import { Ingredient } from '../../utils/ingredient-types';
-import { useParams } from 'react-router';
+import {selectIngredientById} from '../../services/selectors/ingredientsSelector';
+
 
 
 
@@ -44,9 +44,9 @@ const App: FC = () => {{
         dispatch(checkUserAuth());
     }, []);
 
-    const handleClose = () => {
+    const onClose = (): void => {
         dispatch(modalClose());
-    }
+      };
 
     return (
         <>
@@ -77,7 +77,7 @@ const App: FC = () => {{
                             path="ingredients/:id" element={
                                 <Modal
                                     title={'Детали ингредиента'}
-                                    onClose={handleClose}>
+                                    onClose={onClose}>
                                     <IngredientDetails ingredient={ingredient}/>
                                    
                                 </Modal>

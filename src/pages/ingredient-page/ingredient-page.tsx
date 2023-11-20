@@ -11,12 +11,7 @@ import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
 
 const IngredientPage: FC = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getIngredientsData());
-  }, [dispatch]);
-
+ 
   const { id } = useParams();
   console.log(id);
 

@@ -39,8 +39,6 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ onlyUnAuth = false, component
     if (!onlyUnAuth && !user) {
         return <Navigate to="/login" state={{ from: location }} />;
     }
-
-    console.log("User is authenticated. Rendering component:", user);
     return component;
 };
 
