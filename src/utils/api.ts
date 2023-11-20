@@ -5,28 +5,33 @@ import { getUserData } from '../services/thunk/user-thunk';
 
 export const apiUrl = 'https://norma.nomoreparties.space/api';
 
-export function checkResponse(res) {
+interface IRequestOptions extends RequestInit {
+    headers: Record<string, string>;
+  }
+
+export function checkResponse(res: Response) {
     if (res.ok) {
         return res.json();
     }
     return res.json().then((err) => Promise.reject(err));
 }
 
-function request(endPoint, options) {
+function request(endPoint: string, options: IRequestOptions) {
     return fetch(`${apiUrl}/${endPoint}`, options).then(checkResponse);
 }
 
 export async function fetchIngredients() {
+    //@ts-ignore
     return request('ingredients').then((res) => res.data);
 };
 
 
 
 export const checkUserAuth = () => {
-    return (dispatch) => {
+    return (dispatch: any) => {
         if (localStorage.getItem("accessToken")) {
             dispatch(getUserData())
-                .catch((error) => {
+                .catch((error: any) => {
                     localStorage.removeItem("accessToken");
                     localStorage.removeItem("refreshToken");
                     dispatch(setUser(null));
