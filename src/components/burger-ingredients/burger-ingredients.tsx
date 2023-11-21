@@ -127,7 +127,7 @@ const BurgerIngredients: FC = () => {
                 </article>
             </section>
 
-            {modalType === 'ingredientDetails' && (
+            {/* {modalType === 'ingredientDetails' && (
                 <Modal title={'Детали ингредиента'} onClose={() => dispatch(modalClose())}>
                     {ingredientDetailsIsLoading ? (
                         <span className="text text_type_main-medium mt-8 mb-8">Загрузка...</span>
@@ -137,7 +137,7 @@ const BurgerIngredients: FC = () => {
                         <IngredientDetails ingredient={ingredient}/>
                     )}
                 </Modal>
-            )}
+            )} */}
         </>
     );
 };

@@ -26,10 +26,12 @@ import { checkUserAuth } from '../../utils/api';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { modalClose } from '../../services/reducers/modalReducer';
+import { SelectModalType } from '../../services/selectors/modalSelector';
 
-import {selectIngredientById} from '../../services/selectors/ingredientsSelector';
+import {selectIngredientById,selectCurrentIngredient, selectIngredientsIsLoading, selectIngredientsError} from '../../services/selectors/ingredientsSelector';
 
 import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
+import { Ingredient } from '../../utils/ingredient-types';
 
 
 const App: FC = () => {{
@@ -52,6 +54,7 @@ const App: FC = () => {{
 
     return (
         <>
+        
             <Routes location={background || location}>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
@@ -73,20 +76,19 @@ const App: FC = () => {{
             </Routes>
 
             {
-                background && (
-                    <Routes>
-                        <Route
-                            path="ingredients/:id" element={
-                                <Modal
-                                    title={'Детали ингредиента'}
-                                    onClose={onClose}>
-                                    <IngredientDetails ingredient={ingredient}/>
-                                   
-                                </Modal>
-                            } />
-                    </Routes>
-                )
-            }
+      background && (
+        <Routes>
+            <Route
+          path="ingredients/:id" element = {
+            <Modal title={'Детали ингредиента'} 
+            onClose={onClose}>
+            <IngredientDetails 
+            ingredient={ingredient}/>
+          </Modal>
+          }/>
+        </Routes>
+      )
+    }
     </>
     )
 };
