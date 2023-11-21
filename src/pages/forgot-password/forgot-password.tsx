@@ -38,8 +38,12 @@ const ForgotPassword: FC = () => {
           value={email}
           name={'email'}
           isIcon={false}
-        />
-        <Button htmlType="submit" type="primary" size="large">
+        />!
+        <Button 
+        disabled={!email}
+        htmlType="submit" 
+        type="primary" 
+        size="large">
           Восстановить
         </Button>
       </form>

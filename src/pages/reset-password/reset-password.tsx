@@ -61,7 +61,9 @@ const ResetPassword: FC = () => {
                     extraClass="mb-2" />
 
 
-                <Button htmlType="submit"
+                <Button 
+                disabled={!token}
+                htmlType="submit"
                     type="primary"
                     size="large">
 

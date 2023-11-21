@@ -59,6 +59,7 @@ const Register: FC = () => {
 
             </form>
             <Button
+                disabled={!name}
                 htmlType="submit"
                 type="primary"
                 size="large">

@@ -62,6 +62,7 @@ const Login: FC = () => {
 
 
                 <Button
+                 disabled={!password}
                     htmlType="submit"
                     type="primary"
                     size="large">
