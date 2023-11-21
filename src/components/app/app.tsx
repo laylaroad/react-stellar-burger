@@ -29,7 +29,7 @@ import { modalClose } from '../../services/reducers/modalReducer';
 
 import {selectIngredientById} from '../../services/selectors/ingredientsSelector';
 
-
+import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
 
 const App: FC = () => {{
@@ -42,7 +42,9 @@ const App: FC = () => {{
 
     useEffect(() => {
         dispatch(checkUserAuth());
+        dispatch(getIngredientsData());
     }, []);
+
 
     const onClose = (): void => {
         dispatch(modalClose());
