@@ -19,15 +19,8 @@ import { checkUserAuth } from '../../utils/api';
 
 const Home: FC = () => {
 
-    const dispatch = useDispatch();
-
     const isLoading = useSelector(selectIngredientsIsLoading);
     const isError = useSelector(selectIngredientsError);
-
-    useEffect(() => {
-        dispatch(getIngredientsData());
-        dispatch(checkUserAuth());
-    }, []);
 
     return (
         <>

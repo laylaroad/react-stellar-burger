@@ -20,7 +20,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ onlyUnAuth = false, component
         dispatch(checkUserAuth());
     }, [dispatch]);
 
-    const isAuthChecked = useSelector(selectisAuthChecked);
+    const isAuthChecked = useSelector(selectisAuthChecked) as boolean;
     console.log(isAuthChecked);
     const user = useSelector(selectUser);
     const location = useLocation();

@@ -2,12 +2,11 @@ import styles from './ingredient-page.module.css';
 import {  selectIngredients } from '../../services/selectors/ingredientsSelector';
 
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import  { FC, useEffect} from 'react';
+import { useSelector } from 'react-redux';
+import  { FC} from 'react';
 import { Ingredient } from '../../utils/ingredient-types';
 
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
-import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
 
 const IngredientPage: FC = () => {

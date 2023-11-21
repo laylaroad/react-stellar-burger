@@ -73,7 +73,8 @@ const Login: FC = () => {
                     <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Вы – новый пользователь?{''}
                         <Link to={'/register'}>
 
-                            <Button htmlType="button"
+                            <Button 
+                            htmlType="button"
                                 type="secondary"
                                 size="medium">
                                 Зарегистрироваться
@@ -84,7 +85,8 @@ const Login: FC = () => {
                     <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Забыли пароль?{''}
                         <Link to={'/forgot-password'}>
 
-                            <Button htmlType="button"
+                            <Button 
+                            htmlType="button"
                                 type="secondary"
                                 size="medium">
                                 Восстановить пароль

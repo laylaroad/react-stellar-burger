@@ -15,7 +15,7 @@ const ForgotPassword: FC = () => {
     setEmail(event.target.value);
   };
 
-  const handleToRestorePass = async (e: FormEvent) => {
+  const handleToRestorePass = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
         //@ts-ignore
