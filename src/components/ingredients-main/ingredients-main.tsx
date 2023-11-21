@@ -1,5 +1,5 @@
 import styles from './ingredients-main.module.css';
-import Proptypes from 'prop-types';
+import {FC} from 'react';
 
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -11,9 +11,17 @@ import { selectBurgerIngredients } from '../../services/selectors/burgerConstruc
 import { moveIngredient } from '../../services/reducers/burgerConstructorReducer';
 import { deleteIngredient } from '../../services/reducers/burgerConstructorReducer';
 
-function IngredientsMain({ item, index }) {
+import {Ingredient, IngredientId} from '../../utils/ingredient-types';
 
-    const mains = useSelector(selectBurgerIngredients);
+interface IngredientMainProps {
+
+    item: IngredientId
+    index: number
+}
+
+const IngredientsMain: FC<IngredientMainProps> = ({ item, index }) => {
+
+    const mains = useSelector(selectBurgerIngredients) as Array<IngredientId>;
     const dispatch = useDispatch();
 
     const [{ isDragging }, dragRef] = useDrag({
@@ -24,7 +32,7 @@ function IngredientsMain({ item, index }) {
         })
     });
 
-    const findIndex = (item) => {
+    const findIndex = (item:IngredientId ) => {
         return mains.indexOf(item);
     }
 
@@ -34,7 +42,7 @@ function IngredientsMain({ item, index }) {
 
     const [, dropRef] = useDrop({
         accept: 'sort',
-        hover({ ingredient }) {
+        hover({ ingredient }:{ingredient: IngredientId}):void {
             if (ingredient._customId === item._customId)
                 return;
             dispatch(
@@ -50,9 +58,9 @@ function IngredientsMain({ item, index }) {
     return (
         <div className={`${styles.main} ${isDragging ? styles.draggable : ''} `} ref={(node) => dropRef(dragRef(node))}>
 
-            <DragIcon />
+            <DragIcon type="primary" />
             <ConstructorElement
-                key={index._id}
+                // key={index._id}
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}
@@ -64,8 +72,3 @@ function IngredientsMain({ item, index }) {
 }
 
 export default IngredientsMain;
-
-IngredientsMain.propTypes = {
-    index: Proptypes.number,
-    id: Proptypes.number,
-}

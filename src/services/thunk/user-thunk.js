@@ -1,11 +1,7 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { apiUrl, checkResponse } from '../../utils/api';
-
-function request(endpoint, options) {
-    return fetch(`${apiUrl}/${endpoint}`, options);
-}
+import { request, checkResponse } from '../../utils/api';
 
 export const fetchForgotPass = createAsyncThunk(
     "auth/fetchForgotPass",

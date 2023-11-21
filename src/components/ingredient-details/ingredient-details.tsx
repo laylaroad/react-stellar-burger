@@ -1,12 +1,13 @@
-
 import styles from './ingredient-details.module.css';
 
-import { selectCurrentIngredient } from '../../services/selectors/ingredientsSelector';
-import { useSelector } from 'react-redux';
+import { FC } from 'react';
+import { Ingredient } from '../../utils/ingredient-types';
 
-function IngredientDetails() {
-
-    const ingredient = useSelector(selectCurrentIngredient);
+interface IngredientDetailsProps {
+    ingredient: Ingredient;
+  }
+  
+  const IngredientDetails: FC<IngredientDetailsProps> = ({ ingredient }) => {
 
     return (
         <section className={`${styles.ingredient_section}`}>
@@ -36,6 +37,6 @@ function IngredientDetails() {
             </ul>
         </section>
     );
-}
+  }
 
 export default IngredientDetails;

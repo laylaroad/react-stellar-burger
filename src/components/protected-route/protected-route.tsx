@@ -1,13 +1,18 @@
+import { useEffect, FC, ReactElement, ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
 
 import { setAuthChecked } from '../../services/reducers/userReducer';
 import { checkUserAuth } from '../../utils/api';
 import { selectisAuthChecked, selectUser } from '../../services/selectors/userSelector';
 
-const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
+interface ProtectedRouteProps {
+    onlyUnAuth: boolean;
+    component: ReactElement;
+    children?: ReactNode,
+}
 
+const ProtectedRoute: FC<ProtectedRouteProps> = ({ onlyUnAuth = false, component }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -15,7 +20,7 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
         dispatch(checkUserAuth());
     }, [dispatch]);
 
-    const isAuthChecked = useSelector(selectisAuthChecked);
+    const isAuthChecked = useSelector(selectisAuthChecked) as boolean;
     console.log(isAuthChecked);
     const user = useSelector(selectUser);
     const location = useLocation();
@@ -32,13 +37,15 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
     }
 
     if (!onlyUnAuth && !user) {
-
         return <Navigate to="/login" state={{ from: location }} />;
     }
-
-    console.log("User is authenticated. Rendering component:", user);
     return component;
 };
 
-export const OnlyAuth = (props) => <ProtectedRoute onlyUnAuth={false} {...props} />;
-export const OnlyUnAuth = (props) => <ProtectedRoute onlyUnAuth={true} {...props} />;
+export const OnlyAuth: FC<{ component: ReactElement }> = (props) => (
+    <ProtectedRoute onlyUnAuth={false} {...props} />
+  );
+  
+  export const OnlyUnAuth: FC<{ component: ReactElement }> = (props) => (
+    <ProtectedRoute onlyUnAuth={true} {...props} />
+  );

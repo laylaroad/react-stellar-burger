@@ -1,6 +1,6 @@
 import styles from './login.module.css';
 
-import { useState } from 'react';
+import { useState, FC, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 
@@ -11,23 +11,24 @@ import { EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer
 
 import { Link } from 'react-router-dom';
 
-function Login() {
+const Login: FC = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const onChangeEmail = (evt) => {
+    const onChangeEmail = (evt: ChangeEvent<HTMLInputElement>) => {
         setEmail(evt.target.value);
     };
-    const onChangePass = (evt) => {
+    const onChangePass = (evt: ChangeEvent<HTMLInputElement> ) => {
         setPassword(evt.target.value);
     };
 
-    const handleLogin = async (e) => {
+    const handleLogin = async (e: FormEvent ) => {
         e.preventDefault();
         try {
+            //@ts-ignore
             dispatch(login({ email, password }));
             dispatch(setAuthChecked(true))
             navigate('/');
@@ -61,6 +62,7 @@ function Login() {
 
 
                 <Button
+                 disabled={!password}
                     htmlType="submit"
                     type="primary"
                     size="large">
@@ -71,7 +73,8 @@ function Login() {
                     <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Вы – новый пользователь?{''}
                         <Link to={'/register'}>
 
-                            <Button htmlType="button"
+                            <Button 
+                            htmlType="button"
                                 type="secondary"
                                 size="medium">
                                 Зарегистрироваться
@@ -82,7 +85,8 @@ function Login() {
                     <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Забыли пароль?{''}
                         <Link to={'/forgot-password'}>
 
-                            <Button htmlType="button"
+                            <Button 
+                            htmlType="button"
                                 type="secondary"
                                 size="medium">
                                 Восстановить пароль

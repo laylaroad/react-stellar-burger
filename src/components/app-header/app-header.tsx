@@ -1,12 +1,14 @@
 
 import styles from './app-header.module.css';
+import { FC } from 'react';
 
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link } from 'react-router-dom';
 
 import HeaderElements from '../header-elements/header-elements';
 
 
-function AppHeader() {
+const AppHeader: FC = () => {
 
 
     return (
@@ -33,8 +35,10 @@ function AppHeader() {
                 </ul>
 
                 <div className={styles.logo}>
-                    <Logo />
-                </div>
+      <Link to="/">
+        <Logo />
+      </Link>
+    </div>
 
                 <HeaderElements
                     icon={<ProfileIcon type="secondary" />}

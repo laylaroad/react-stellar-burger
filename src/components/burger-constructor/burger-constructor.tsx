@@ -1,4 +1,6 @@
 import styles from './burger-constructor.module.css';
+import { FC } from 'react';
+
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { addIngredient } from '../../services/reducers/burgerConstructorReducer';
 import { getOrderData } from '../../services/reducers/orderReducer';
 
-import { SelectModalType } from '../../services/selectors/modalSelector';
+import { SelectModalType, SelectModalOpen } from '../../services/selectors/modalSelector';
 import { selectOrderIsLoading, selectOrderIsError, selectOrderSuccess } from '../../services/selectors/orderSelector';
 import { modalOpen, modalClose } from '../../services/reducers/modalReducer';
 import { deleteAllIngredients } from '../../services/reducers/burgerConstructorReducer';
@@ -21,27 +23,30 @@ import Modal from '../modal/modal';
 import { useNavigate } from 'react-router-dom';
 import { selectUser } from '../../services/selectors/userSelector';
 
+import {Ingredient, IngredientId} from '../../utils/ingredient-types';
 
-function BurgerConstructor() {
+  
+const BurgerConstructor: FC = () => {{
 
     const dispatch = useDispatch();
 
-    const price = useSelector(selectPrice);
-    const ingredientsAllId = useSelector(selectAllId);
-    const bun = useSelector(selectBurgerBun);
+    const price = useSelector(selectPrice) as number;
+    const ingredientsAllId = useSelector(selectAllId) as IngredientId[];
+    const bun = useSelector(selectBurgerBun) as IngredientId;
 
-    const orderSuccess = useSelector(selectOrderSuccess);
-    const orderError = useSelector(selectOrderIsError);
-    const orderIsLoading = useSelector(selectOrderIsLoading);
+    const orderSuccess = useSelector(selectOrderSuccess) as boolean;
+    const orderError = useSelector(selectOrderIsError) as boolean;
+    const orderIsLoading = useSelector(selectOrderIsLoading) as boolean;
 
     const modalType = useSelector(SelectModalType);
 
     const navigate = useNavigate();
     const user = useSelector(selectUser);
+    const isModalOpen = useSelector(SelectModalOpen);
 
-
-    const makeTheOrder = () => {
-        if (user) {
+    const makeTheOrder: () => void = () => {
+        if  (user) {
+            //@ts-ignore
             dispatch(getOrderData({ ingredients: ingredientsAllId }));
             dispatch(modalOpen('orderDetails'));
             dispatch(deleteAllIngredients());
@@ -52,7 +57,7 @@ function BurgerConstructor() {
 
     const [{ isHover }, dropTarget] = useDrop({
         accept: 'ingredient',
-        drop(ingredient) {
+        drop(ingredient: Ingredient) {
             const newIngredient = { ...ingredient, _customId: uuidv4() };
             dispatch(addIngredient(newIngredient));
         },
@@ -61,18 +66,20 @@ function BurgerConstructor() {
         }),
     });
 
+
+
     return (
         <section className={styles.burger_constructor}
             ref={dropTarget}>
 
             <div className={` ${styles.burger_wrapper} ${isHover ? styles.container_empty : ""
                 } `}>
-                <BurgerCreating />
+      <BurgerCreating/>
             </div>
             <span className={styles.burger_sum}>
                 <p className={`${styles.currency} text text_type_digits-medium mr-10`}>
                     {price}
-                    <CurrencyIcon type="primary" extraClass={styles.currency} />
+                    <CurrencyIcon type="primary" />
                 </p>
                 <Button
                     disabled={!bun}
@@ -83,8 +90,8 @@ function BurgerConstructor() {
                 >
                     Оформить заказ
                 </Button>
-                {makeTheOrder && modalType === "orderDetails" && (
-                    <Modal onClose={() => dispatch(modalClose())}>
+                {isModalOpen && modalType === "orderDetails" && (
+                    <Modal title={''} onClose={() => dispatch(modalClose())}>
                         {orderIsLoading ? (
                             <span className="text text_type_main-medium mt-8 mb-8">Загрузка...</span>
                         ) : orderError ? (
@@ -98,5 +105,5 @@ function BurgerConstructor() {
         </section >
     );
 };
-
+};
 export default BurgerConstructor;
