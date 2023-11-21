@@ -38,7 +38,7 @@ const ForgotPassword: FC = () => {
           value={email}
           name={'email'}
           isIcon={false}
-        />!
+        />
         <Button 
         disabled={!email}
         htmlType="submit" 
