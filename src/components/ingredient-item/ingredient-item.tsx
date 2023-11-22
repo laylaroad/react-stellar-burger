@@ -20,7 +20,7 @@ interface IngredientItemProps {
 
 const IngredientItem: FC<IngredientItemProps> = ({ ingredient, _id }) => {
   const dispatch = useDispatch();
-
+const location = useLocation();
   const bun = useSelector(selectBurgerBun);
   const allIdIngredients = useSelector(selectAllId);
   const allIdArray = Array.isArray(allIdIngredients) ? allIdIngredients : [];
@@ -49,7 +49,9 @@ const IngredientItem: FC<IngredientItemProps> = ({ ingredient, _id }) => {
   });
 
   return (
-    <div
+    <Link
+    state = {{background: location}}
+    to={`ingredients/${ingredient._id}`}
       className={`${styles.ingredient_item} ${isDragging ? styles.draggable : ''}`}
       onClick={modalIngredients}
       key={ingredient._id}
@@ -63,7 +65,7 @@ const IngredientItem: FC<IngredientItemProps> = ({ ingredient, _id }) => {
       </div>
       <h4 className={`${styles.ingredient_name} text text_type_main-default`}>{ingredient.name}</h4>
       {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
-    </div>
+    </Link>
   );
 };
 
