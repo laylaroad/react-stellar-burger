@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
@@ -27,71 +27,72 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { modalClose } from '../../services/reducers/modalReducer';
 
-import {selectIngredientById} from '../../services/selectors/ingredientsSelector';
+import {selectIngredientById, selectIngredients,selectIngredientsIsLoading } from '../../services/selectors/ingredientsSelector';
 
 import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
 
-const App: FC = () => {{
-
+const App: FC = () => {
     const dispatch = useDispatch();
     const location = useLocation();
+    const navigate = useNavigate();
     const background = location.state && location.state.background;
-    const params = useParams();
-    const ingredient = useSelector(selectIngredientById(params.id));
+    // const params = useParams();
+    // const ingredient = useSelector(selectIngredientById(params.id)) || {};
+    // const ingredient = useSelector(selectIngredients);
+    const isLoading = useSelector(selectIngredientsIsLoading);
 
+    // console.log('Массив ингредиентов', ingredient);
+  
     useEffect(() => {
         dispatch(checkUserAuth());
+    
+        console.log("Dispatching getIngredientsData");
         dispatch(getIngredientsData());
-    }, []);
-
-
-    const onClose = (): void => {
-        dispatch(modalClose());
+      }, [dispatch]);
+  
+      const onClose = () => {
+        console.log('Closing modal...');
+        dispatch(modalClose())
+        navigate(-1);
       };
-
+  
     return (
-        <>
-            <Routes location={background || location}>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route
-                        path="register"
-                        element={<OnlyUnAuth component={<Register />} />}
-                    />
-                    <Route path="login" element={<OnlyUnAuth component={<Login />} />} />
-                    <Route path="reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
-                    <Route path="forgot-password" element={<ForgotPassword />} />
-
-                    <Route path="profile" element={<OnlyAuth component={<ProfileNavigation />} />}>
-                        <Route index element={<ProfileMain />} />
-                        <Route path="orders" element={<Orders />} />
-                    </Route>
-                    <Route path="ingredients/:id" element={<IngredientPage />} />
-                    <Route path="*" element={<NotFound404 />} />
-                </Route>
-            </Routes>
-
-            {
-                background && (
-                    <Routes>
-                        <Route
-                            path="ingredients/:id" element={
-                                <Modal
-                                    title={'Детали ингредиента'}
-                                    onClose={onClose}>
-                                    <IngredientDetails ingredient={ingredient}/>
-                                   
-                                </Modal>
-                            } />
-                    </Routes>
-                )
-            }
-    </>
-    )
-};
-};
-
-
-export default App;
-
+      <>
+        <Routes location={background || location}>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="register" element={<OnlyUnAuth component={<Register />} />} />
+            <Route path="login" element={<OnlyUnAuth component={<Login />} />} />
+            <Route path="reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
+            <Route path="profile" element={<OnlyAuth component={<ProfileNavigation />} />}>
+              <Route index element={<ProfileMain />} />
+              <Route path="orders" element={<Orders />} />
+            </Route>
+            <Route path="ingredients/:id" element={<IngredientPage />} />
+            <Route path="*" element={<NotFound404 />} />
+          </Route>
+        </Routes>
+  
+        {background && (
+          <Routes>
+            <Route
+              path="ingredients/:id"
+              element={
+                <Modal title="Детали ингредиента" onClose={onClose}>
+                   {isLoading ? (
+                  <p>Loading...</p>
+                ) : (
+                  <IngredientDetails />
+                )}
+                </Modal>
+              }
+            />
+          </Routes>
+        )}
+      </>
+    );
+  };
+  
+  export default App;

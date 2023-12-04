@@ -27,15 +27,18 @@ const ingredientsSliceData = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getIngredientsData.pending, (state) => {
+            console.log('Fetching ingredients data...');
             state.isLoading = true;
             state.isError = false;
         });
         builder.addCase(getIngredientsData.fulfilled, (state, action) => {
+            console.log('Ingredients data fetched successfully:', action.payload);
             state.ingredientsArray = action.payload.data;
             state.isLoading = false;
             state.isError = false;
         });
         builder.addCase(getIngredientsData.rejected, (state) => {
+            console.error('Error fetching ingredients data:', state.error);
             state.isLoading = false;
             state.isError = true;
         });
