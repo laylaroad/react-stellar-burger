@@ -63,7 +63,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk(
     'auth/logout',
-    async ({ accessToken, refreshToken }: { accessToken: string; refreshToken: string }) => {
+    async () => {
         const token = localStorage.getItem("refreshToken");
         const res = await fetchWithRefresh('auth/logout', {
             method: "POST",
@@ -78,8 +78,8 @@ export const logout = createAsyncThunk(
         const data = await checkResponse(res);
 
         if (data.success) {
-            localStorage.removeItem("accessToken", data.accessToken);
-            localStorage.removeItem("refreshToken", data.refreshToken);
+            localStorage.removeItem('refsreshToken');
+            localStorage.removeItem('accessToken');
         } else {
             return Promise.reject("Ошибка данных с сервера");
         }
@@ -87,7 +87,6 @@ export const logout = createAsyncThunk(
         return data;
     }
 );
-
 
 export const getUserData = createAsyncThunk(
     'auth/getUserData',

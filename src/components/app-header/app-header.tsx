@@ -29,7 +29,7 @@ const AppHeader: FC = () => {
                         icon={<ListIcon type="secondary" />}
                         text="Лента заказов"
                         isActive={false}
-                        link={'/profile/order'}
+                        link={'/profile/orders'}
                     />
 
                 </ul>
