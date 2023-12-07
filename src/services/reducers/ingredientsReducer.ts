@@ -44,7 +44,7 @@ const ingredientsSliceData = createSlice({
     });
     builder.addCase(getIngredientsData.fulfilled, (state, action) => {
       console.log('Ingredients data fetched successfully:', action.payload);
-      state.ingredientsArray = action.payload;
+      state.ingredientsArray = action.payload.data;
       state.isLoading = false;
       state.isError = false;
     });
