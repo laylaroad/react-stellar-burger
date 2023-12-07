@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 import { FC } from 'react';
-import { Ingredient } from '../../utils/ingredient-types';
+import { Ingredient } from '../../types/ingredient-types';
 
 import {selectIngredients} from '../../services/selectors/ingredientsSelector';
 

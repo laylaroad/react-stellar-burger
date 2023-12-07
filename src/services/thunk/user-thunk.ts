@@ -21,7 +21,7 @@ export const fetchForgotPass = createAsyncThunk(
 
 export const fetchResetPass = createAsyncThunk(
     'auth/fetchResetPass',
-    async ({ password, token }) => {
+    async ({ password, token }: { password: string; token: string }) => {
         const res = await request('password-reset/reset', {
             method: "POST",
             headers: {
@@ -35,7 +35,7 @@ export const fetchResetPass = createAsyncThunk(
 
 export const login = createAsyncThunk(
     'auth/login',
-    async ({ email, password }) => {
+    async ({ email, password }: { email: string; password: string }) => {
         const res = await fetchWithRefresh('auth/login', {
             method: "POST",
             headers: {
@@ -63,7 +63,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk(
     'auth/logout',
-    async () => {
+    async ({ accessToken, refreshToken }: { accessToken: string; refreshToken: string }) => {
         const token = localStorage.getItem("refreshToken");
         const res = await fetchWithRefresh('auth/logout', {
             method: "POST",
@@ -110,45 +110,41 @@ export const getUserData = createAsyncThunk(
     }
 );
 
+export const register = createAsyncThunk('auth/register', async ({ email, password, name }: { email: string; password: string; name: string }) => {
+    try {
+        console.log('Registration initiated:', { email, name });
 
-export const register = createAsyncThunk(
-    'auth/register',
-    async ({ email, password, name }) => {
-        try {
-            console.log('Registration initiated:', { email, name });
+        const res = await fetchWithRefresh('auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify({ email, password, name }),
+        });
 
-            const res = await fetchWithRefresh('auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8',
-                },
-                body: JSON.stringify({ email, password, name }),
-            });
+        console.log('Registration response:', res);
 
-            console.log('Registration response:', res);
+        const data = await checkResponse(res);
+        console.log('Response data:', data);
 
-            const data = await checkResponse(res);
-            console.log('Response data:', data);
-
-            if (data.success) {
-                localStorage.setItem('accessToken', data.accessToken);
-                localStorage.setItem('refreshToken', data.refreshToken);
-            } else {
-                console.error('Server error during registration:', data.errorMessage);
-                return Promise.reject('Ошибка данных с сервера');
-            }
-
-            return data;
-        } catch (error) {
-            console.error('Error during registration:', error);
-            return Promise.reject('Ошибка при регистрации пользователя');
+        if (data.success) {
+            localStorage.setItem('accessToken', data.accessToken);
+            localStorage.setItem('refreshToken', data.refreshToken);
+        } else {
+            console.error('Server error during registration:', data.errorMessage);
+            return Promise.reject('Ошибка данных с сервера');
         }
+
+        return data;
+    } catch (error) {
+        console.error('Error during registration:', error);
+        return Promise.reject('Ошибка при регистрации пользователя');
     }
-);
+});
 
 export const pathUserData = createAsyncThunk(
     'auth/pathUserData',
-    async ({ email, password, name }) => {
+    async ({ email, password, name }: { email: string; password: string; name: string }) => {
         const res = await fetchWithRefresh("auth/user", {
             method: "PATCH",
             headers: {
@@ -185,23 +181,27 @@ export const refreshToken = () => {
     });
 };
 
-export const fetchWithRefresh = async (endpoint, options) => {
+export const fetchWithRefresh = async (endpoint: string, options: any) => {
     try {
         const res = await request(endpoint, options);
         return res;
     } catch (err) {
-        if (err.message === "jwt expired") {
-            const refreshData = await refreshToken();
-            if (!refreshData.success) {
-                return Promise.reject(refreshData);
+        if (err instanceof Error) {
+            if (err.message === 'jwt expired') {
+                const refreshData = await refreshToken();
+                if (!refreshData.success) {
+                    return Promise.reject(refreshData);
+                }
+                localStorage.setItem('accessToken', refreshData.accessToken);
+                localStorage.setItem('refreshToken', refreshData.refreshToken);
+                options.headers.authorization = refreshData.accessToken;
+                const res = await request(endpoint, options);
+                return res;
+            } else {
+                return Promise.reject(err);
             }
-            localStorage.setItem("accessToken", refreshData.accessToken);
-            localStorage.setItem("refreshToken", refreshData.refreshToken);
-            options.headers.authorization = refreshData.accessToken;
-            const res = await request(endpoint, options);
-            return res;
         } else {
-            return Promise.reject(err);
+            return Promise.reject(new Error('Unknown error occurred'));
         }
     }
 };

@@ -9,7 +9,7 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { selectBurgerBun, selectBurgerIngredients } from '../../services/selectors/burgerConstructorSelector';
 
 import IngredientsMain from '../ingredients-main/ingredients-main';
-import {Ingredient, IngredientId} from '../../utils/ingredient-types';
+import {Ingredient, IngredientId} from '../../types/ingredient-types';
 
 
 const BurgerCreating: FC = () => {

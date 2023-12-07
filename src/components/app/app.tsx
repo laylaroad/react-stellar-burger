@@ -37,12 +37,8 @@ const App: FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const background = location.state && location.state.background;
-    // const params = useParams();
-    // const ingredient = useSelector(selectIngredientById(params.id)) || {};
-    // const ingredient = useSelector(selectIngredients);
     const isLoading = useSelector(selectIngredientsIsLoading);
 
-    // console.log('Массив ингредиентов', ingredient);
   
     useEffect(() => {
         dispatch(checkUserAuth());

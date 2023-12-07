@@ -12,19 +12,21 @@ const ProfileMain: FC = () => {
   const user = useSelector(selectUser);
   const [isEdit, setIsEdit] = useState(false);
 
-  const [values, setValues] = useState({
-    name: user.name || '',
-    email: user.email || '',
+  const [values, setValues] = useState<{ name: string; email: string; password: string; disabled: boolean }>({
+    name: user?.username || '',
+    email: user?.email || '',
     password: '',
+    disabled: true,
   });
 
   const handleReset = () => {
     setIsEdit(false);
-    if (user.name && user.email) {
+    if (user?.name && user.email) {
       setValues({
         name: user.name,
         email: user.email,
         password: '',
+        disabled: true, 
       });
     }
   };
@@ -44,14 +46,15 @@ const ProfileMain: FC = () => {
   };
 
   useEffect(() => {
-    if (user.name && user.email) {
+    if (user?.name && user.email) {
       setValues({
         name: user.name,
         email: user.email,
         password: '',
+        disabled: true, 
       });
     }
-  }, [user.name, user.email]);
+  }, [user?.name, user?.email]);
 
   return (
     <section>

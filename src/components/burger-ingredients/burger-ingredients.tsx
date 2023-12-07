@@ -15,7 +15,7 @@ import { selectIngredientsIsLoading, selectIngredientsError } from '../../servic
 
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
-import { Ingredient } from '../../utils/ingredient-types';
+import { Ingredient } from '../../types/ingredient-types';
 
 
 const BurgerIngredients: FC = () => {
@@ -28,7 +28,7 @@ const BurgerIngredients: FC = () => {
     const modalType = useSelector(SelectModalType);
     const ingredientDetailsIsLoading = useSelector(selectIngredientsIsLoading);
     const ingredientDetailsIsError = useSelector(selectIngredientsError);
-    const ingredient = useSelector(selectCurrentIngredient) as Ingredient;
+    // const ingredient = useSelector(selectCurrentIngredient) as Ingredient;
 
     const oneRef = useRef<HTMLHeadingElement>(null);
     const twoRef = useRef<HTMLHeadingElement>(null);
@@ -67,63 +67,64 @@ const BurgerIngredients: FC = () => {
                 <h2 className={`${styles.burger_title} text text_type_main-large`}>Соберите бургер</h2>
                 <BurgerTab current={current} setCurrent={setCurrent} />
                 <article className={styles.container} onScroll={handleScroll}>
-                    {ingredients && (
-                        <>
-                            <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={oneRef}>
-                                Булки
-                            </h3>
-                            <div className={`${styles.ingredients} pl-4`}>
-                                {ingredients.map((ingredient) => {
-                                    if (ingredient.type === 'bun') {
-                                        return (
-                                            <IngredientItem
-                                                key={ingredient._id}
-                                                _id={ingredient._id}
-                                                ingredient={ingredient}
-                                            />
-                                        );
-                                    }
-                                })}
-                            </div>
+            
+            {ingredients && ingredients.length > 0 && (
+  <>
+    <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={oneRef}>
+      Булки
+    </h3>
+    <div className={`${styles.ingredients} pl-4`}>
+      {console.log('Ingredients:', ingredients)}
+      {ingredients.map((ingredient: Ingredient) => {
+        if (ingredient.type === 'bun') {
+          return (
+            <IngredientItem
+              key={ingredient._id}
+              _id={ingredient._id}
+              ingredient={ingredient}
+            />
+          );
+        }
+      })}
+    </div>
 
-                            <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={twoRef} >
-                                Соусы
-                            </h3>
+    <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={twoRef}>
+      Соусы
+    </h3>
 
-                            <div className={`${styles.ingredients} pl-4`}>
-                                {ingredients.map((ingredient) => {
-                                    if (ingredient.type === 'sauce') {
-                                        return (
-                                            <IngredientItem
-                                                key={ingredient._id}
-                                                _id={ingredient._id}
-                                                ingredient={ingredient}
+    <div className={`${styles.ingredients} pl-4`}>
+      {ingredients.map((ingredient: Ingredient) => {
+        if (ingredient.type === 'sauce') {
+          return (
+            <IngredientItem
+              key={ingredient._id}
+              _id={ingredient._id}
+              ingredient={ingredient}
+            />
+          );
+        }
+      })}
+    </div>
 
-                                            />
-                                        );
-                                    }
-                                })}
-                            </div>
+    <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={threeRef}>
+      Начинки
+    </h3>
 
-                            <h3 className={`${styles.ingredient_title} text text_type_main-medium pb-6`} ref={threeRef}>
-                                Начинки
-                            </h3>
-
-                            <div className={`${styles.ingredients} pl-4`}>
-                                {ingredients.map((ingredient) => {
-                                    if (ingredient.type === 'main') {
-                                        return (
-                                            <IngredientItem
-                                                key={ingredient._id}
-                                                _id={ingredient._id}
-                                                ingredient={ingredient}
-                                            />
-                                        );
-                                    }
-                                })}
-                            </div>
-                        </>
-                    )}
+    <div className={`${styles.ingredients} pl-4`}>
+      {ingredients.map((ingredient: Ingredient) => {
+        if (ingredient.type === 'main') {
+          return (
+            <IngredientItem
+              key={ingredient._id}
+              _id={ingredient._id}
+              ingredient={ingredient}
+            />
+          );
+        }
+      })}
+    </div>
+  </>
+)}
                 </article>
             </section>
 

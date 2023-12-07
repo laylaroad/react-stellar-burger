@@ -23,7 +23,7 @@ import Modal from '../modal/modal';
 import { useNavigate } from 'react-router-dom';
 import { selectUser } from '../../services/selectors/userSelector';
 
-import {Ingredient, IngredientId} from '../../utils/ingredient-types';
+import {Ingredient, IngredientId} from '../../types/ingredient-types';
 
   
 const BurgerConstructor: FC = () => {{
@@ -31,7 +31,7 @@ const BurgerConstructor: FC = () => {{
     const dispatch = useDispatch();
 
     const price = useSelector(selectPrice) as number;
-    const ingredientsAllId = useSelector(selectAllId) as IngredientId[];
+    const ingredientsAllId = useSelector(selectAllId) as unknown as IngredientId[]; //вернуться позже
     const bun = useSelector(selectBurgerBun) as IngredientId;
 
     const orderSuccess = useSelector(selectOrderSuccess) as boolean;

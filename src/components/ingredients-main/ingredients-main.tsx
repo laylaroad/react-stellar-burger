@@ -11,7 +11,7 @@ import { selectBurgerIngredients } from '../../services/selectors/burgerConstruc
 import { moveIngredient } from '../../services/reducers/burgerConstructorReducer';
 import { deleteIngredient } from '../../services/reducers/burgerConstructorReducer';
 
-import {Ingredient, IngredientId} from '../../utils/ingredient-types';
+import {Ingredient, IngredientId} from '../../types/ingredient-types';
 
 interface IngredientMainProps {
 
