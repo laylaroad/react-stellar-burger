@@ -1,5 +1,5 @@
 import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
-// import { socketMiddleware } from './middlewares/websocket';
+import { socketMiddleware } from './middlewares/websocket';
 
 //reducers
 import ingredientsReducer from './reducers/ingredientsReducer';
@@ -8,7 +8,7 @@ import burgerConstructorReducer from './reducers/burgerConstructorReducer';
 import modalReducer from './reducers/modalReducer';
 import userReducer from './reducers/userReducer';
 import ordersFeedReducer from './reducers/ordersFeedReducer';
-import { createAction } from '@reduxjs/toolkit';
+import feedReducer from './reducers/feedReducer';
 
 
 export const rootReducer = combineReducers({
@@ -18,6 +18,7 @@ export const rootReducer = combineReducers({
   modal: modalReducer,
   user: userReducer,
   feed: ordersFeedReducer,
+  feedApi: feedReducer,
 });
 
 // export type TwsActions = {
@@ -42,8 +43,7 @@ type TResponseGetOrders = {
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => {
-    // return getDefaultMiddleware().concat(socketMiddleware(wsActions))
-    return getDefaultMiddleware()
+    return getDefaultMiddleware().concat(socketMiddleware());
   }
 })
 

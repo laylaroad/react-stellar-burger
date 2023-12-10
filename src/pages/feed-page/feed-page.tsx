@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { FC, useEffect } from 'react';
 import styles from './feed-page.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAppDispatch } from '../../hooks/react-redux';
 
 //feed-components
@@ -9,6 +9,8 @@ import OrderList from '../../components/order-list/order-list';
 import OrderSummary from '../../components/order-summary/order-summary';
 
 import { wsConnect } from '../../services/reducers/wsActions';
+// import { selectAllOrders } from '../../services/selectors/feedSelector';
+
 
 //websocket
 // import {wsConnecting, wsClose} from '../../services/reducers/ordersFeedReducer';
@@ -19,16 +21,10 @@ const FeedPage: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  // useEffect(() => {
-  //   console.log('Connecting to WebSocket...');
+  const selectAllOrders = (store: any) => store.feedApi.allOrders;
 
-  //   dispatch(wsConnecting(`${wssUrl}/orders/all`));
-
-  //   return () => {
-  //     console.log('Closing WebSocket connection...');
-  //     dispatch(wsClose());
-  //   };
-  // }, [location.pathname]);
+  const allOrders = useSelector(selectAllOrders);
+  console.log(allOrders);
 
   useEffect(() => {
     console.log('Connecting to WebSocket...');
@@ -42,6 +38,7 @@ const FeedPage: FC = () => {
       </h1>
       <section className={styles.feed}>
         <div className={styles.order_column}>
+
           <OrderList time="Сегодня, 16:20 i-GMT+3" status="Выполнен" price={480} name="Death Star Starship Main бургер" number={123} />
         </div>
         <div className={styles.summary_column}>
@@ -53,3 +50,7 @@ const FeedPage: FC = () => {
 };
 
 export default FeedPage;
+function RootStore(RootStore: any): null {
+  throw new Error('Function not implemented.');
+}
+

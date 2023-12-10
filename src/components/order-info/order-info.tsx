@@ -17,7 +17,6 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal }) => {
     const { id } = useParams();
     const ingredients = useAppSelector(selectIngredients);
     const orderData = useAppSelector(selectCurrentOrder) as IOrder | null;
-    console.log('Данные о заказе', orderData);
 
     const numberStyles = isModal ? styles.modal_number : styles.number;
     const orderStyles = isModal ? styles.modal_window : styles.order_window;

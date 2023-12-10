@@ -52,12 +52,11 @@ const App: FC = () => {
   useEffect(() => {
     dispatch(checkUserAuth());
 
-    console.log("Dispatching getIngredientsData");
     dispatch(getIngredientsData());
   }, [dispatch]);
 
   const onClose = () => {
-    console.log('Closing modal...');
+
     dispatch(modalClose())
     navigate(-1);
   };

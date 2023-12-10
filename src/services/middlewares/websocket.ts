@@ -3,9 +3,11 @@ import { Middleware } from 'redux';
 import { RootStore } from '../store';
 
 import * as actions from '../../services/reducers/wsActions';
+import { setAllOrders } from '../../services/reducers/feedReducer';
 
 
 export const socketMiddleware = (): Middleware<{}, RootStore> => {
+    console.log('middleware');
     let socket: WebSocket | null = null;
     return (store) => (next) => (action) => {
         switch (action.type) {
@@ -19,6 +21,13 @@ export const socketMiddleware = (): Middleware<{}, RootStore> => {
                     console.log('websocket open', event.target.url);
                     store.dispatch(actions.wsConnected(event.target.url));
                 };
+
+                socket.onmessage = (event) => {
+                    const payload = JSON.parse(event.data);
+                    console.log('receiving server message');
+                    store.dispatch(setAllOrders(payload));
+                };
+
                 break;
 
             case 'WS_DISCONNECT':

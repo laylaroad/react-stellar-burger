@@ -37,7 +37,7 @@ const orderSlice = createSlice({
         },
         setOrders: (state, action) => {
             state.orders = action.payload;
-        }
+        },
     },
 });
 
