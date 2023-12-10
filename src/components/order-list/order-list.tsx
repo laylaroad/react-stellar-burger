@@ -66,12 +66,12 @@ const OrderList: FC<IOrderListProps> = (props) => {
     const orderIngredients = ingredients.slice(0, 6); // Limit to 6 ingredients
 
     return (
-     <>
+      <>
         <ul className={styles.order_list}>
-        
-        <Link to={`/order-info`}>
-        <li key={orderId} className={styles.card_order}>
-            {/* // to={`/orders/${orderDetails.number}`}> */}
+
+          <Link to={`/order-info`}>
+            <li key={orderId} className={styles.card_order}>
+              {/* // to={`/orders/${orderDetails.number}`}> */}
               <div className={styles.card_header}>
                 <p className="text text_type_main-default">
                   #{orderDetails.number}
@@ -81,8 +81,8 @@ const OrderList: FC<IOrderListProps> = (props) => {
                   className="text text_type_main-default text_color_inactive"
                 />
               </div>
-<p className={`${styles.order_name} text text_type_main-medium`}>{props.name}</p>
-<p className={`${styles.status} text text_type_main-default`}>{props.status}</p>
+              <p className={`${styles.order_name} text text_type_main-medium`}>{props.name}</p>
+              <p className={`${styles.status} text text_type_main-default`}>{props.status}</p>
               <div className={styles.card_footer}>
                 <div className={styles.images}>
                   {orderIngredients.map((ingredient, index) => (
@@ -111,12 +111,12 @@ const OrderList: FC<IOrderListProps> = (props) => {
                   <CurrencyIcon type="primary" />
                 </span>
               </div>
-              </li>
-            </Link>
-        
+            </li>
+          </Link>
 
-            <Link to={`/orders/${orderDetails.number}`}>
-          <li key={orderId} className={styles.card_order}>
+
+          <Link to={`/orders/${orderDetails.number}`}>
+            <li key={orderId} className={styles.card_order}>
               <div className={styles.card_header}>
                 <p className="text text_type_main-default">
                   #{orderDetails.number}
@@ -156,11 +156,11 @@ const OrderList: FC<IOrderListProps> = (props) => {
                   <CurrencyIcon type="primary" />
                 </span>
               </div>
-          </li>
+            </li>
           </Link>
 
         </ul>
-</>
+      </>
     );
   } else {
     // Если запрос заказа не успешен
