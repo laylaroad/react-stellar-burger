@@ -12,6 +12,8 @@ const OrderSummary: FC = () => {
     // console.log('Заказов за сегодня:', totalToday);
 
 
+
+
     return (
         <section className={styles.order_summary}>
             <div className={styles.numbers}>
