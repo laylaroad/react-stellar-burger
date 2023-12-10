@@ -31,22 +31,27 @@ const FeedPage: FC = () => {
     dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'));
   })
 
-  return (
-    <>
-      <h1 className={`${styles.title} text text_type_main-large`}>
-        Лента заказов
-      </h1>
-      <section className={styles.feed}>
-        <div className={styles.order_column}>
+  if (allOrders) {
+    return (
+      <>
+        <h1 className={`${styles.title} text text_type_main-large`}>
+          Лента заказов
+        </h1>
+        <section className={styles.feed}>
+          <div className={styles.order_column}>
 
-          <OrderList time="Сегодня, 16:20 i-GMT+3" status="Выполнен" price={480} name="Death Star Starship Main бургер" number={123} />
-        </div>
-        <div className={styles.summary_column}>
-          <OrderSummary />
-        </div>
-      </section>
-    </>
-  )
+            <OrderList order={allOrders.orders[0]} />
+          </div>
+          <div className={styles.summary_column}>
+            <OrderSummary />
+          </div>
+        </section>
+      </>
+    )
+  }
+  else {
+    return <> loading </>
+  }
 };
 
 export default FeedPage;
