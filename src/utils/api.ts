@@ -45,3 +45,23 @@ export const checkUserAuth = () => {
         }
     };
 };
+
+export const webSocket = () => {
+
+    const socket = new WebSocket('wss://norma.nomoreparties.space/orders/all');
+    socket.onopen = function () {
+        console.log('Соединение установлено');
+    };
+
+    socket.onmessage = function (event) {
+        console.log('Получено сообщение:', event);
+    };
+
+    socket.onclose = function (event) {
+        console.log('Соединение закрыто');
+    };
+
+    socket.onerror = function (error) {
+        console.log('Ошибка!');
+    };
+};

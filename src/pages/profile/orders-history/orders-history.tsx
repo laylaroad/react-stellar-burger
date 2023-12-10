@@ -26,9 +26,9 @@ const OrdersHistory: FC = () => {
 
     return (
         <div className={styles.orders}>
-            orders.map(el) = {
-                <OrderList time={''} price={480} name={'Флюоресцентный space бургер'} status="Выполнен" number={0} />
-            }
+            {/* orders.map(el) = { */}
+            <OrderList time={''} price={480} name={'Флюоресцентный space бургер'} status="Выполнен" number={0} />
+
 
         </div>
     )

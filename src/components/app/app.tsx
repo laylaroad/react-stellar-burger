@@ -78,7 +78,7 @@ const App: FC = () => {
             <Route path="orders/:id" element={<OrderInfoPage />} />
           </Route>
           <Route path="feed" element={<FeedPage />} />
-          <Route path="order-info" element={<OrderInfo status={true} />} />
+          <Route path="feed/:id" element={<OrderInfo isModal={false} status={true} />} />
 
           <Route path="ingredients/:id" element={<IngredientPage />} />
           <Route path="*" element={<NotFound404 />} />
@@ -102,10 +102,10 @@ const App: FC = () => {
           />
 
           <Route
-            path="/feed/:id"
+            path="feed/:id"
             element={
               <Modal title="" onClose={onClose}>
-                <OrderInfo status={true}
+                <OrderInfo isModal={true} status={true}
                 />
               </Modal>
             }
@@ -115,7 +115,7 @@ const App: FC = () => {
             element={
 
               <Modal title="" onClose={onClose}>
-                <OrderInfo status={true}
+                <OrderInfo isModal={true} status={true}
                 />
               </Modal>
             }

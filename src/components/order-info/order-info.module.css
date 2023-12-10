@@ -1,14 +1,25 @@
-.order_window {
+.modal_window {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.order_window {
+  margin-top: 20px;
+  width: 55%;
+  margin-left: auto;
+  margin-right: auto;
   align-items: center;
-  margin-top: 120px;
+  text-align: center;
 }
 
 .order_name {
   margin-top: 20px;
-  width: 50%;
+  width: 100%;
+  text-align: start;
+  margin-left: 40px;
 }
 
 .order_status {
@@ -16,10 +27,14 @@
   color: var(--interface-success, #0cc);
   margin-bottom: 70px;
   width: 50%;
+  text-align: start;
+  margin-left: 40px;
 }
 
 .composition {
   width: 50%;
+  text-align: start;
+  margin-left: 40px;
 }
 
 .ingredient_name {
@@ -27,19 +42,28 @@
   justify-content: flex-start;
   align-content: flex-start;
   width: 69%;
+  word-wrap: break-word;
 }
 
 .order_composition {
   list-style: none;
-  margin-top: 24px;
   padding-right: 20px;
   overflow-y: scroll;
   box-sizing: border-box;
   max-height: calc(100vh - 446px);
   overflow: auto;
-  width: 55%;
+  width: 100%;
   align-items: center;
+}
 
+.modal_number {
+  text-align: start;
+  margin-left: 30px;
+}
+
+.number {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .order_composition::-webkit-scrollbar {
@@ -56,11 +80,10 @@
 
 .order_footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: stretch;
   flex-direction: row;
-  width: 50%;
+  width: 100%;
   margin-bottom: 180px;
-  margin-top: 52px;
 }
 
 .order_sum {
@@ -69,24 +92,29 @@
   justify-content: flex-end;
   flex-direction: row;
   gap: 8px;
-  width: 110%;
+  width: 120%;
+  padding-bottom: 55px;
+}
+
+.div_image {
+  display: flex;
+  width: 64px;
+  height: 64px;
+  padding: 4px 4px;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  border: 2px solid var(--button-normal, #801ab2);
+  background: var(--interface-bg, #131316);
 }
 
 .image {
-  width: 69px;
-  height: 64px;
-  display: flex;
-  flex-direction: column;
-  border: 2px double transparent;
-  border-radius: 50%;
-  background-image: linear-gradient(
-      to bottom,
-      rgba(19, 19, 22, 1),
-      rgba(19, 19, 22, 1)
-    ),
-    conic-gradient(from 10deg at 50% 50%, #801ab3, #4c4cff);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+  width: 112px;
+  height: 56px;
+  flex-shrink: 0;
 }
 
 .order_li {
@@ -102,4 +130,11 @@
   flex-direction: row;
   gap: 8px;
   justify-content: space-between;
+}
+
+.time {
+  display: flex;
+  width: 100%;
+  margin-left: 35px;
+  margin-top: 16px;
 }
