@@ -22,19 +22,28 @@
   width: 50%;
 }
 
+.ingredient_name {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  width: 69%;
+}
+
 .order_composition {
   list-style: none;
   margin-top: 24px;
-  padding: 0;
+  padding-right: 20px;
   overflow-y: scroll;
   box-sizing: border-box;
   max-height: calc(100vh - 446px);
   overflow: auto;
-  width: 50%;
+  width: 55%;
+  align-items: center;
+
 }
 
 .order_composition::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 
 .order_composition::-webkit-scrollbar-track {
@@ -57,12 +66,14 @@
 .order_sum {
   display: flex;
   align-content: space-between;
+  justify-content: flex-end;
   flex-direction: row;
   gap: 8px;
+  width: 110%;
 }
 
 .image {
-  width: 64px;
+  width: 69px;
   height: 64px;
   display: flex;
   flex-direction: column;
@@ -84,4 +95,11 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 24px;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-between;
 }
