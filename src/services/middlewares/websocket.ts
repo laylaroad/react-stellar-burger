@@ -1,80 +1,58 @@
-import { TwsActionTypes } from '../../types/websocket-types';
-import { Middleware } from 'redux';
-import { RootStore } from '../store';
+// // import { IwsActionTypes } from '../../types/websocket-types';
+// import { Middleware } from 'redux';
+// import { RootStore } from '../store';
 
+import { nextTick } from "process";
 
-export const socketMiddleware = (wsActions: TwsActionTypes): Middleware<{}, RootStore> => {
-    return (store) => {
-        let socket: WebSocket | null = null;
-        let isConnected = false;
-        let reconnectTimer = 0;
-        let url = '';
+// export const socketMiddleware = (): Middleware<{}, RootStore> => {
 
-        return next => action => {
-            const { dispatch } = store;
-            const { wsConnect, wsDisconnect, wsSendMessage, onOpen,
-                onClose, onError, onMessage, wsConnecting } = wsActions;
+//     return (store) => {
+//         let socket: WebSocket | null = null;
+//         let isConnected = false;
 
-            if (wsConnect.match(action)) {
-                console.log('connect')
-                url = action.payload;
-                socket = new WebSocket(url);
-                isConnected = true;
-                dispatch(wsConnecting());
-            }
+//         return (next) => (action) => {
+//             const { dispatch } = store;
+//             const {
+//                 wsConnect,
+//                 wsOpen,
+//                 wsClose,
+//                 wsError,
+//                 wsMessage,
+//                 wsConnecting,
+//             } = wsActions;
 
-            if (socket) {
-                socket.onopen = () => {
-                    dispatch(onOpen());
-                };
+//             if (wsConnect.match(action)) {
+//                 // console.log('connect');
+//                 // socket = new WebSocket('wss://norma.nomoreparties.space');
+//                 isConnected = true;
+//                 dispatch(wsConnecting());
+//             }
 
-                socket.onerror = err => {
-                    console.log('error')
-                };
+//             if (socket) {
+//                 socket.onopen = () => {
+//                     console.log('socket is opened');
+//                     dispatch({ type: wsOpen });
+//                 };
 
-                socket.onmessage = event => {
-                    const { data } = event;
-                    const parsedData = JSON.parse(data);
-                    dispatch(onMessage(parsedData));
-                };
+//                 socket.onerror = (err) => {
+//                     dispatch({ type: wsError });
+//                 };
 
-                socket.onclose = event => {
-                    if (event.code !== 1000) {
-                        console.log('error')
-                        dispatch(onError(event.code.toString()));
-                    }
-                    console.log('close')
-                    dispatch(onClose());
+//                 socket.onmessage = (event) => {
+//                     const { data } = event;
+//                     const parsedData = JSON.parse(data);
+//                     console.log('Received message:', parsedData);
+//                     dispatch({ type: wsMessage, payload: parsedData });
+//                 };
 
-                    if (isConnected) {
-                        dispatch(wsConnecting());
-                        reconnectTimer = window.setTimeout(() => {
-                            dispatch(wsConnect(url));
-                        }, 3000)
-                    }
+//                 socket.onclose = (event) => {
+//                     dispatch({ type: wsClose, payload: event.code.toString() });
+//                 };
+//             }
 
-                };
+//             next(action);
+//         };
+//     };
+// };
 
-                if (wsSendMessage && wsSendMessage.match(action)) {
-                    console.log('send')
-                    socket.send(JSON.stringify(action.payload));
-                }
-
-                if (wsDisconnect.match(action)) {
-                    console.log('disconnect')
-                    clearTimeout(reconnectTimer)
-                    isConnected = false;
-                    reconnectTimer = 0;
-                    socket.close();
-                    dispatch(onClose());
-                }
-            }
-
-            next(action);
-        };
-    };
-};
-
-const someVariable = 'example';
-
-export default someVariable;
+export default () => null;

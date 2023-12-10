@@ -1,0 +1,87 @@
+.order_window {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+}
+
+.order_name {
+  margin-top: 20px;
+  width: 50%;
+}
+
+.order_status {
+  margin-top: 8px;
+  color: var(--interface-success, #0cc);
+  margin-bottom: 70px;
+  width: 50%;
+}
+
+.composition {
+  width: 50%;
+}
+
+.order_composition {
+  list-style: none;
+  margin-top: 24px;
+  padding: 0;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  max-height: calc(100vh - 446px);
+  overflow: auto;
+  width: 50%;
+}
+
+.order_composition::-webkit-scrollbar {
+  width: 12px;
+}
+
+.order_composition::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.order_composition::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.order_footer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 50%;
+  margin-bottom: 180px;
+  margin-top: 52px;
+}
+
+.order_sum {
+  display: flex;
+  align-content: space-between;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.image {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  border: 2px double transparent;
+  border-radius: 50%;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(19, 19, 22, 1),
+      rgba(19, 19, 22, 1)
+    ),
+    conic-gradient(from 10deg at 50% 50%, #801ab3, #4c4cff);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.order_li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+}

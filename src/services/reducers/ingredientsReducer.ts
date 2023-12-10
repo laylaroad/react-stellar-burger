@@ -38,12 +38,12 @@ const ingredientsSliceData = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getIngredientsData.pending, (state) => {
-      console.log('Fetching ingredients data...');
+      // console.log('Fetching ingredients data...');
       state.isLoading = true;
       state.isError = false;
     });
     builder.addCase(getIngredientsData.fulfilled, (state, action) => {
-      console.log('Ingredients data fetched successfully:', action.payload);
+      // console.log('Ingredients data fetched successfully:', action.payload);
       state.ingredientsArray = action.payload.data;
       state.isLoading = false;
       state.isError = false;

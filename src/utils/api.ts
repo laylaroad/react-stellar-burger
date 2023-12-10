@@ -5,9 +5,11 @@ import { getUserData } from '../services/thunk/user-thunk';
 
 export const apiUrl = 'https://norma.nomoreparties.space/api';
 
+export const wssUrl = "wss://norma.nomoreparties.space";
+
 interface IRequestOptions extends RequestInit {
     headers: Record<string, string>;
-  }
+}
 
 export function checkResponse(res: Response) {
     if (res.ok) {

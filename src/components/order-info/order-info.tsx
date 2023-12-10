@@ -1,0 +1,61 @@
+import styles from './order-info.module.css';
+import { FC } from 'react';
+import { useParams } from 'react-router-dom';
+import { FormattedDate, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { selectIngredients } from '../../services/selectors/ingredientsSelector';
+import { useAppSelector } from '../../hooks/react-redux';
+import { selectCurrentOrder } from '../../services/selectors/ordersFeedSelector';
+import { IOrder } from '../../types/order-types';
+
+interface OrderInfoProps {
+    status: boolean;
+
+}
+
+const OrderInfo: FC<OrderInfoProps> = ({ status }) => {
+    const { id } = useParams();
+    const ingredients = useAppSelector(selectIngredients);
+    const orderData = useAppSelector(selectCurrentOrder) as IOrder | null;
+    console.log('Данные о заказе', orderData);
+
+    const createdAtDate = orderData?.createdAt ? new Date(orderData.createdAt) : null;
+
+    return (
+        <section className={styles.order_window}>
+            <span className="text text_type_digits-default">#{orderData?.number}</span>
+            <p className={`${styles.order_name} text text_type_main-default`}>
+                {orderData?.name}
+            </p>
+            <p className={`${styles.order_status} text text_type_main-default`}>{status}</p>
+            <h2 className={`${styles.composition} text text_type_main-medium`}>Состав:</h2>
+            <ul className={styles.order_composition}>
+                {ingredients.map((ingredient, index) => (
+                    <li key={index}>
+                        <div className={styles.order_li}>
+                            <img className={styles.image} src={ingredient?.image} alt={ingredient?.name} />
+                            <p className="text text_type_main-default">{ingredient.name}</p>
+                            <p className="text text_type_main-default">
+                                {ingredient.price}
+                                <CurrencyIcon type="primary" />
+                            </p>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+            <div className={styles.order_footer}>
+                {createdAtDate !== null && (
+                    <FormattedDate
+                        date={createdAtDate}
+                        className="text text_type_main-default text_color_inactive"
+                    />
+                )}
+                <span className={`${styles.order_sum} text text_type_digits-default`}>
+                    {orderData?.price}
+                    <CurrencyIcon type="primary" />
+                </span>
+            </div>
+        </section>
+    );
+};
+
+export default OrderInfo;

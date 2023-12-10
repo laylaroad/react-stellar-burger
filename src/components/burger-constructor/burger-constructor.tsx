@@ -8,7 +8,7 @@ import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 
 import { addIngredient } from '../../services/reducers/burgerConstructorReducer';
-import { getOrderData } from '../../services/reducers/orderReducer';
+import { postOrderData } from '../../services/reducers/orderReducer';
 
 import { SelectModalType, SelectModalOpen } from '../../services/selectors/modalSelector';
 import { selectOrderIsLoading, selectOrderIsError, selectOrderSuccess } from '../../services/selectors/orderSelector';
@@ -47,7 +47,7 @@ const BurgerConstructor: FC = () => {{
     const makeTheOrder: () => void = () => {
         if  (user) {
             //@ts-ignore
-            dispatch(getOrderData({ ingredients: ingredientsAllId }));
+            dispatch(postOrderData({ ingredients: ingredientsAllId }));
             dispatch(modalOpen('orderDetails'));
             dispatch(deleteAllIngredients());
         } else {

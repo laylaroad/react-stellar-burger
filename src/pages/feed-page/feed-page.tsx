@@ -1,22 +1,46 @@
 import {useLocation} from 'react-router-dom'
-import {FC} from 'react';
-import styles from 'feed-page.module.css';
+import {FC, useEffect} from 'react';
+import styles from './feed-page.module.css';
+import {useAppDispatch} from '../../hooks/react-redux';
+
+//feed-components
+import OrderList from '../../components/order-list/order-list';
+import OrderSummary from '../../components/order-summary/order-summary';
+
+//websocket
+// import {wsConnecting, wsClose} from '../../services/reducers/ordersFeedReducer';
+import {wssUrl} from '../../utils/api';
 
 const FeedPage: FC = () => {
-    const location = useLocation();
+
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  // useEffect(() => {
+  //   console.log('Connecting to WebSocket...');
+  
+  //   dispatch(wsConnecting(`${wssUrl}/orders/all`));
+
+  //   return () => {
+  //     console.log('Closing WebSocket connection...');
+  //     dispatch(wsClose());
+  //   };
+  // }, [location.pathname]);
 
     return (
-        <section className={styles.feed}>
-      <h1 className={styles.title}>
+<>
+      <h1 className={`${styles.title} text text_type_main-large`}>
         Лента заказов
       </h1>
-      <div>
-       {/* {Компонент заказа} */}
+       <section className={styles.feed}>
+      <div className={styles.order_column}>
+      <OrderList time="Сегодня, 16:20 i-GMT+3" status="Выполнен" price={480} name="Death Star Starship Main бургер" number={123}/>
       </div>
-      <div>
-        {/* {Компонент оплаты заказа} */}
+      <div className={styles.summary_column}>
+     <OrderSummary/>
       </div>
     </section>
+    </>
     )
 };
 

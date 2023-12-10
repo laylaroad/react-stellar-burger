@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { checkResponse, apiUrl } from '../../utils/api';
 import { deleteIngredient } from './burgerConstructorReducer';
-import { IngredientId } from '../../types/ingredient-types';
+import { IOrders } from '../../types/order-types';
 
 type Ingredient = {
   IngredientId: string[];
@@ -20,7 +20,7 @@ interface OrderData {
   };
 }
 
-export const getOrderData = createAsyncThunk<OrderData, Ingredient>('order/orderData', async (ingredients, thunkAPI) => {
+export const postOrderData = createAsyncThunk<OrderData, Ingredient>('order/orderData', async (ingredients, thunkAPI) => {
   const orderRequestConfig = {
     method: 'POST',
     headers: {
@@ -29,7 +29,6 @@ export const getOrderData = createAsyncThunk<OrderData, Ingredient>('order/order
     },
     body: JSON.stringify({ ingredients }),
   };
-
   const response = await fetch(`${apiUrl}/orders`, orderRequestConfig);
   const data = await checkResponse(response);
   //@ts-ignore
@@ -37,6 +36,8 @@ export const getOrderData = createAsyncThunk<OrderData, Ingredient>('order/order
 
   return data;
 });
+
+
 
 const initialState: OrderState = {
   isLoading: false,
@@ -50,18 +51,18 @@ const orderSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getOrderData.pending, (state) => {
+    builder.addCase(postOrderData.pending, (state) => {
       state.isLoading = true;
       state.isError = false;
       state.isSuccess = false;
     });
-    builder.addCase(getOrderData.fulfilled, (state, action: PayloadAction<OrderData>) => {
+    builder.addCase(postOrderData.fulfilled, (state, action: PayloadAction<OrderData>) => {
       state.number = action.payload.order.number;
       state.isLoading = false;
       state.isError = false;
       state.isSuccess = true;
     });
-    builder.addCase(getOrderData.rejected, (state, action) => {
+    builder.addCase(postOrderData.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.isSuccess = false;
