@@ -5,12 +5,8 @@ import { useAppSelector } from '../../hooks/react-redux';
 const OrderSummary: FC = () => {
 
     const selectAllOrders = (store: any) => store.feedApi.allOrders;
-
     const allOrders = useAppSelector(selectAllOrders);
-
-
     const getReadyNumbers = allOrders?.orders.filter((item: any) => item.status === 'done')
-
     const getInProcessNumbers = allOrders?.orders.filter((item: any) => item.status === 'pending')
 
     return (

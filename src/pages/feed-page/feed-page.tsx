@@ -1,36 +1,40 @@
+import styles from './feed-page.module.css';
+
 import { useLocation } from 'react-router-dom'
 import { FC, useEffect } from 'react';
-import styles from './feed-page.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAppDispatch } from '../../hooks/react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/react-redux';
+import { Link } from 'react-router-dom';
 
-//feed-components
 import OrderList from '../../components/order-list/order-list';
 import OrderSummary from '../../components/order-summary/order-summary';
+
 import { IOrder } from '../../types/order-types';
+import { setCurrentOrder } from "../../services/reducers/ordersFeedReducer";
+import { modalOpen } from '../../services/reducers/modalReducer';
 
 import { wsConnect } from '../../services/reducers/wsActions';
-// import { selectAllOrders } from '../../services/selectors/feedSelector';
 
-
-//websocket
-// import {wsConnecting, wsClose} from '../../services/reducers/ordersFeedReducer';
-import { wssUrl } from '../../utils/api';
 
 const FeedPage: FC = () => {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation();
 
   const selectAllOrders = (store: any) => store.feedApi.allOrders;
 
-  const allOrders = useSelector(selectAllOrders);
+  const allOrders = useAppSelector(selectAllOrders);
   console.log(allOrders);
 
   useEffect(() => {
     console.log('Connecting to WebSocket...');
     dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'));
   })
+
+  const modalOrderInfo = () => {
+    dispatch(setCurrentOrder(order))
+    dispatch(modalOpen('order-info'));
+  };
+
   if (allOrders) {
     return (
       <>
@@ -40,9 +44,19 @@ const FeedPage: FC = () => {
         <section className={styles.feed}>
           <ul className={styles.order_column}>
             {allOrders.orders.map((order: IOrder) => (
-              <li>
-                <OrderList key={order._id} order={order} />
-              </li>
+              <Link
+                style={{ textDecoration: 'none' }}
+                state={{ background: location }}
+                to={`${order._id}`}
+                onClick={(e: any) => {
+                  modalOrderInfo();
+                }}
+                key={order._id}
+              >
+                <li>
+                  <OrderList key={order._id} order={order} />
+                </li>
+              </Link>
             ))}
           </ul>
           <div className={styles.summary_column}>
@@ -57,7 +71,12 @@ const FeedPage: FC = () => {
 }
 
 export default FeedPage;
+
 function RootStore(RootStore: any): null {
+  throw new Error('Function not implemented.');
+}
+
+function order(order: any): { payload: any; type: "feed/setCurrentOrder"; } {
   throw new Error('Function not implemented.');
 }
 

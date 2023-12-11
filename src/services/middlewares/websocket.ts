@@ -7,7 +7,6 @@ import { setAllOrders } from '../../services/reducers/feedReducer';
 
 
 export const socketMiddleware = (): Middleware<{}, RootStore> => {
-    console.log('middleware');
     let socket: WebSocket | null = null;
     return (store) => (next) => (action) => {
         switch (action.type) {
