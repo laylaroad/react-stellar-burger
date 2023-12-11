@@ -1,6 +1,6 @@
 import styles from './orders-history.module.css';
 import { FC, useEffect } from 'react';
-import OrderList from '../../../components/order-list/order-list';
+import Order from '../../../components/order/order';
 import { wssUrl } from '../../../utils/api';
 import { useAppDispatch, useAppSelector } from '../../../hooks/react-redux';
 

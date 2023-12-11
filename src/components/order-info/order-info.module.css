@@ -1,9 +1,12 @@
 .modal_window {
-  display: flex;
-  justify-content: space-between;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
+  display: block;
+  width: 100%;
+  min-height: 254px;
+  margin-bottom: 24px;
+  max-height: 100%;
 }
 
 .order_window {
@@ -25,7 +28,7 @@
 .order_status {
   margin-top: 8px;
   color: var(--interface-success, #0cc);
-  margin-bottom: 70px;
+  margin-bottom: 40px;
   width: 50%;
   text-align: start;
   margin-left: 40px;
@@ -50,7 +53,7 @@
   padding-right: 20px;
   overflow-y: scroll;
   box-sizing: border-box;
-  max-height: calc(100vh - 446px);
+  max-height: calc(100vh - 496px);
   overflow: auto;
   width: 100%;
   align-items: center;

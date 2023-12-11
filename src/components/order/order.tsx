@@ -1,4 +1,4 @@
-import styles from "./order-list.module.css";
+import styles from "./order.module.css";
 import { FC, Key } from "react";
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { selectIngredients } from "../../services/selectors/ingredientsSelector"
 import { useAppDispatch, useAppSelector } from "../../hooks/react-redux";
 
 
-import OrderInfo from '../../components/order-info/order-info';
+import OrderInfo from '../order-info/order-info';
 
 import Modal from '../modal/modal';
 import { modalClose, modalOpen } from '../../services/reducers/modalReducer';
@@ -22,11 +22,11 @@ import { setCurrentOrder } from "../../services/reducers/ordersFeedReducer";
 
 import { Ingredient } from '../../types/ingredient-types';
 
-interface OrderListProps {
+interface OrderProps {
   order: any;
 }
 
-const OrderList: FC<OrderListProps> = ({ order }) => {
+const Order: FC<OrderProps> = ({ order }) => {
   // const orderDate = new Date(order.time);
   const orderId = uuidv4();
   const dispatch = useAppDispatch();
@@ -129,10 +129,6 @@ const OrderList: FC<OrderListProps> = ({ order }) => {
       )}
     </>
   );
-  // // Если запрос заказа не успешен
-  // return (
-  //   <p className="text text_type_digits-default">Что-то пошло не так...</p>
-  // );
 }
 
-export default OrderList;
+export default Order;

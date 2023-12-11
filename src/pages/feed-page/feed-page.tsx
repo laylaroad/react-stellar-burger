@@ -5,7 +5,7 @@ import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/react-redux';
 import { Link } from 'react-router-dom';
 
-import OrderList from '../../components/order-list/order-list';
+import Order from '../../components/order/order';
 import OrderSummary from '../../components/order-summary/order-summary';
 
 import { IOrder } from '../../types/order-types';
@@ -54,7 +54,7 @@ const FeedPage: FC = () => {
                 key={order._id}
               >
                 <li>
-                  <OrderList key={order._id} order={order} />
+                  <Order key={order._id} order={order} />
                 </li>
               </Link>
             ))}

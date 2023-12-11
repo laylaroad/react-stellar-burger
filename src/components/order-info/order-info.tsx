@@ -7,6 +7,7 @@ import { useAppSelector } from '../../hooks/react-redux';
 
 import { useAppDispatch } from '../../hooks/react-redux';
 import { wsConnect } from '../../services/reducers/wsActions';
+import { Ingredient } from '../../types/ingredient-types';
 
 interface OrderInfoProps {
     status: boolean;
@@ -34,12 +35,11 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal }) => {
 
     if (allOrders) {
         const currentOrder = allOrders.orders.find((order: any) => { return order._id === id });
-        console.log(currentOrder);
+        // console.log(currentOrder);
 
         const orderIngredients = currentOrder.ingredients.map((ingredientId: string) => {
             return ingredientsArray.find((ingredient: any) => ingredient._id === ingredientId);
         })
-
 
         const numberStyles = isModal ? styles.modal_number : styles.number;
         const orderStyles = isModal ? styles.modal_window : styles.order_window;
@@ -63,6 +63,7 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal }) => {
                                 <p className={`${styles.ingredient_name} text text_type_main-default`}>{ingredient.name}</p>
                                 <p className={`${styles.price} text text_type_main-default`}>
                                     {ingredient.type === 'bun' ? 2 : 1} x {ingredient.price}
+
                                     <CurrencyIcon type="primary" />
                                 </p>
                             </div>
@@ -77,7 +78,12 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal }) => {
                         />
                     )}
                     <span className={`${styles.order_sum} text text_type_digits-default`}>
-                        {currentOrder.price} 560
+                        {
+                            orderIngredients.reduce((totalPrice: number, ingredient: any) => {
+                                const ingredientCount = ingredient.type === 'bun' ? 2 : 1;
+                                return totalPrice + ingredient.price * ingredientCount;
+                            }, 0)
+                        }
                         <CurrencyIcon type="primary" />
                     </span>
                 </div>
