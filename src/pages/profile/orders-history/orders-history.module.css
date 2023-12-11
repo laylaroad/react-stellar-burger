@@ -1,11 +1,27 @@
 .orders {
   display: flex;
-
-  width: 50%;
+  width: 90%;
   flex-direction: column;
   margin: 0;
-
+  padding-left: 0;
+  list-style: none;
   overflow-y: scroll;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  max-height: calc(100vh - 50px);
+  max-width: 120%;
+}
+
+.orders::-webkit-scrollbar {
+  width: 8px;
+}
+
+.orders::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.orders::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
 }
 
 .orders_title {
