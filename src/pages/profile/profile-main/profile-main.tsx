@@ -1,5 +1,5 @@
 import { FC, useState, useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/react-redux';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { pathUserData } from '../../../services/thunk/user-thunk';
@@ -8,8 +8,8 @@ import { selectUser } from '../../../services/selectors/userSelector';
 import styles from './profile-main.module.css';
 
 const ProfileMain: FC = () => {
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
   const [isEdit, setIsEdit] = useState(false);
 
   const [values, setValues] = useState<{ name: string; email: string; password: string; disabled: boolean }>({
@@ -26,7 +26,7 @@ const ProfileMain: FC = () => {
         name: user.name,
         email: user.email,
         password: '',
-        disabled: true, 
+        disabled: true,
       });
     }
   };
@@ -34,7 +34,7 @@ const ProfileMain: FC = () => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setIsEdit(false);
-//@ts-ignore
+    //@ts-ignore
     dispatch(pathUserData(values));
     localStorage.removeItem('userData');
   };
@@ -51,7 +51,7 @@ const ProfileMain: FC = () => {
         name: user.name,
         email: user.email,
         password: '',
-        disabled: true, 
+        disabled: true,
       });
     }
   }, [user?.name, user?.email]);

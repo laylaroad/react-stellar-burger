@@ -1,5 +1,6 @@
 import { FC, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/react-redux';
 
 import styles from './burger-ingredients.module.css';
 
@@ -19,12 +20,12 @@ import { Ingredient } from '../../types/ingredient-types';
 
 
 const BurgerIngredients: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [current, setCurrent] = useState('one');
-  const ingredients = useSelector(selectIngredients);
-  const modalType = useSelector(SelectModalType);
-  const ingredientDetailsIsLoading = useSelector(selectIngredientsIsLoading);
-  const ingredientDetailsIsError = useSelector(selectIngredientsError);
+  const ingredients = useAppSelector(selectIngredients);
+  const modalType = useAppSelector(SelectModalType);
+  const ingredientDetailsIsLoading = useAppSelector(selectIngredientsIsLoading);
+  const ingredientDetailsIsError = useAppSelector(selectIngredientsError);
 
   const oneRef = useRef<HTMLHeadingElement>(null);
   const twoRef = useRef<HTMLHeadingElement>(null);
@@ -57,8 +58,6 @@ const BurgerIngredients: FC = () => {
       setCurrent(result[0].name);
     }
   };
-
-  console.log('Ingredients:', ingredients);
 
   return (
     <>

@@ -1,11 +1,11 @@
 import styles from './order-details.module.css';
 import done from '../../images/done.svg';
-import {FC} from 'react';
-import { useSelector } from 'react-redux';
+import { FC } from 'react';
+import { useAppSelector } from '../../hooks/react-redux';
 import { selectOrderNumber } from '../../services/selectors/orderSelector';
 
 const OrderDetails: FC = () => {
-    const orderNumber = useSelector(selectOrderNumber) as number;
+    const orderNumber = useAppSelector(selectOrderNumber) as number;
 
     return (
         <section className={styles.order_section}>

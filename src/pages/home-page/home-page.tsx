@@ -1,26 +1,19 @@
-
 import styles from './home-page.module.css';
-
-import {FC} from 'react';
+import { FC } from 'react';
 
 import { DndProvider } from 'react-dnd';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useAppSelector } from '../../hooks/react-redux';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-
-import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 
 import { selectIngredientsIsLoading, selectIngredientsError } from '../../services/selectors/ingredientsSelector';
 
-import { checkUserAuth } from '../../utils/api';
-
 const Home: FC = () => {
 
-    const isLoading = useSelector(selectIngredientsIsLoading);
-    const isError = useSelector(selectIngredientsError);
+    const isLoading = useAppSelector(selectIngredientsIsLoading);
+    const isError = useAppSelector(selectIngredientsError);
 
     return (
         <>

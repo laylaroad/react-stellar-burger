@@ -23,10 +23,10 @@ const FeedPage: FC = () => {
   const selectAllOrders = (store: any) => store.feedApi.allOrders;
 
   const allOrders = useAppSelector(selectAllOrders);
-  console.log(allOrders);
+  // console.log(allOrders);
 
   useEffect(() => {
-    console.log('Connecting to WebSocket...');
+    // console.log('Connecting to WebSocket...');
     dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'));
   })
 
