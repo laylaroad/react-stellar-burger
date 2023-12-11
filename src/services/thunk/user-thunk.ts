@@ -47,10 +47,14 @@ export const login = createAsyncThunk(
                 password: password
             })
         });
+        // console.log(res);
 
-        const data = await checkResponse(res);
+        // const data = await checkResponse(res);
+        const data = res;
+        // console.log(data);
 
         if (data.success) {
+            // console.log('logged in');
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
         } else {

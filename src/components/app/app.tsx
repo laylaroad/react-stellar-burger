@@ -70,8 +70,7 @@ const App: FC = () => {
           <Route path="login" element={<OnlyUnAuth component={<Login />} />} />
           <Route path="reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
           <Route path="forgot-password" element={<ForgotPassword />} />
-          {/* <Route path="profile" element={<OnlyAuth component={<ProfileNavigation />} />}> */}
-          <Route path="profile" element={<ProfileNavigation />}>
+          <Route path="profile" element={<OnlyAuth component={<ProfileNavigation />} />}>
             <Route index element={<ProfileMain />} />
             <Route path="orders" element={<OrdersHistory />} />
             <Route path="orders/:id" element={<OrderInfoPage />} />

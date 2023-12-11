@@ -14,6 +14,8 @@ import { modalOpen } from '../../services/reducers/modalReducer';
 
 import { wsConnect } from '../../services/reducers/wsActions';
 
+import { setAllOrders } from '../../services/reducers/feedReducer';
+
 
 const FeedPage: FC = () => {
 

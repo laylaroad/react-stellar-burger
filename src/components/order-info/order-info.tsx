@@ -12,6 +12,8 @@ import { IOrder } from '../../types/order-types';
 
 import { selectCurrentOrder } from '../../services/selectors/ordersFeedSelector';
 
+import { setAllOrders } from '../../services/reducers/feedReducer';
+
 interface OrderInfoProps {
     status: boolean;
     isModal: boolean;

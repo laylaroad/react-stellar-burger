@@ -27,7 +27,7 @@ export const postOrderData = createAsyncThunk<OrderData, Ingredient>('order/orde
       'Content-Type': 'application/json;charset=utf-8',
       authorization: localStorage.getItem('accessToken') || '',
     },
-    body: JSON.stringify({ ingredients }),
+    body: JSON.stringify(ingredients),
   };
   const response = await fetch(`${apiUrl}/orders`, orderRequestConfig);
   const data = await checkResponse(response);

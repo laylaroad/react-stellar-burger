@@ -9,6 +9,9 @@ import { setCurrentOrder } from '../../../services/reducers/ordersFeedReducer';
 import { modalOpen } from '../../../services/reducers/modalReducer';
 import order from '../../../components/order/order';
 
+import { setAllOrders } from '../../../services/reducers/feedReducer';
+
+
 
 import { wsConnect } from '../../../services/reducers/wsActions';
 
@@ -16,7 +19,7 @@ import { wsConnect } from '../../../services/reducers/wsActions';
 const OrdersHistory: FC = () => {
     const location = useLocation();
     const dispatch = useAppDispatch();
-    // const accessToken = localStorage.getItem("accessToken")?.split("Bearer ")[1];
+    const accessToken = localStorage.getItem("accessToken")?.split("Bearer ")[1];
 
     const selectAllOrders = (store: any) => store.feedApi.allOrders;
     const allOrders = useAppSelector(selectAllOrders);
@@ -28,7 +31,8 @@ const OrdersHistory: FC = () => {
 
     useEffect(() => {
         // console.log('Connecting to WebSocket...');
-        dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'));
+        // dispatch(wsConnect('wss://norma.nomoreparties.space/orders'));
+        dispatch(wsConnect(`wss://norma.nomoreparties.space/orders?token=${accessToken}`));
     })
 
     if (allOrders) {

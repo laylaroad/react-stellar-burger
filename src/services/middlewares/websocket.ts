@@ -23,6 +23,7 @@ export const socketMiddleware = (): Middleware<{}, RootStore> => {
 
                 socket.onmessage = (event) => {
                     const payload = JSON.parse(event.data);
+                    console.log(payload, 'Произошло сообщение');
                     console.log('receiving server message');
                     store.dispatch(setAllOrders(payload));
                 };
