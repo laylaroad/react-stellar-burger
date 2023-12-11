@@ -1,6 +1,6 @@
 import styles from './order-info.module.css';
 import { FC, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { FormattedDate, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { selectIngredients } from '../../services/selectors/ingredientsSelector';
 import { useAppSelector } from '../../hooks/react-redux';
@@ -20,6 +20,7 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal }) => {
     const { id } = useParams();
     console.log('id', id);
     const dispatch = useAppDispatch();
+    const location = useLocation();
     const ingredientsArray = useAppSelector(selectIngredients);
     const selectAllOrders = (store: any) => store.feedApi.allOrders;
     const allOrders = useAppSelector(selectAllOrders);
@@ -30,7 +31,8 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal }) => {
     })
 
 
-    if (allOrders) {
+
+    if (id && allOrders) {
         const currentOrder = allOrders.orders.find((order: any) => { return order._id === id });
 
         const orderIngredients = currentOrder.ingredients.map((ingredientId: string) => {
