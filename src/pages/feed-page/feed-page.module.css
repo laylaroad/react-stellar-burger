@@ -1,12 +1,11 @@
 .feed {
   display: flex;
-  justify-content: space-evenly;
-  column-gap: 16px;
+  justify-content: center;
   width: 100%;
 }
 
 .title {
-  margin-left: 120px;
+  margin-left: 30px;
   margin-top: 40px;
   margin-bottom: 20px;
 }
@@ -14,9 +13,10 @@
 .order_column {
   list-style: none;
   padding-left: 0;
-  width: 58%;
-  max-height: 65vh;
-  overflow-y: scroll;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 104px);
   overflow-y: auto;
 }
 

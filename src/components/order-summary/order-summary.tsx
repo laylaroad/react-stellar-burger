@@ -9,30 +9,40 @@ const OrderSummary: FC = () => {
     const allOrders = useAppSelector(selectAllOrders);
 
 
-    // const getReadyNumbers = allOrders?.orders.filter((el: any) => el.status === 'done')
+    const getReadyNumbers = allOrders?.orders.filter((item: any) => item.status === 'done')
 
-    // const getInProcessNumbers = allOrders?.orders.filter((el: any) => el.status === 'pending')
+    const getInProcessNumbers = allOrders?.orders.filter((item: any) => item.status === 'pending')
 
     return (
         <section className={styles.order_summary}>
-            <div className={styles.numbers}>
-                <div className={styles.orders_ready}>
+            <div className={styles.orders_board}>
+                <div className={styles.orders_column}>
                     <h4 className="text text_type_main-medium">Готовы:</h4>
-                    <ul className={`${styles.order_ready_numbers} text_type_digits-default`}>
-                        <li className={styles.order_ready_numbers}>100</li>
 
+                    <ul className={`${styles.orders_done_list} text_type_digits-default`}>
+                        {getReadyNumbers?.map((item: any) => (
+                            <li key={item._id}
+                                className={styles.numbers_style}>
+                                {item.number}
+
+                            </li>
+                        ))}
                     </ul>
+
                 </div>
-                <div className={styles.in_process}>
+                <div className={styles.orders_column}>
                     <h4 className="text text_type_main-medium">В работе:</h4>
                     <ul className="text_type_digits-default">
-                        <li className={styles.order_in_process_numbers}>100</li>
-
+                        {getInProcessNumbers?.map((item: any) => (
+                            <li key={item._id}
+                                className={styles.order_in_process_numbers}> {item.number}</li>
+                        ))}
                     </ul>
+
                 </div>
             </div>
 
-            <div className={styles.orders_done}>
+            <div className={styles.total}>
                 <h3 className="text text_type_main-medium">Выполнено за все время</h3>
                 <p className={`${styles.numbers} text text_type_digits-large`}>{allOrders.total}</p>
                 <h3 className="text text_type_main-medium">Выполнено за сегодня</h3>
