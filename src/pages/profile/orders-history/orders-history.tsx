@@ -46,7 +46,7 @@ const OrdersHistory: FC = () => {
                             key={order._id}
                         >
                             <li>
-                                <Order key={order._id} order={order} />
+                                <Order key={order._id} order={order} status={order.status} showOrderStatus={true} />
                             </li>
                         </Link>
                     ))}

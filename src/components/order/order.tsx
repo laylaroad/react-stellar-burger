@@ -19,9 +19,11 @@ import { Ingredient } from '../../types/ingredient-types';
 
 interface OrderProps {
   order: any;
+  showOrderStatus?: boolean;
+  status?: string;
 }
 
-const Order: FC<OrderProps> = ({ order }) => {
+const Order: FC<OrderProps> = ({ order, showOrderStatus, status }) => {
   const orderId = uuidv4();
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -39,6 +41,13 @@ const Order: FC<OrderProps> = ({ order }) => {
     dispatch(setCurrentOrder(order))
     dispatch(modalOpen('order-info'));
   };
+
+  console.log(status);
+
+  const statusText =
+    status === 'done' ? 'Выполнен' :
+      status === 'pending' ? 'Готовится' :
+        'Отменен';
 
 
   return (
@@ -64,7 +73,8 @@ const Order: FC<OrderProps> = ({ order }) => {
               />
             </div>
             <p className={`${styles.order_name} text text_type_main-medium`}>{order.name}</p>
-            {/* <p className={`${styles.status} text text_type_main-default`}>{props.status}</p> */}
+            {showOrderStatus &&
+              <p className={`${styles.status} text text_type_main-default`}>{statusText}</p>}
             <div className={styles.card_footer}>
               <div className={styles.images}>
                 {orderIngredients.map((ingredient: any, index: Key | null | undefined) => (

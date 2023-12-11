@@ -1,7 +1,7 @@
 export interface IOrder {
     _id: string;
     ingredients: Array<string>;
-    status: boolean | null;
+    status: string | undefined;
     name: string;
     createdAt: string;
     updatedAt: string;
