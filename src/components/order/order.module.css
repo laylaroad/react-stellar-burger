@@ -8,8 +8,8 @@
   overflow: auto;
   overflow-x: hidden;
   box-sizing: border-box;
-  max-height: calc(100vh - 250px);
-  max-width: 120%;
+  max-height: calc(100vh - 150px);
+  max-width: 100%;
 }
 
 .order_list::-webkit-scrollbar {

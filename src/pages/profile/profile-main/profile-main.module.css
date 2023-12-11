@@ -5,9 +5,9 @@
 }
 
 .profile_wrapper {
-  width: 320px;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .profile_nav {
