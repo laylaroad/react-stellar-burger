@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../hooks/react-redux';
 //feed-components
 import OrderList from '../../components/order-list/order-list';
 import OrderSummary from '../../components/order-summary/order-summary';
+import { IOrder } from '../../types/order-types';
 
 import { wsConnect } from '../../services/reducers/wsActions';
 // import { selectAllOrders } from '../../services/selectors/feedSelector';
@@ -30,7 +31,6 @@ const FeedPage: FC = () => {
     console.log('Connecting to WebSocket...');
     dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'));
   })
-
   if (allOrders) {
     return (
       <>
@@ -38,21 +38,23 @@ const FeedPage: FC = () => {
           Лента заказов
         </h1>
         <section className={styles.feed}>
-          <div className={styles.order_column}>
-
-            <OrderList order={allOrders.orders[0]} />
-          </div>
+          <ul className={styles.order_column}>
+            {allOrders.orders.map((order: IOrder) => (
+              <li>
+                <OrderList key={order._id} order={order} />
+              </li>
+            ))}
+          </ul>
           <div className={styles.summary_column}>
             <OrderSummary />
           </div>
         </section>
       </>
-    )
+    );
+  } else {
+    return <>loading</>;
   }
-  else {
-    return <> loading </>
-  }
-};
+}
 
 export default FeedPage;
 function RootStore(RootStore: any): null {

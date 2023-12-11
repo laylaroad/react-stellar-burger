@@ -1,16 +1,15 @@
 import styles from "./order-list.module.css";
 import { FC, Key } from "react";
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   FormattedDate,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { v4 as uuidv4 } from "uuid";
-import { selectIngredientById, selectIngredients } from "../../services/selectors/ingredientsSelector";
+import { selectIngredients } from "../../services/selectors/ingredientsSelector";
 import { useAppDispatch, useAppSelector } from "../../hooks/react-redux";
-// import { selectOrders } from '../../services/selectors/orderSelector';
-import { Link } from 'react-router-dom';
-import ingredientsReducer from "../../services/reducers/ingredientsReducer";
+
 
 import OrderInfo from '../../components/order-info/order-info';
 
@@ -28,10 +27,8 @@ interface OrderListProps {
 }
 
 const OrderList: FC<OrderListProps> = ({ order }) => {
-  const orderDate = new Date(order.time);
+  // const orderDate = new Date(order.time);
   const orderId = uuidv4();
-  const ingredients = useAppSelector(selectIngredients);
-  // const getOrdersFromServer = useAppSelector(selectOrders);
   const dispatch = useAppDispatch();
   const location = useLocation();
 
@@ -50,8 +47,6 @@ const OrderList: FC<OrderListProps> = ({ order }) => {
   console.log(orderIngredients);
 
 
-  // Limit to 6 ingredients
-
   const modalOrderInfo = () => {
     dispatch(setCurrentOrder(order))
     dispatch(modalOpen('order-info'));
@@ -60,7 +55,6 @@ const OrderList: FC<OrderListProps> = ({ order }) => {
   return (
     <>
       <ul className={styles.order_list}>
-
         <Link
           style={{ textDecoration: 'none' }}
           state={{ background: location }}
