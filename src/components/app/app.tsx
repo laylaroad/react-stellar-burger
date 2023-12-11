@@ -112,7 +112,6 @@ const App: FC = () => {
           <Route
             path="profile/orders/:id"
             element={
-
               <Modal title="" onClose={onClose}>
                 <OrderInfo isModal={true} status={true}
                 />

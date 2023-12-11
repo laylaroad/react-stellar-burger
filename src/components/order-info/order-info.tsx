@@ -10,18 +10,20 @@ import { wsConnect } from '../../services/reducers/wsActions';
 import { Ingredient } from '../../types/ingredient-types';
 import { IOrder } from '../../types/order-types';
 
+import { selectCurrentOrder } from '../../services/selectors/ordersFeedSelector';
+
 interface OrderInfoProps {
     status: boolean;
     isModal: boolean;
-
 }
 
 const OrderInfo: FC<OrderInfoProps> = ({ status, isModal }) => {
     const { id } = useParams();
-    console.log('id', id);
     const dispatch = useAppDispatch();
     const location = useLocation();
     const ingredientsArray = useAppSelector(selectIngredients);
+    const getSelectCurrentOrder = useAppSelector(selectCurrentOrder);
+    // console.log(getSelectCurrentOrder);
     const selectAllOrders = (store: any) => store.feedApi.allOrders;
     const allOrders = useAppSelector(selectAllOrders);
 
@@ -29,8 +31,6 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal }) => {
         // console.log('Connecting to WebSocket...');
         dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'));
     })
-
-
 
     if (id && allOrders) {
         const currentOrder = allOrders.orders.find((order: any) => { return order._id === id });
