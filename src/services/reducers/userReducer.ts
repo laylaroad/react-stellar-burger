@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { login, logout, getUserData, register, pathUserData } from '../thunk/user-thunk';
 
-
 interface IUserData {
   id: string;
   username: string | null;

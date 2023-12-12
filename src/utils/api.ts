@@ -6,7 +6,7 @@ import { getUserData } from '../services/thunk/user-thunk';
 export const apiUrl = 'https://norma.nomoreparties.space/api';
 
 export const wssUrl = "wss://norma.nomoreparties.space";
-
+export const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
 interface IRequestOptions extends RequestInit {
     headers: Record<string, string>;
 }
@@ -28,7 +28,6 @@ export async function fetchIngredients() {
 };
 
 
-
 export const checkUserAuth = () => {
     return (dispatch: any) => {
         if (localStorage.getItem("accessToken")) {
@@ -45,25 +44,3 @@ export const checkUserAuth = () => {
         }
     };
 };
-
-
-
-// export const webSocket = () => {
-
-//     const socket = new WebSocket('wss://norma.nomoreparties.space/orders/all');
-//     socket.onopen = function () {
-//         console.log('Соединение установлено');
-//     };
-
-//     socket.onmessage = function (event) {
-//         console.log('Получено сообщение:', event);
-//     };
-
-//     socket.onclose = function (event) {
-//         console.log('Соединение закрыто');
-//     };
-
-//     socket.onerror = function (error) {
-//         console.log('Ошибка!');
-//     };
-// };

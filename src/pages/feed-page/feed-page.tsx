@@ -13,8 +13,7 @@ import { setCurrentOrder } from "../../services/reducers/ordersFeedReducer";
 import { modalOpen } from '../../services/reducers/modalReducer';
 
 import { wsConnect } from '../../services/reducers/wsActions';
-
-import { setAllOrders } from '../../services/reducers/feedReducer';
+import { wsUrl } from '../../utils/api';
 
 
 const FeedPage: FC = () => {
@@ -23,13 +22,10 @@ const FeedPage: FC = () => {
   const location = useLocation();
 
   const selectAllOrders = (store: any) => store.feedApi.allOrders;
-
   const allOrders = useAppSelector(selectAllOrders);
-  // console.log(allOrders);
 
   useEffect(() => {
-    // console.log('Connecting to WebSocket...');
-    dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'));
+    dispatch(wsConnect(wsUrl));
   })
 
   const modalOrderInfo = () => {
