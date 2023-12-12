@@ -2,12 +2,15 @@ import styles from './order-summary.module.css';
 import { FC } from 'react'
 import { useAppSelector } from '../../hooks/react-redux';
 
+import { IOrder } from '../../types/order-types';
+
 const OrderSummary: FC = () => {
 
     const selectAllOrders = (store: any) => store.feedApi.allOrders;
     const allOrders = useAppSelector(selectAllOrders);
-    const getReadyNumbers = allOrders?.orders.filter((item: any) => item.status === 'done')
-    const getInProcessNumbers = allOrders?.orders.filter((item: any) => item.status === 'pending')
+
+    const getReadyNumbers = allOrders?.orders.filter((item: IOrder) => item.status === 'done')
+    const getInProcessNumbers = allOrders?.orders.filter((item: IOrder) => item.status === 'pending')
 
     return (
         <section className={styles.order_summary}>
@@ -16,7 +19,7 @@ const OrderSummary: FC = () => {
                     <h4 className="text text_type_main-medium">Готовы:</h4>
 
                     <ul className={`${styles.orders_done_list} text_type_digits-default`}>
-                        {getReadyNumbers?.map((item: any) => (
+                        {getReadyNumbers?.map((item: IOrder) => (
                             <li key={item._id}
                                 className={styles.numbers_style}>
                                 {item.number}
@@ -29,7 +32,7 @@ const OrderSummary: FC = () => {
                 <div className={styles.orders_column}>
                     <h4 className="text text_type_main-medium">В работе:</h4>
                     <ul className="text_type_digits-default">
-                        {getInProcessNumbers?.map((item: any) => (
+                        {getInProcessNumbers?.map((item: IOrder) => (
                             <li key={item._id}
                                 className={styles.order_in_process_numbers}> {item.number}</li>
                         ))}

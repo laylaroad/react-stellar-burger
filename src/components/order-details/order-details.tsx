@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/react-redux';
 import { selectOrderNumber } from '../../services/selectors/orderSelector';
 
 const OrderDetails: FC = () => {
-    const orderNumber = useAppSelector(selectOrderNumber) as number;
+    const orderNumber = useAppSelector(selectOrderNumber);
 
     return (
         <section className={styles.order_section}>

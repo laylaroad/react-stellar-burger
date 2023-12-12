@@ -1,21 +1,17 @@
-
 import styles from './burger-creating.module.css';
-
-import {FC} from 'react';
-
-import { useSelector } from 'react-redux';
+import { FC } from 'react';
+import { useAppSelector } from '../../hooks/react-redux';
 
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { selectBurgerBun, selectBurgerIngredients } from '../../services/selectors/burgerConstructorSelector';
-
 import IngredientsMain from '../ingredients-main/ingredients-main';
-import {Ingredient, IngredientId} from '../../types/ingredient-types';
+
 
 
 const BurgerCreating: FC = () => {
 
-    const bun = useSelector(selectBurgerBun) as IngredientId;
-    const mains = useSelector(selectBurgerIngredients) as Array<IngredientId>;
+    const bun = useAppSelector(selectBurgerBun);
+    const mains = useAppSelector(selectBurgerIngredients);
 
     return (
         <div className={`${styles.burger_wrapper} ${bun === null ? styles.burger_empty : ""}`}>

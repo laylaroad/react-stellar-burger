@@ -13,7 +13,7 @@ export interface IOrder {
 
 export type IOrders = {
     success: boolean | null;
-    orders: Array<Omit<IOrder, 'owner'>>;
+    orders: IOrder[];
     total: number;
     totalToday: number;
 };

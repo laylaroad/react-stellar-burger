@@ -85,9 +85,24 @@
   border: 2px solid var(--button-normal, #801ab2);
   background: var(--interface-bg, #131316);
 }
+.plus {
+  position: absolute;
+}
 
-.darkened_image {
-  opacity: 0.6;
+.more_images {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  background: #131316;
+  border-radius: 100px;
+  border: 2px solid;
+  background: linear-gradient(63.18deg, #801ab3 0%, #4c4cff 100%),
+    linear-gradient(0deg, #131316, #131316);
+  border-image-source: linear-gradient(63.18deg, #801ab3 0%, #4c4cff 100%);
+  margin-left: -20px;
 }
 
 .image_1 {

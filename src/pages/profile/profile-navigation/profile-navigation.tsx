@@ -1,11 +1,8 @@
 import styles from './profile-navigation.module.css';
-
 import { FC } from 'react';
-
-import { useDispatch } from 'react-redux';
 import { logout } from '../../../services/thunk/user-thunk';
-
 import { NavLink, Outlet } from 'react-router-dom';
+import { useAppDispatch } from '../../../hooks/react-redux';
 
 interface ProfileNavigationProps {
     isActive?: boolean
@@ -13,7 +10,7 @@ interface ProfileNavigationProps {
 
 const ProfileNavigation: FC<ProfileNavigationProps> = ({ isActive }) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const isActiveLink = isActive ? `${styles.link_active}` : `${styles.link_disactive}`;
 

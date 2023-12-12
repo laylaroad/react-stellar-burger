@@ -34,7 +34,6 @@ const ProfileMain: FC = () => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setIsEdit(false);
-    //@ts-ignore
     dispatch(pathUserData(values));
     localStorage.removeItem('userData');
   };

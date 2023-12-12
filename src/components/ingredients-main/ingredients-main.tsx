@@ -1,6 +1,5 @@
 import styles from './ingredients-main.module.css';
 import { FC } from 'react';
-
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/react-redux';

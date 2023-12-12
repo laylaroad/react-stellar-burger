@@ -1,8 +1,7 @@
 import { FC, useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useAppDispatch, useAppSelector } from '../../hooks/react-redux';
-
 import styles from './burger-ingredients.module.css';
+import { useAppDispatch, useAppSelector } from '../../hooks/react-redux';
+import { Ingredient } from '../../types/ingredient-types';
 
 import BurgerTab from '../burger-tab/burger-tab';
 import IngredientItem from '../ingredient-item/ingredient-item';
@@ -11,12 +10,10 @@ import { modalClose } from '../../services/reducers/modalReducer';
 import Modal from '../modal/modal';
 import { SelectModalType } from '../../services/selectors/modalSelector';
 
-import { selectIngredients, selectCurrentIngredient } from '../../services/selectors/ingredientsSelector';
+import { selectIngredients } from '../../services/selectors/ingredientsSelector';
 import { selectIngredientsIsLoading, selectIngredientsError } from '../../services/selectors/ingredientsSelector';
-
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
-import { Ingredient } from '../../types/ingredient-types';
 
 
 const BurgerIngredients: FC = () => {

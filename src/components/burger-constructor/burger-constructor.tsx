@@ -1,16 +1,16 @@
 import styles from './burger-constructor.module.css';
 import { FC } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { Ingredient } from '../../types/ingredient-types';
 import { useAppDispatch, useAppSelector } from '../../hooks/react-redux';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 
 import { addIngredient } from '../../services/reducers/burgerConstructorReducer';
 import { postOrderData } from '../../services/reducers/orderReducer';
-
+import { selectUser } from '../../services/selectors/userSelector';
 import { SelectModalType, SelectModalOpen } from '../../services/selectors/modalSelector';
 import { selectOrderIsLoading, selectOrderIsError, selectOrderSuccess } from '../../services/selectors/orderSelector';
 import { modalOpen, modalClose } from '../../services/reducers/modalReducer';
@@ -21,10 +21,7 @@ import BurgerCreating from '../burger-creating/burger-creating';
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 
-import { useNavigate } from 'react-router-dom';
-import { selectUser } from '../../services/selectors/userSelector';
 
-import { Ingredient, IngredientId } from '../../types/ingredient-types';
 
 
 const BurgerConstructor: FC = () => {
@@ -32,13 +29,13 @@ const BurgerConstructor: FC = () => {
 
         const dispatch = useAppDispatch();
 
-        const price = useAppSelector(selectPrice) as number;
-        const ingredientsAllId = useAppSelector(selectAllId) as unknown as IngredientId[];
-        const bun = useAppSelector(selectBurgerBun) as IngredientId;
+        const price = useAppSelector(selectPrice);
+        const ingredientsAllId = useAppSelector(selectAllId);
+        const bun = useAppSelector(selectBurgerBun);
 
-        const orderSuccess = useAppSelector(selectOrderSuccess) as boolean;
-        const orderError = useAppSelector(selectOrderIsError) as boolean;
-        const orderIsLoading = useAppSelector(selectOrderIsLoading) as boolean;
+        const orderSuccess = useAppSelector(selectOrderSuccess);
+        const orderError = useAppSelector(selectOrderIsError);
+        const orderIsLoading = useAppSelector(selectOrderIsLoading);
 
         const modalType = useAppSelector(SelectModalType);
 
@@ -48,7 +45,7 @@ const BurgerConstructor: FC = () => {
 
         const makeTheOrder: () => void = () => {
             if (user) {
-                //@ts-ignore
+                // @ts-ignore
                 dispatch(postOrderData({ ingredients: ingredientsAllId }));
                 dispatch(modalOpen('orderDetails'));
                 dispatch(deleteAllIngredients());

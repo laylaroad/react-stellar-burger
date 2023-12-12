@@ -1,17 +1,14 @@
+import styles from './ingredient-item.module.css';
 import { useMemo, FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Ingredient, IngredientId } from '../../types/ingredient-types';
 import { Link, useLocation } from 'react-router-dom';
+
 import { DragPreviewImage, useDrag, DragSourceMonitor } from 'react-dnd';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-
-import styles from './ingredient-item.module.css';
-
 import { showIngredient } from '../../services/reducers/ingredientsReducer';
 import { modalOpen } from '../../services/reducers/modalReducer';
-
 import { selectBurgerBun, selectAllId } from '../../services/selectors/burgerConstructorSelector';
-
-import {Ingredient, IngredientId } from '../../types/ingredient-types';
 
 interface IngredientItemProps {
   ingredient: Ingredient;
@@ -20,7 +17,7 @@ interface IngredientItemProps {
 
 const IngredientItem: FC<IngredientItemProps> = ({ ingredient, _id }) => {
   const dispatch = useDispatch();
-const location = useLocation();
+  const location = useLocation();
   const bun = useSelector(selectBurgerBun);
   const allIdIngredients = useSelector(selectAllId);
   const allIdArray = Array.isArray(allIdIngredients) ? allIdIngredients : [];
@@ -51,27 +48,27 @@ const location = useLocation();
 
   return (
     <Link
-    state={{ background: location }}
-    to={`ingredients/${ingredient._id}`}
-    className={`${styles.ingredient_item} ${isDragging ? styles.draggable : ''}`}
-    onClick={(e) => {
-      console.log('Link clicked:', e);
-    console.log('Target:', e.target);
-    console.log('Current Target:', e.currentTarget);
-      modalIngredients();
-    }}
-    key={ingredient._id}
-    ref={dragRef}
-  >
-    <DragPreviewImage connect={preview} src={ingredient.image} />
-    <img src={ingredient.image} alt={ingredient.name} />
-    <div className={styles.ingredient_price}>
-      <span className={`${styles.ingredient_name} text text_type_digits-default`}>{ingredient.price}</span>
-      <CurrencyIcon type="primary" />
-    </div>
-    <h4 className={`${styles.ingredient_name} text text_type_main-default`}>{ingredient.name}</h4>
-    {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
-  </Link>
+      state={{ background: location }}
+      to={`ingredients/${ingredient._id}`}
+      className={`${styles.ingredient_item} ${isDragging ? styles.draggable : ''}`}
+      onClick={(e) => {
+        console.log('Link clicked:', e);
+        console.log('Target:', e.target);
+        console.log('Current Target:', e.currentTarget);
+        modalIngredients();
+      }}
+      key={ingredient._id}
+      ref={dragRef}
+    >
+      <DragPreviewImage connect={preview} src={ingredient.image} />
+      <img src={ingredient.image} alt={ingredient.name} />
+      <div className={styles.ingredient_price}>
+        <span className={`${styles.ingredient_name} text text_type_digits-default`}>{ingredient.price}</span>
+        <CurrencyIcon type="primary" />
+      </div>
+      <h4 className={`${styles.ingredient_name} text text_type_main-default`}>{ingredient.name}</h4>
+      {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
+    </Link>
   );
 };
 

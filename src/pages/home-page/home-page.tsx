@@ -1,9 +1,8 @@
 import styles from './home-page.module.css';
 import { FC } from 'react';
-
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 import { useAppSelector } from '../../hooks/react-redux';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';

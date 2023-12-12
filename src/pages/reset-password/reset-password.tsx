@@ -1,21 +1,20 @@
 import styles from './reset-password.module.css';
-
 import { FC, FormEvent, ChangeEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/react-redux';
 
 import { fetchResetPass } from '../../services/thunk/user-thunk';
-
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import { Link } from 'react-router-dom';
+
 
 const ResetPassword: FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('');
+    const [errorPassword, seterrorPassword] = useState(false);
 
     const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
@@ -28,7 +27,6 @@ const ResetPassword: FC = () => {
     const handletoRestorePass = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            //@ts-ignore
             dispatch(fetchResetPass({ password, token }));
             navigate('/login');
         } catch (error) {
@@ -46,24 +44,22 @@ const ResetPassword: FC = () => {
                     value={password}
                     name={'password'}
                     icon={'ShowIcon'}
-                      //@ts-ignore
-                    error={false}
                     placeholder={'Введите новый пароль'}
                     extraClass="mb-2"
                 />
+                {!seterrorPassword &&
+                    <Input
+                        type={'text'}
+                        error={false}
+                        placeholder={'Введите код из письма'}
+                        value={token}
+                        onChange={handleToken}
+                        extraClass="mb-2" />}
 
-                <Input
-                    type={'text'}
-                    error={false}
-                    placeholder={'Введите код из письма'}
-                    value={token}
-                    onChange={handleToken}
-                    extraClass="mb-2" />
 
-
-                <Button 
-                disabled={!token}
-                htmlType="submit"
+                <Button
+                    disabled={!token}
+                    htmlType="submit"
                     type="primary"
                     size="large">
 

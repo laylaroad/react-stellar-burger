@@ -25,7 +25,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ onlyUnAuth = false, component
     const location = useLocation();
 
     if (!isAuthChecked) {
-        // console.log("Происходит авторизация, подождите...");
+        console.log("Происходит авторизация, подождите...");
         return null;
     }
 

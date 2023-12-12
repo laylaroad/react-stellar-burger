@@ -7,8 +7,8 @@
   overflow-y: scroll;
   overflow-x: hidden;
   box-sizing: border-box;
-  max-height: calc(100vh - 50px);
-  max-width: 80%;
+  max-height: calc(100vh - 255px);
+  width: 70%;
 }
 
 .orders::-webkit-scrollbar {

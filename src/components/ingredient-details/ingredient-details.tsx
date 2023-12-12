@@ -1,22 +1,17 @@
 import styles from './ingredient-details.module.css';
+import { FC } from 'react';
 
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/react-redux';
 
-import { FC } from 'react';
 import { Ingredient } from '../../types/ingredient-types';
 import { selectIngredients } from '../../services/selectors/ingredientsSelector';
 
 const IngredientDetails: FC = () => {
 
     const { id } = useParams();
-    console.log(id);
-
     const ingredientsArray = useAppSelector(selectIngredients);
-    console.log(ingredientsArray);
-
     const ingredient = ingredientsArray.find((ingredient: Ingredient) => ingredient._id === id);
-    console.log(ingredient);
     if (!ingredient) return null;
 
     return (
