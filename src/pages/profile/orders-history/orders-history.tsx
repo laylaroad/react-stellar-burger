@@ -7,10 +7,9 @@ import { IOrder } from '../../../types/order-types';
 import { setCurrentOrder } from '../../../services/reducers/ordersFeedReducer';
 import { modalOpen } from '../../../services/reducers/modalReducer';
 import { selectAllOrders } from '../../../services/selectors/feedSelector';
-import { wsConnect } from '../../../services/reducers/wsActions';
+import { wsConnect, wsDisconnect } from '../../../services/reducers/wsActions';
 
 import { userOrdersWsApiPath } from '../../../utils/api';
-import { setWsConnection } from '../../../services/reducers/feedReducer';
 interface IOrdersHistoryProps {
     order?: IOrder | null;
 }
@@ -23,7 +22,7 @@ const OrdersHistory: FC<IOrdersHistoryProps> = ({ order }) => {
     useEffect(() => {
         dispatch(wsConnect(userOrdersWsApiPath));
         return () => {
-            dispatch(setWsConnection());
+            dispatch(wsDisconnect(userOrdersWsApiPath));
         };
     }, [location.pathname]);
 

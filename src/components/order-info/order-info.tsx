@@ -6,7 +6,7 @@ import { selectIngredients } from '../../services/selectors/ingredientsSelector'
 import { useAppSelector } from '../../hooks/react-redux';
 
 import { useAppDispatch } from '../../hooks/react-redux';
-import { wsConnect } from '../../services/reducers/wsActions';
+import { wsConnect, wsClose } from '../../services/reducers/wsActions';
 import { Ingredient } from '../../types/ingredient-types';
 import { IOrder } from '../../types/order-types';
 
@@ -28,7 +28,6 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal, wsApiPath }) => {
         !isModal && dispatch(wsConnect(wsApiPath));
     })
 
-    console.log(isModal);
 
     if (id && allOrders) {
         const currentOrder = allOrders.orders.find((order: IOrder) => { return order._id === id });

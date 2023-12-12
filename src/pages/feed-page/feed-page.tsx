@@ -13,7 +13,7 @@ import { setCurrentOrder } from "../../services/reducers/ordersFeedReducer";
 import { modalOpen } from '../../services/reducers/modalReducer';
 import { selectAllOrders } from '../../services/selectors/feedSelector';
 
-import { wsConnect } from '../../services/reducers/wsActions';
+import { wsConnect, wsDisconnect } from '../../services/reducers/wsActions';
 import { allOrdersWsApiPath } from '../../utils/api';
 
 interface IFeedPageProps {
@@ -29,7 +29,12 @@ const FeedPage: FC<IFeedPageProps> = ({ order }) => {
 
   useEffect(() => {
     dispatch(wsConnect(allOrdersWsApiPath));
-  })
+    return () => {
+      dispatch(wsDisconnect(allOrdersWsApiPath));
+    };
+  }, [location.pathname]);
+
+
 
   const modalOrderInfo = () => {
     dispatch(setCurrentOrder(order))
