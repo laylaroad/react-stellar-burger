@@ -32,8 +32,11 @@ export const socketMiddleware = (): Middleware<{}, RootStore> => {
 
                 socket.onmessage = (event) => {
                     const payload = JSON.parse(event.data);
-                    console.log(payload, 'получаем ответ от сервера');
-                    store.dispatch(setAllOrders(payload));
+                    if (payload.success) {
+                        store.dispatch(setAllOrders(payload));
+                    } else {
+                        console.log('error');
+                    }
                 };
 
                 socket.onclose = event => {
