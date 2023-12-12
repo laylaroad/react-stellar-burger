@@ -9,7 +9,7 @@ import { modalOpen } from '../../../services/reducers/modalReducer';
 import { selectAllOrders } from '../../../services/selectors/feedSelector';
 import { wsConnect } from '../../../services/reducers/wsActions';
 
-import { userOrdersWsUrl } from '../../../utils/api';
+import { userOrdersWsApiPath } from '../../../utils/api';
 import { setWsConnection } from '../../../services/reducers/feedReducer';
 interface IOrdersHistoryProps {
     order?: IOrder | null;
@@ -21,7 +21,7 @@ const OrdersHistory: FC<IOrdersHistoryProps> = ({ order }) => {
     const allOrders = useAppSelector(selectAllOrders);
 
     useEffect(() => {
-        dispatch(wsConnect(userOrdersWsUrl));
+        dispatch(wsConnect(userOrdersWsApiPath));
         return () => {
             dispatch(setWsConnection());
         };
@@ -61,8 +61,3 @@ const OrdersHistory: FC<IOrdersHistoryProps> = ({ order }) => {
 }
 
 export default OrdersHistory;
-
-// function order(order: any): { payload: any; type: "feed/setCurrentOrder"; } {
-//     throw new Error('Function not implemented.');
-// }
-

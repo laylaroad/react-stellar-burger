@@ -3,6 +3,7 @@ import { RootStore } from '../store';
 
 import * as actions from '../../services/reducers/wsActions';
 import { setAllOrders } from '../../services/reducers/feedReducer';
+import { wsApiHost } from '../../utils/api';
 
 export const socketMiddleware = (): Middleware<{}, RootStore> => {
 
@@ -17,7 +18,7 @@ export const socketMiddleware = (): Middleware<{}, RootStore> => {
                     socket.close();
                 }
                 const accessToken = localStorage.getItem("accessToken")?.split("Bearer ")[1];
-                const url = `${action.url}?token=${accessToken}`
+                const url = `${wsApiHost}${action.apiPath}?token=${accessToken}`
                 socket = new WebSocket(url);
 
                 socket.onopen = (event: any) => {

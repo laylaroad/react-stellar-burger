@@ -4,9 +4,9 @@ import { setAuthChecked, setUser } from "../services/reducers/userReducer";
 import { getUserData } from '../services/thunk/user-thunk';
 
 export const apiUrl = 'https://norma.nomoreparties.space/api';
-
-export const allOrdersWsUrl = 'wss://norma.nomoreparties.space/orders/all';
-export const userOrdersWsUrl = 'wss://norma.nomoreparties.space/orders';
+export const wsApiHost = 'wss://norma.nomoreparties.space'
+export const allOrdersWsApiPath = '/orders/all';
+export const userOrdersWsApiPath = '/orders';
 interface IRequestOptions extends RequestInit {
     headers: Record<string, string>;
 }

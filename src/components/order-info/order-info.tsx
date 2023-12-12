@@ -14,19 +14,18 @@ import { selectAllOrders } from '../../services/selectors/feedSelector';
 interface OrderInfoProps {
     status: boolean;
     isModal: boolean;
-    wsApiUrl: string;
+    wsApiPath: string;
 }
 
-const OrderInfo: FC<OrderInfoProps> = ({ status, isModal, wsApiUrl }) => {
+const OrderInfo: FC<OrderInfoProps> = ({ status, isModal, wsApiPath }) => {
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const ingredientsArray = useAppSelector(selectIngredients);
-
     const allOrders = useAppSelector(selectAllOrders);
 
     useEffect(() => {
         console.log('Connecting to WebSocket...');
-        !isModal && dispatch(wsConnect(wsApiUrl));
+        !isModal && dispatch(wsConnect(wsApiPath));
     })
 
     console.log(isModal);

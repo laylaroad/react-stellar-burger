@@ -21,7 +21,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 
 //protected-route
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
-import { checkUserAuth, allOrdersWsUrl, userOrdersWsUrl } from '../../utils/api';
+import { checkUserAuth, allOrdersWsApiPath, userOrdersWsApiPath } from '../../utils/api';
 
 import Modal from '../modal/modal';
 import { modalClose } from '../../services/reducers/modalReducer';
@@ -66,9 +66,9 @@ const App: FC = () => {
             <Route path="orders" element={<OrdersHistory />} />
           </Route>
           <Route path="feed" element={<FeedPage />} />
-          <Route path="feed/:id" element={<OrderInfo isModal={false} status={true} wsApiUrl={userOrdersWsUrl} />} />
+          <Route path="feed/:id" element={<OrderInfo isModal={false} status={true} wsApiPath={userOrdersWsApiPath} />} />
           <Route path="ingredients/:id" element={<IngredientPage />} />
-          <Route path="profile/orders/:id" element={<OnlyAuth component={<OrderInfo isModal={false} status={true} wsApiUrl={allOrdersWsUrl} />} />} />
+          <Route path="profile/orders/:id" element={<OnlyAuth component={<OrderInfo isModal={false} status={true} wsApiPath={allOrdersWsApiPath} />} />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
       </Routes>
@@ -93,7 +93,7 @@ const App: FC = () => {
             path="feed/:id"
             element={
               <Modal title="" onClose={onClose}>
-                <OrderInfo isModal={true} status={true} wsApiUrl={userOrdersWsUrl}
+                <OrderInfo isModal={true} status={true} wsApiPath={userOrdersWsApiPath}
                 />
               </Modal>
             }
@@ -102,7 +102,7 @@ const App: FC = () => {
             path="profile/orders/:id"
             element={
               <Modal title="" onClose={onClose}>
-                <OrderInfo isModal={true} status={true} wsApiUrl={allOrdersWsUrl}
+                <OrderInfo isModal={true} status={true} wsApiPath={allOrdersWsApiPath}
                 />
               </Modal>
             }

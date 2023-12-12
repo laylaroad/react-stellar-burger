@@ -14,7 +14,7 @@ import { modalOpen } from '../../services/reducers/modalReducer';
 import { selectAllOrders } from '../../services/selectors/feedSelector';
 
 import { wsConnect } from '../../services/reducers/wsActions';
-import { allOrdersWsUrl } from '../../utils/api';
+import { allOrdersWsApiPath } from '../../utils/api';
 
 interface IFeedPageProps {
   order?: IOrder | null;
@@ -28,7 +28,7 @@ const FeedPage: FC<IFeedPageProps> = ({ order }) => {
   const allOrders = useAppSelector(selectAllOrders);
 
   useEffect(() => {
-    dispatch(wsConnect(allOrdersWsUrl));
+    dispatch(wsConnect(allOrdersWsApiPath));
   })
 
   const modalOrderInfo = () => {
@@ -72,9 +72,3 @@ const FeedPage: FC<IFeedPageProps> = ({ order }) => {
 }
 
 export default FeedPage;
-
-
-// function order(order: any): { payload: any; type: "feed/setCurrentOrder"; } {
-//   throw new Error('Function not implemented.');
-// }
-

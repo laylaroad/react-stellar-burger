@@ -1,7 +1,7 @@
 
-export const wsConnect = (url: any) => ({ type: 'WS_CONNECT', url });
-export const wsDisconnect = (url: any) => ({ type: 'WS_DISCONNECT', url });
-export const wsDisconnected = (url: any) => ({ type: 'WS_DISCONNECTED', url });
-export const wsConnected = (url: any) => ({ type: 'WS_CONNECTED', url });
-export const wsError = (url: any) => ({ type: 'WS_ERROR', url });
-export const wsClose = (url: any) => ({ type: 'WS_CLOSE', url });
+export const wsConnect = (apiPath: string) => ({ type: 'WS_CONNECT', apiPath });
+export const wsDisconnect = (apiPath: string) => ({ type: 'WS_DISCONNECT', apiPath });
+export const wsDisconnected = (apiPath: string) => ({ type: 'WS_DISCONNECTED', apiPath });
+export const wsConnected = (apiPath: string) => ({ type: 'WS_CONNECTED', apiPath });
+export const wsError = (apiPath: string) => ({ type: 'WS_ERROR', apiPath });
+export const wsClose = (apiPath: string) => ({ type: 'WS_CLOSE', apiPath });
