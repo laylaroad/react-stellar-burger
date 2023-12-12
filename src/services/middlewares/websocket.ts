@@ -12,19 +12,20 @@ export const socketMiddleware = (): Middleware<{}, RootStore> => {
         const { dispatch } = store;
 
         switch (action.type) {
-
             case 'WS_CONNECT':
                 if (socket !== null) {
                     socket.close();
                 }
-                socket = new WebSocket(action.url);
+                const accessToken = localStorage.getItem("accessToken")?.split("Bearer ")[1];
+                const url = `${action.url}?token=${accessToken}`
+                socket = new WebSocket(url);
 
                 socket.onopen = (event: any) => {
                     console.log('websocket open', event.target.url);
                     store.dispatch(actions.wsConnected(event.target.url));
                 };
 
-                socket.onerror = () => {
+                socket.onerror = (err) => {
                     console.log('error')
                 };
 
@@ -36,7 +37,7 @@ export const socketMiddleware = (): Middleware<{}, RootStore> => {
 
                 socket.onclose = event => {
                     if (event.code !== 1000) {
-                        dispatch(actions.wsError(event.code.toString()));
+                        dispatch(actions.wsClose(event.code.toString()));
                     }
                 };
 

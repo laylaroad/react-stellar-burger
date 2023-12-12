@@ -11,21 +11,24 @@ import OrderSummary from '../../components/order-summary/order-summary';
 import { IOrder } from '../../types/order-types';
 import { setCurrentOrder } from "../../services/reducers/ordersFeedReducer";
 import { modalOpen } from '../../services/reducers/modalReducer';
+import { selectAllOrders } from '../../services/selectors/feedSelector';
 
 import { wsConnect } from '../../services/reducers/wsActions';
-import { wsUrl } from '../../utils/api';
+import { allOrdersWsUrl } from '../../utils/api';
 
+interface IFeedPageProps {
+  order?: IOrder | null;
+}
 
-const FeedPage: FC = () => {
+const FeedPage: FC<IFeedPageProps> = ({ order }) => {
 
   const dispatch = useAppDispatch();
   const location = useLocation();
 
-  const selectAllOrders = (store: any) => store.feedApi.allOrders;
   const allOrders = useAppSelector(selectAllOrders);
 
   useEffect(() => {
-    dispatch(wsConnect(wsUrl));
+    dispatch(wsConnect(allOrdersWsUrl));
   })
 
   const modalOrderInfo = () => {
@@ -46,7 +49,7 @@ const FeedPage: FC = () => {
                 style={{ textDecoration: 'none' }}
                 state={{ background: location }}
                 to={`${order._id}`}
-                onClick={(e: any) => {
+                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                   modalOrderInfo();
                 }}
                 key={order._id}
@@ -70,11 +73,8 @@ const FeedPage: FC = () => {
 
 export default FeedPage;
 
-function RootStore(RootStore: any): null {
-  throw new Error('Function not implemented.');
-}
 
-function order(order: any): { payload: any; type: "feed/setCurrentOrder"; } {
-  throw new Error('Function not implemented.');
-}
+// function order(order: any): { payload: any; type: "feed/setCurrentOrder"; } {
+//   throw new Error('Function not implemented.');
+// }
 

@@ -1,12 +1,12 @@
 import styles from './order-summary.module.css';
 import { FC } from 'react'
 import { useAppSelector } from '../../hooks/react-redux';
+import { selectAllOrders } from '../../services/selectors/feedSelector';
 
 import { IOrder } from '../../types/order-types';
 
 const OrderSummary: FC = () => {
 
-    const selectAllOrders = (store: any) => store.feedApi.allOrders;
     const allOrders = useAppSelector(selectAllOrders);
 
     const getReadyNumbers = allOrders?.orders.filter((item: IOrder) => item.status === 'done')

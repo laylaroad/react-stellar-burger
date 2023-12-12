@@ -5,8 +5,8 @@ import { getUserData } from '../services/thunk/user-thunk';
 
 export const apiUrl = 'https://norma.nomoreparties.space/api';
 
-export const wssUrl = "wss://norma.nomoreparties.space";
-export const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
+export const allOrdersWsUrl = 'wss://norma.nomoreparties.space/orders/all';
+export const userOrdersWsUrl = 'wss://norma.nomoreparties.space/orders';
 interface IRequestOptions extends RequestInit {
     headers: Record<string, string>;
 }

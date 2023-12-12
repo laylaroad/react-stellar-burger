@@ -1,7 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IOrders } from '../../types/order-types';
+interface feedApiState {
+    allOrders: IOrders | null,
+    wsConnection: boolean,
+}
 
-const initialState = {
+const initialState: feedApiState = {
     allOrders: null,
+    wsConnection: true,
 }
 
 const feedSlice = createSlice({
@@ -11,9 +17,12 @@ const feedSlice = createSlice({
         setAllOrders: (state, action: PayloadAction<any>) => {
             state.allOrders = action.payload;
         },
+        setWsConnection: (state) => {
+            state.wsConnection = false;
+        }
     },
 });
 
-export const { setAllOrders } = feedSlice.actions;
+export const { setAllOrders, setWsConnection } = feedSlice.actions;
 
 export default feedSlice.reducer;

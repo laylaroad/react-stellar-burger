@@ -1,25 +1,31 @@
 import styles from './orders-history.module.css';
 import { FC, useEffect } from 'react';
-import { Link, useLocation, NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Order from '../../../components/order/order';
 import { useAppDispatch, useAppSelector } from '../../../hooks/react-redux';
 import { IOrder } from '../../../types/order-types';
 import { setCurrentOrder } from '../../../services/reducers/ordersFeedReducer';
 import { modalOpen } from '../../../services/reducers/modalReducer';
-
+import { selectAllOrders } from '../../../services/selectors/feedSelector';
 import { wsConnect } from '../../../services/reducers/wsActions';
 
-const OrdersHistory: FC = () => {
+import { userOrdersWsUrl } from '../../../utils/api';
+import { setWsConnection } from '../../../services/reducers/feedReducer';
+interface IOrdersHistoryProps {
+    order?: IOrder | null;
+}
+
+const OrdersHistory: FC<IOrdersHistoryProps> = ({ order }) => {
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const accessToken = localStorage.getItem("accessToken")?.split("Bearer ")[1];
-
-    const selectAllOrders = (store: any) => store.feedApi.allOrders;
     const allOrders = useAppSelector(selectAllOrders);
 
     useEffect(() => {
-        dispatch(wsConnect(`wss://norma.nomoreparties.space/orders?token=${accessToken}`));
-    })
+        dispatch(wsConnect(userOrdersWsUrl));
+        return () => {
+            dispatch(setWsConnection());
+        };
+    }, [location.pathname]);
 
     const modalOrderInfo = () => {
         dispatch(setCurrentOrder(order))
@@ -36,7 +42,7 @@ const OrdersHistory: FC = () => {
                             style={{ textDecoration: 'none' }}
                             state={{ background: location }}
                             to={`${order._id}`}
-                            onClick={(e: any) => {
+                            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                                 modalOrderInfo();
                             }}
                             key={order._id}
@@ -56,7 +62,7 @@ const OrdersHistory: FC = () => {
 
 export default OrdersHistory;
 
-function order(order: any): { payload: any; type: "feed/setCurrentOrder"; } {
-    throw new Error('Function not implemented.');
-}
+// function order(order: any): { payload: any; type: "feed/setCurrentOrder"; } {
+//     throw new Error('Function not implemented.');
+// }
 

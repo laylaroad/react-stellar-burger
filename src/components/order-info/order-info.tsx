@@ -10,32 +10,29 @@ import { wsConnect } from '../../services/reducers/wsActions';
 import { Ingredient } from '../../types/ingredient-types';
 import { IOrder } from '../../types/order-types';
 
-import { selectCurrentOrder } from '../../services/selectors/ordersFeedSelector';
-
-import { setAllOrders } from '../../services/reducers/feedReducer';
-
+import { selectAllOrders } from '../../services/selectors/feedSelector';
 interface OrderInfoProps {
     status: boolean;
     isModal: boolean;
+    wsApiUrl: string;
 }
 
-const OrderInfo: FC<OrderInfoProps> = ({ status, isModal }) => {
+const OrderInfo: FC<OrderInfoProps> = ({ status, isModal, wsApiUrl }) => {
     const { id } = useParams();
     const dispatch = useAppDispatch();
-    const location = useLocation();
     const ingredientsArray = useAppSelector(selectIngredients);
-    const getSelectCurrentOrder = useAppSelector(selectCurrentOrder);
-    // console.log(getSelectCurrentOrder);
-    const selectAllOrders = (store: any) => store.feedApi.allOrders;
+
     const allOrders = useAppSelector(selectAllOrders);
 
     useEffect(() => {
-        // console.log('Connecting to WebSocket...');
-        dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'));
+        console.log('Connecting to WebSocket...');
+        !isModal && dispatch(wsConnect(wsApiUrl));
     })
 
+    console.log(isModal);
+
     if (id && allOrders) {
-        const currentOrder = allOrders.orders.find((order: any) => { return order._id === id });
+        const currentOrder = allOrders.orders.find((order: IOrder) => { return order._id === id });
 
         const orderIngredients = currentOrder.ingredients.map((ingredientId: string) => {
             return ingredientsArray.find((ingredient: Ingredient) => ingredient._id === ingredientId);

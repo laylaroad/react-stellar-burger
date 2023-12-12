@@ -25,12 +25,10 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ onlyUnAuth = false, component
     const location = useLocation();
 
     if (!isAuthChecked) {
-        console.log("Происходит авторизация, подождите...");
         return null;
     }
 
     if (onlyUnAuth && user) {
-        console.log("Пользователь не авторизован");
         const { from } = location.state || { from: { pathname: "/" } };
         return <Navigate to={from} />;
     }
