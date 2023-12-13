@@ -2,6 +2,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { request, checkResponse } from '../../utils/api';
+import { setUser, setAuthChecked } from '../reducers/userReducer';
 
 export const fetchForgotPass = createAsyncThunk(
     "auth/fetchForgotPass",
@@ -35,7 +36,7 @@ export const fetchResetPass = createAsyncThunk(
 
 export const login = createAsyncThunk(
     'auth/login',
-    async ({ email, password }: { email: string; password: string }) => {
+    async ({ email, password }: { email: string; password: string }, { dispatch }) => {
         const res = await fetchWithRefresh('auth/login', {
             method: "POST",
             headers: {
@@ -53,6 +54,9 @@ export const login = createAsyncThunk(
         if (data.success) {
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
+            dispatch(setUser(data.user));
+            console.log(data);
+            dispatch(setAuthChecked(true));
         } else {
             return Promise.reject("Ошибка данных с сервера");
         }
@@ -99,7 +103,8 @@ export const getUserData = createAsyncThunk(
             },
         });
 
-        const data = await checkResponse(res);
+        const data = res;
+
 
         if (data.success) {
             return data;
@@ -204,6 +209,3 @@ export const fetchWithRefresh = async (endpoint: string, options: any) => {
         }
     }
 };
-
-
-

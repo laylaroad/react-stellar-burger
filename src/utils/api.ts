@@ -1,5 +1,6 @@
 
 import { setAuthChecked, setUser } from "../services/reducers/userReducer";
+import { AppDispatch } from "../services/store";
 
 import { getUserData } from '../services/thunk/user-thunk';
 
@@ -29,7 +30,7 @@ export async function fetchIngredients() {
 
 
 export const checkUserAuth = () => {
-    return (dispatch: any) => {
+    return (dispatch: AppDispatch) => {
         if (localStorage.getItem("accessToken")) {
             dispatch(getUserData())
                 .catch((error: any) => {
@@ -44,3 +45,4 @@ export const checkUserAuth = () => {
         }
     };
 };
+

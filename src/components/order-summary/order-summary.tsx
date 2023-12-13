@@ -31,7 +31,7 @@ const OrderSummary: FC = () => {
                 </div>
                 <div className={styles.orders_column}>
                     <h4 className="text text_type_main-medium">В работе:</h4>
-                    <ul className="text_type_digits-default">
+                    <ul className={`${styles.orders_in_work} text_type_digits-default`}>
                         {getInProcessNumbers?.map((item: IOrder) => (
                             <li key={item._id}
                                 className={styles.order_in_process_numbers}> {item.number}</li>

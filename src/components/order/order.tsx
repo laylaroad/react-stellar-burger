@@ -36,7 +36,7 @@ const Order: FC<IOrderProps> = ({ order, showOrderStatus, status }) => {
   return (
     <>
       <ul className={styles.order_list}>
-        <li key={orderId} className={styles.card_order}>
+        <li className={styles.card_order}>
           <div className={styles.card_header}>
             <p className="text text_type_digits-default">
               #{order.number}
