@@ -33,22 +33,28 @@ const OrdersHistory: FC<IOrdersHistoryProps> = ({ order }) => {
 
 
     if (allOrders) {
+        const sortedOrders = allOrders.orders.toSorted((a: any, b: any) => {
+            const dateA = new Date(a.createdAt) as any;
+            const dateB = new Date(b.createdAt) as any;
+            return dateB - dateA;
+        });
+
         return (
             <section className={styles.feed}>
                 <ul className={styles.orders}>
-                    {allOrders.orders.map((order: IOrder) => (
+                    {sortedOrders.map((order: IOrder) => (
                         <Link
-                            style={{ textDecoration: 'none' }}
+                            className={styles.link}
                             state={{ background: location }}
                             to={`${order._id}`}
-                            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                            onClick={(e) => {
                                 modalOrderInfo();
                             }}
                             key={order._id}
                         >
-                            <li>
-                                <Order key={order._id} order={order} status={order.status} showOrderStatus={true} />
-                            </li>
+
+                            <Order key={order._id} order={order} status={order.status} showOrderStatus={true} />
+
                         </Link>
                     ))}
                 </ul>

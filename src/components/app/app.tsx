@@ -29,9 +29,6 @@ import { modalClose } from '../../services/reducers/modalReducer';
 import { selectIngredientsIsLoading } from '../../services/selectors/ingredientsSelector';
 import { getIngredientsData } from '../../services/reducers/ingredientsReducer';
 
-
-
-
 const App: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -39,15 +36,12 @@ const App: FC = () => {
   const background = location.state && location.state.background;
   const isLoading = useAppSelector(selectIngredientsIsLoading);
 
-
   useEffect(() => {
     dispatch(checkUserAuth());
-
     dispatch(getIngredientsData());
   }, [dispatch]);
 
   const onClose = () => {
-
     dispatch(modalClose())
     navigate(-1);
   };

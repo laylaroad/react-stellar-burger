@@ -51,17 +51,15 @@ const FeedPage: FC<IFeedPageProps> = ({ order }) => {
           <ul className={styles.order_column}>
             {allOrders.orders.map((order: IOrder) => (
               <Link
-                style={{ textDecoration: 'none' }}
+                className={styles.link}
                 state={{ background: location }}
                 to={`${order._id}`}
-                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                onClick={(e) => {
                   modalOrderInfo();
                 }}
                 key={order._id}
               >
-                <li>
-                  <Order key={order._id} order={order} />
-                </li>
+                <Order key={order._id} order={order} />
               </Link>
             ))}
           </ul>
