@@ -66,9 +66,9 @@ const App: FC = () => {
             <Route path="orders" element={<OrdersHistory />} />
           </Route>
           <Route path="feed" element={<FeedPage />} />
-          <Route path="feed/:id" element={<OrderInfo isModal={false} status={true} wsApiPath={userOrdersWsApiPath} />} />
+          <Route path="feed/:id" element={<OrderInfo isModal={false} status={true} wsApiPath={allOrdersWsApiPath} />} />
           <Route path="ingredients/:id" element={<IngredientPage />} />
-          <Route path="profile/orders/:id" element={<OnlyAuth component={<OrderInfo isModal={false} status={true} wsApiPath={allOrdersWsApiPath} />} />} />
+          <Route path="profile/orders/:id" element={<OnlyAuth component={<OrderInfo isModal={false} status={true} wsApiPath={userOrdersWsApiPath} />} />} />
           <Route path="*" element={<NotFound404 />} />
         </Route>
       </Routes>
