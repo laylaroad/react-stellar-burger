@@ -1,0 +1,144 @@
+.modal_window {
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  max-width: 100%;
+  min-height: 254px;
+  margin-bottom: 24px;
+  max-height: 110%;
+}
+
+.order_window {
+  margin-top: 20px;
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  text-align: center;
+}
+
+.order_name {
+  margin-top: 20px;
+  max-width: 90%;
+  text-align: start;
+  margin-left: 40px;
+}
+
+.order_status {
+  margin-top: 8px;
+  color: var(--interface-success, #0cc);
+  margin-bottom: 40px;
+  width: 50%;
+  text-align: start;
+  margin-left: 40px;
+}
+
+.composition {
+  width: 50%;
+  text-align: start;
+  margin-left: 40px;
+}
+
+.ingredient_name {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  width: 69%;
+  word-wrap: break-word;
+}
+
+.order_composition {
+  list-style: none;
+  padding-right: 20px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  max-height: calc(100vh - 556px);
+  overflow: auto;
+  width: 100%;
+  align-items: center;
+}
+
+.modal_number {
+  text-align: start;
+  margin-left: 30px;
+}
+
+.number {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.order_composition::-webkit-scrollbar {
+  width: 8px;
+}
+
+.order_composition::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.order_composition::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.order_footer {
+  display: flex;
+  justify-content: stretch;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 180px;
+  margin-top: 40px;
+}
+
+.order_sum {
+  display: flex;
+  align-content: space-between;
+  justify-content: flex-end;
+  flex-direction: row;
+  gap: 8px;
+  width: 120%;
+  padding-bottom: 55px;
+}
+
+.div_image {
+  display: flex;
+  width: 64px;
+  height: 64px;
+  padding: 4px 4px;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  border: 2px solid var(--button-normal, #801ab2);
+  background: var(--interface-bg, #131316);
+}
+
+.image {
+  width: 112px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.order_li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.time {
+  display: flex;
+  width: 100%;
+  margin-left: 35px;
+  margin-top: 16px;
+}

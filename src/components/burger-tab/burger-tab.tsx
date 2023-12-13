@@ -1,8 +1,6 @@
-
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-tab.module.css';
-
-import {FC} from 'react';
+import { FC } from 'react';
 
 interface BurgerTabProps {
   current: string,

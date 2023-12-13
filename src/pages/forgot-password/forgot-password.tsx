@@ -1,14 +1,15 @@
-import React, { useState, FC, ChangeEvent, FormEvent } from 'react';
+import { useState, FC, ChangeEvent, FormEvent } from 'react';
 import styles from './forgot-password.module.css';
-import { useDispatch } from 'react-redux';
+
 import { useNavigate, Link } from 'react-router-dom';
 import { fetchForgotPass } from '../../services/thunk/user-thunk';
 import { setEmailChecked } from '../../services/reducers/userReducer';
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useAppDispatch } from '../../hooks/react-redux';
 
 const ForgotPassword: FC = () => {
   const [email, setEmail] = useState<string>('');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,8 +19,7 @@ const ForgotPassword: FC = () => {
   const handleToRestorePass = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-        //@ts-ignore
-      dispatch(fetchForgotPass(email));
+      dispatch(fetchForgotPass());
       dispatch(setEmailChecked(true));
       navigate('/reset-password');
     } catch (error) {
@@ -39,11 +39,11 @@ const ForgotPassword: FC = () => {
           name={'email'}
           isIcon={false}
         />
-        <Button 
-        disabled={!email}
-        htmlType="submit" 
-        type="primary" 
-        size="large">
+        <Button
+          disabled={!email}
+          htmlType="submit"
+          type="primary"
+          size="large">
           Восстановить
         </Button>
       </form>

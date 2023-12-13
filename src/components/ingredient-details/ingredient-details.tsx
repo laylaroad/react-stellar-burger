@@ -1,13 +1,18 @@
 import styles from './ingredient-details.module.css';
-
 import { FC } from 'react';
-import { Ingredient } from '../../utils/ingredient-types';
 
-interface IngredientDetailsProps {
-    ingredient: Ingredient;
-  }
-  
-  const IngredientDetails: FC<IngredientDetailsProps> = ({ ingredient }) => {
+import { useParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/react-redux';
+
+import { Ingredient } from '../../types/ingredient-types';
+import { selectIngredients } from '../../services/selectors/ingredientsSelector';
+
+const IngredientDetails: FC = () => {
+
+    const { id } = useParams();
+    const ingredientsArray = useAppSelector(selectIngredients);
+    const ingredient = ingredientsArray.find((ingredient: Ingredient) => ingredient._id === id);
+    if (!ingredient) return null;
 
     return (
         <section className={`${styles.ingredient_section}`}>
@@ -37,6 +42,6 @@ interface IngredientDetailsProps {
             </ul>
         </section>
     );
-  }
+}
 
 export default IngredientDetails;

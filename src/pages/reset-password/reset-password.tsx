@@ -1,86 +1,64 @@
+import React, { useState, FC, ChangeEvent, FormEvent } from 'react';
 import styles from './reset-password.module.css';
-
-import { FC, FormEvent, ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { fetchForgotPass } from '../../services/thunk/user-thunk';
+import { setEmailChecked } from '../../services/reducers/userReducer';
+import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { fetchResetPass } from '../../services/thunk/user-thunk';
-
-import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-
-import { Link } from 'react-router-dom';
-
-const ResetPassword: FC = () => {
-
+const ForgotPassword: FC = () => {
+    const [email, setEmail] = useState<string>('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [password, setPassword] = useState('');
-    const [token, setToken] = useState('');
 
-    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
+    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value);
     };
 
-    const handleToken = (event: ChangeEvent<HTMLInputElement>) => {
-        setToken(event.target.value);
-    };
-
-    const handletoRestorePass = async (e: FormEvent) => {
+    const handleToRestorePass = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             //@ts-ignore
-            dispatch(fetchResetPass({ password, token }));
-            navigate('/login');
+            dispatch(fetchForgotPass(email));
+            dispatch(setEmailChecked(true));
+            navigate('/reset-password');
         } catch (error) {
             console.error('Ошибка', error);
         }
     };
 
     return (
-        <section className={styles.reset_password}>
-            <h2 className={`${styles.reset_password_title} text text_type_main-medium`}>Восстановление пароля</h2>
-            <form className={styles.form}
-                onSubmit={handletoRestorePass}>
-                <PasswordInput
-                    onChange={handlePasswordChange}
-                    value={password}
-                    name={'password'}
-                    icon={'ShowIcon'}
-                      //@ts-ignore
-                    error={false}
-                    placeholder={'Введите новый пароль'}
-                    extraClass="mb-2"
+        <section className={styles.forgot_password}>
+            <h2 className={`${styles.forgot_password_title} text text_type_main-medium`}>
+                Восстановление пароля
+            </h2>
+            <form className={styles.form} onSubmit={handleToRestorePass}>
+                <EmailInput
+                    onChange={handleEmailChange}
+                    value={email}
+                    name={'email'}
+                    isIcon={false}
                 />
-
-                <Input
-                    type={'text'}
-                    error={false}
-                    placeholder={'Введите код из письма'}
-                    value={token}
-                    onChange={handleToken}
-                    extraClass="mb-2" />
-
-
-                <Button 
-                disabled={!token}
-                htmlType="submit"
+                <Button
+                    disabled={!email}
+                    htmlType="submit"
                     type="primary"
                     size="large">
-
-                    Сохранить
+                    Восстановить
                 </Button>
             </form>
-            <p className={`${styles.reset_password_paragraph} text_type_main-default text_color_inactive`}>Вспомнили пароль?{''}
+            <p
+                className={`${styles.forgot_password_paragraph} text_type_main-default text_color_inactive`}
+            >
+                Вспомнили пароль?
                 <Link to={'/login'}>
-
                     <Button htmlType="button" type="secondary" size="medium">
                         Войти
                     </Button>
                 </Link>
             </p>
         </section>
+    );
+};
 
-    )
-}
-
-export default ResetPassword;
+export default ForgotPassword;

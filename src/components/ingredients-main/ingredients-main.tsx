@@ -1,9 +1,8 @@
 import styles from './ingredients-main.module.css';
-import {FC} from 'react';
-
+import { FC } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../hooks/react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 
 import { selectBurgerIngredients } from '../../services/selectors/burgerConstructorSelector';
@@ -11,7 +10,7 @@ import { selectBurgerIngredients } from '../../services/selectors/burgerConstruc
 import { moveIngredient } from '../../services/reducers/burgerConstructorReducer';
 import { deleteIngredient } from '../../services/reducers/burgerConstructorReducer';
 
-import {Ingredient, IngredientId} from '../../utils/ingredient-types';
+import { IngredientId } from '../../types/ingredient-types';
 
 interface IngredientMainProps {
 
@@ -21,8 +20,8 @@ interface IngredientMainProps {
 
 const IngredientsMain: FC<IngredientMainProps> = ({ item, index }) => {
 
-    const mains = useSelector(selectBurgerIngredients) as Array<IngredientId>;
-    const dispatch = useDispatch();
+    const mains = useAppSelector(selectBurgerIngredients) as Array<IngredientId>;
+    const dispatch = useAppDispatch();
 
     const [{ isDragging }, dragRef] = useDrag({
         type: 'sort',
@@ -32,7 +31,7 @@ const IngredientsMain: FC<IngredientMainProps> = ({ item, index }) => {
         })
     });
 
-    const findIndex = (item:IngredientId ) => {
+    const findIndex = (item: IngredientId) => {
         return mains.indexOf(item);
     }
 
@@ -42,7 +41,7 @@ const IngredientsMain: FC<IngredientMainProps> = ({ item, index }) => {
 
     const [, dropRef] = useDrop({
         accept: 'sort',
-        hover({ ingredient }:{ingredient: IngredientId}):void {
+        hover({ ingredient }: { ingredient: IngredientId }): void {
             if (ingredient._customId === item._customId)
                 return;
             dispatch(
@@ -60,7 +59,6 @@ const IngredientsMain: FC<IngredientMainProps> = ({ item, index }) => {
 
             <DragIcon type="primary" />
             <ConstructorElement
-                // key={index._id}
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}

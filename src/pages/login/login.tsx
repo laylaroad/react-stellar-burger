@@ -1,8 +1,6 @@
 import styles from './login.module.css';
-
 import { useState, FC, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
 
 import { login } from '../../services/thunk/user-thunk';
 import { setAuthChecked } from '../../services/reducers/userReducer';
@@ -10,10 +8,11 @@ import { setAuthChecked } from '../../services/reducers/userReducer';
 import { EmailInput, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/react-redux';
 
 const Login: FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,14 +20,13 @@ const Login: FC = () => {
     const onChangeEmail = (evt: ChangeEvent<HTMLInputElement>) => {
         setEmail(evt.target.value);
     };
-    const onChangePass = (evt: ChangeEvent<HTMLInputElement> ) => {
+    const onChangePass = (evt: ChangeEvent<HTMLInputElement>) => {
         setPassword(evt.target.value);
     };
 
-    const handleLogin = async (e: FormEvent ) => {
+    const handleLogin = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            //@ts-ignore
             dispatch(login({ email, password }));
             dispatch(setAuthChecked(true))
             navigate('/');
@@ -62,7 +60,7 @@ const Login: FC = () => {
 
 
                 <Button
-                 disabled={!password}
+                    disabled={!password}
                     htmlType="submit"
                     type="primary"
                     size="large">
@@ -73,8 +71,8 @@ const Login: FC = () => {
                     <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Вы – новый пользователь?{''}
                         <Link to={'/register'}>
 
-                            <Button 
-                            htmlType="button"
+                            <Button
+                                htmlType="button"
                                 type="secondary"
                                 size="medium">
                                 Зарегистрироваться
@@ -85,8 +83,8 @@ const Login: FC = () => {
                     <p className={`${styles.text_login} text_type_main-default text_color_inactive`}>Забыли пароль?{''}
                         <Link to={'/forgot-password'}>
 
-                            <Button 
-                            htmlType="button"
+                            <Button
+                                htmlType="button"
                                 type="secondary"
                                 size="medium">
                                 Восстановить пароль

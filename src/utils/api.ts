@@ -1,13 +1,16 @@
 
 import { setAuthChecked, setUser } from "../services/reducers/userReducer";
+import { AppDispatch } from "../services/store";
 
 import { getUserData } from '../services/thunk/user-thunk';
 
 export const apiUrl = 'https://norma.nomoreparties.space/api';
-
+export const wsApiHost = 'wss://norma.nomoreparties.space'
+export const allOrdersWsApiPath = '/orders/all';
+export const userOrdersWsApiPath = '/orders';
 interface IRequestOptions extends RequestInit {
     headers: Record<string, string>;
-  }
+}
 
 export function checkResponse(res: Response) {
     if (res.ok) {
@@ -26,9 +29,8 @@ export async function fetchIngredients() {
 };
 
 
-
 export const checkUserAuth = () => {
-    return (dispatch: any) => {
+    return (dispatch: AppDispatch) => {
         if (localStorage.getItem("accessToken")) {
             dispatch(getUserData())
                 .catch((error: any) => {
@@ -43,3 +45,4 @@ export const checkUserAuth = () => {
         }
     };
 };
+

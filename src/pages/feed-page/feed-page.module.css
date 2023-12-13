@@ -1,0 +1,40 @@
+.feed {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  margin-left: 60px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.order_column {
+  list-style: none;
+  padding-left: 0;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 104px);
+  overflow-y: auto;
+}
+
+.summary_column {
+  width: 49%;
+}
+
+.order_column::-webkit-scrollbar {
+  width: 8px;
+  background-color: #2f2f37;
+}
+
+.order_column::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.link {
+  text-decoration: none;
+}
