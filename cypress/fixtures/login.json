@@ -1,0 +1,9 @@
+{
+  "accessToken": "Bearer 345679q011",
+  "refreshToken": "1929399651",
+  "success": true,
+  "user": {
+    "email": "userget@mail.com",
+    "name": "username"
+  }
+}
