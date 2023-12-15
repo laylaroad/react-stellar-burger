@@ -13,6 +13,7 @@ describe('burger-constructor', function () {
     })
 
     it('add ingredients, authorize & create order', () => {
+        //checking the ingredients assertion
         cy.contains('Соберите бургер').should('exist');
         cy.get('[class^=burger-tab_burger_tab__]').should('exist');
         cy.get('[class^=burger-ingredients_container__]').should('exist');
@@ -24,6 +25,7 @@ describe('burger-constructor', function () {
 
         cy.get('[class^=burger-creating_burger_wrapper__]').as('constructor')
 
+        //dnd assertion
         cy.get('@bun').trigger('dragstart');
         cy.get('@constructor').trigger('drop');
         cy.get('@constructor').contains('булка').should('exist');
@@ -43,6 +45,7 @@ describe('burger-constructor', function () {
             expect(location.pathname).to.equal('/login');
         });
 
+        //authorization assertion
         cy.contains('Вход').should('exist');
         cy.get('button').contains('Войти').as('loginButton').should('be.disabled');
         cy.get('[class^=login_form__]').as('login_form').should('exist');
@@ -61,32 +64,41 @@ describe('burger-constructor', function () {
         cy.location().should((location) => {
             expect(location.pathname).to.equal('/');
         });
+
+        //making the order assertion
+        cy.get('@makeOrderButton').should('exist');
+        cy.intercept('POST', 'https://norma.nomoreparties.space/api/orders', { fixture: 'order.json' });
+        cy.get('@makeOrderButton').click();
+        cy.get('[class^=modal_modal__]').should('exist');
+        cy.get('[class^=modal_modal_card__]').should('exist');
+        cy.get('[class^=order-details_order_section__]').should('exist');
+        cy.get('[class^=order-details_order_number__]').should('exist');
+        cy.contains('Ваш заказ начали готовить').should('exist');
+        cy.get('[class^=modal_close_button__]').click();
     })
 
-
-    //     cy.get('button').contains('Войти').as('loginButton');
-    //     cy.get('@loginButton').should('exist');
-    //     cy.get('@loginButton').click();
-    //     cy.get('@loginButton').click();
-    //     cy.location().should((location) => {
-    //         expect(location.pathname).to.equal('/');
-    //     });
-    //     cy.get('@makeOrderButton').should('exist');
-    //     cy.get('@makeOrderButton').click();
-    //     cy.get('@makeOrderButton').click();
-    //     cy.get('.modal_modal__4TXNT').should('exist');
-    //     cy.get('.modal_modal_card__RkCwF').should('exist');
-    //     cy.wait(15000);
-    //     cy.get('.order-details_order_number__DUVCO').should('exist');
-    //     cy.get('body').type('{esc}');
-
-    //     cy.get('.burger-tab_burger_tab__Q47Gx').should('exist');
-    //     cy.get('[href="/ingredients/643d69a5c3f7b9001cfa093c"]').should('exist');
-    //     cy.get('[href="/ingredients/643d69a5c3f7b9001cfa093c"]').click();
-    //     cy.get(':nth-child(2) > .modal_modal__4TXNT').should('exist');
-    //     cy.get(':nth-child(2) > .modal_modal__4TXNT > .modal_modal_card__RkCwF > .modal_modal_title__f8R9L').should('exist');
-    //     cy.get('.ingredient-details_ingredient_image__Is5fK').should('exist');
-    //     cy.get('body').type('{esc}');
-    // });
+    //modal ingredients opening assertion
+    it('opening ingredients modal', () => {
+        cy.get('[class^=burger-ingredients_container__]').should('exist');
+        cy.contains('булка').should('exist').as('bun').find('[class^=ingredient-item_ingredient_name__]').should('exist');
+        cy.get('@bun').click();
+        cy.location().should((location) => {
+            expect(location.pathname).to.match(/^\/ingredients\/\w+$/);
+        });
+        cy.get('[class^=modal_modal__]').should('exist');
+        cy.get('[class^=modal_modal_card__]').should('exist');
+        cy.contains('Детали ингредиента').should('exist');
+        cy.get('[class^=modal_close_button__]').should('exist');
+        cy.get('[class^=ingredient-details_ingredient_section__]').should('exist');
+        cy.get('[class^=ingredient-details_ingredient_title__]').should('exist');
+        cy.reload(true);
+        cy.location().should((location) => {
+            expect(location.pathname).to.match(/^\/ingredients\/\w+$/);
+        });
+        cy.get('[class^=modal_close_button__]').click();
+        cy.location().should((location) => {
+            expect(location.pathname).to.eq('/');
+        });
+    })
 });
 
