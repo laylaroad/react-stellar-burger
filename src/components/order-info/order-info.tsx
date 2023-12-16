@@ -6,7 +6,7 @@ import { selectIngredients } from '../../services/selectors/ingredientsSelector'
 import { useAppSelector } from '../../hooks/react-redux';
 
 import { useAppDispatch } from '../../hooks/react-redux';
-import { wsConnect, wsClose } from '../../services/reducers/wsActions';
+import { wsConnect, wsClose } from '../../services/websocket/wsActions';
 import { Ingredient } from '../../types/ingredient-types';
 import { IOrder } from '../../types/order-types';
 

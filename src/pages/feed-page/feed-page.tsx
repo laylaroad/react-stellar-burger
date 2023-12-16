@@ -12,7 +12,7 @@ import { IOrder } from '../../types/order-types';
 import { modalOpen } from '../../services/reducers/modalReducer';
 import { selectAllOrders } from '../../services/selectors/feedSelector';
 
-import { wsConnect, wsDisconnect } from '../../services/reducers/wsActions';
+import { wsConnect, wsDisconnect } from '../../services/websocket/wsActions';
 import { allOrdersWsApiPath } from '../../utils/api';
 
 

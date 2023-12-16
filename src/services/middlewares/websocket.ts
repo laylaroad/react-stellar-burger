@@ -1,7 +1,7 @@
 import { Middleware } from 'redux';
 import { RootStore } from '../store';
 
-import * as actions from '../../services/reducers/wsActions';
+import * as actions from '../websocket/wsActions';
 import { setAllOrders } from '../../services/reducers/feedReducer';
 import { wsApiHost } from '../../utils/api';
 
