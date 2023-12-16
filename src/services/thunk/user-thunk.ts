@@ -103,7 +103,6 @@ export const getUserData = createAsyncThunk(
         });
 
         const data = res;
-        console.log(data);
 
         if (data.success) {
             return data;

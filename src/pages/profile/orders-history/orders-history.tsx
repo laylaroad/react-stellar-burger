@@ -4,17 +4,13 @@ import { Link, useLocation } from 'react-router-dom';
 import Order from '../../../components/order/order';
 import { useAppDispatch, useAppSelector } from '../../../hooks/react-redux';
 import { IOrder } from '../../../types/order-types';
-import { setCurrentOrder } from '../../../services/reducers/ordersFeedReducer';
 import { modalOpen } from '../../../services/reducers/modalReducer';
 import { selectAllOrders } from '../../../services/selectors/feedSelector';
 import { wsConnect, wsDisconnect } from '../../../services/reducers/wsActions';
 
 import { userOrdersWsApiPath } from '../../../utils/api';
-interface IOrdersHistoryProps {
-    order?: IOrder | null;
-}
 
-const OrdersHistory: FC<IOrdersHistoryProps> = ({ order }) => {
+const OrdersHistory: FC = () => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const allOrders = useAppSelector(selectAllOrders);
@@ -27,7 +23,6 @@ const OrdersHistory: FC<IOrdersHistoryProps> = ({ order }) => {
     }, [location.pathname]);
 
     const modalOrderInfo = () => {
-        dispatch(setCurrentOrder(order))
         dispatch(modalOpen('order-info'));
     };
 

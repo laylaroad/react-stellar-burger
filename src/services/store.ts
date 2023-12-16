@@ -7,7 +7,6 @@ import orderReducer from './reducers/orderReducer';
 import burgerConstructorReducer from './reducers/burgerConstructorReducer';
 import modalReducer from './reducers/modalReducer';
 import userReducer from './reducers/userReducer';
-import ordersFeedReducer from './reducers/ordersFeedReducer';
 import feedReducer from './reducers/feedReducer';
 
 
@@ -17,7 +16,6 @@ export const rootReducer = combineReducers({
   burgerConstructor: burgerConstructorReducer,
   modal: modalReducer,
   user: userReducer,
-  feed: ordersFeedReducer,
   feedApi: feedReducer,
 });
 
