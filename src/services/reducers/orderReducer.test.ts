@@ -1,5 +1,4 @@
 
-import { number } from "prop-types";
 import orderReducer, { initialState } from "./orderReducer";
 
 
@@ -80,6 +79,7 @@ describe('Order Reducer', () => {
             orderReducer(initialState,
                 {
                     type: 'order/orderData/rejected',
+                    error: 'error'
                 })
         ).toEqual({
             isLoading: false,
@@ -91,6 +91,7 @@ describe('Order Reducer', () => {
             orderReducer(undefined,
                 {
                     type: 'order/orderData/rejected',
+                    error: 'error'
                 })
         ).toEqual({
             isLoading: false,
