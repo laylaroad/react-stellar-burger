@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { checkResponse, apiUrl } from '../../utils/api';
 import { deleteIngredient } from './burgerConstructorReducer';
-import { IOrders } from '../../types/order-types';
 
 type Ingredient = {
   IngredientId: string[];
@@ -39,7 +38,7 @@ export const postOrderData = createAsyncThunk<OrderData, Ingredient>('order/orde
 
 
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   isLoading: false,
   isError: false,
   isSuccess: false,

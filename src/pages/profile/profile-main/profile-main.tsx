@@ -13,7 +13,7 @@ const ProfileMain: FC = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   const [values, setValues] = useState<{ name: string; email: string; password: string; disabled: boolean }>({
-    name: user?.username || '',
+    name: user?.name || '',
     email: user?.email || '',
     password: '',
     disabled: true,

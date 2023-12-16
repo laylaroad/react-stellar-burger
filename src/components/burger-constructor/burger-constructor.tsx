@@ -58,6 +58,7 @@ const BurgerConstructor: FC = () => {
             accept: 'ingredient',
             drop(ingredient: Ingredient) {
                 const newIngredient = { ...ingredient, _customId: uuidv4() };
+                console.log(newIngredient);
                 dispatch(addIngredient(newIngredient));
             },
             collect: (monitor) => ({

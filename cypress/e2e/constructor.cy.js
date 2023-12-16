@@ -38,9 +38,9 @@ describe('burger-constructor', function () {
         cy.get('@constructor').trigger('drop');
         cy.get('@constructor').find('[class^=ingredients-main_main__]').should('have.length', 2);
 
-        cy.get('button').contains('Оформить заказ').as('makeOrderButton');
-        cy.get('@makeOrderButton').should('exist').should('be.enabled');
-        cy.get('@makeOrderButton').click();
+        cy.get('button').contains('Оформить заказ').as('orderButton');
+        cy.get('@orderButton').should('exist').should('be.enabled');
+        cy.get('@orderButton').click();
         cy.location().should((location) => {
             expect(location.pathname).to.equal('/login');
         });
@@ -66,9 +66,9 @@ describe('burger-constructor', function () {
         });
 
         //making the order assertion
-        cy.get('@makeOrderButton').should('exist');
+        cy.get('@orderButton').should('exist');
         cy.intercept('POST', 'https://norma.nomoreparties.space/api/orders', { fixture: 'order.json' });
-        cy.get('@makeOrderButton').click();
+        cy.get('@orderButton').click();
         cy.get('[class^=modal_modal__]').should('exist');
         cy.get('[class^=modal_modal_card__]').should('exist');
         cy.get('[class^=order-details_order_section__]').should('exist');

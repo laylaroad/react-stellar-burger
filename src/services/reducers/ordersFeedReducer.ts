@@ -10,7 +10,7 @@ interface IOrdersFeedProps {
     currentOrder: IOrder | null;
 }
 
-const initialState: IOrdersFeedProps = {
+export const initialState: IOrdersFeedProps = {
     success: null,
     total: 0,
     totalToday: 0,

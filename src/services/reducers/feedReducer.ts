@@ -4,7 +4,7 @@ interface feedApiState {
     allOrders: IOrders | null,
 }
 
-const initialState: feedApiState = {
+export const initialState: feedApiState = {
     allOrders: null,
 }
 
