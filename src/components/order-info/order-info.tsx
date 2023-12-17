@@ -35,8 +35,23 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal, wsApiPath }) => {
     if (id && allOrders) {
         const currentOrder = allOrders.orders.find((order) => { return order._id === id });
 
-        const orderIngredients = currentOrder?.ingredients.map((ingredientId) => {
-            return ingredientsArray.find((ingredient) => ingredient._id === ingredientId);
+        const ingredientIdsWithCount = currentOrder?.ingredients.map((ingredientId, index, array) => {
+            const count = array.filter((el) => el === ingredientId).length;
+
+            return { id: ingredientId, count: count }
+        })
+
+        const uniqueIngredientIds = currentOrder?.ingredients.filter(
+            (id, index, allIngredients) => allIngredients.indexOf(id) === index
+        )
+
+        const uniqueIngredientIdsWithCount = uniqueIngredientIds?.map(
+            (id) => ingredientIdsWithCount?.find((value) => value.id === id))
+
+        const orderIngredients = uniqueIngredientIdsWithCount?.map((element) => {
+            const ingredient = ingredientsArray.find((ingredient) => ingredient._id === element?.id);
+
+            return { ...ingredient, count: element?.count }
         })
 
         const numberStyles = isModal ? styles.modal_number : styles.number;
@@ -60,7 +75,7 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal, wsApiPath }) => {
                                 </div>
                                 <p className={`${styles.ingredient_name} text text_type_main-default`}>{ingredient?.name}</p>
                                 <p className={`${styles.price} text text_type_main-default`}>
-                                    {ingredient?.type === 'bun' ? 2 : 1} x {ingredient?.price}
+                                    {ingredient?.count} x {ingredient?.price}
 
                                     <CurrencyIcon type="primary" />
                                 </p>
@@ -78,7 +93,7 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal, wsApiPath }) => {
                     <span className={`${styles.order_sum} text text_type_digits-default`}>
                         {
                             orderIngredients?.reduce((totalPrice, ingredient) => {
-                                const ingredientCount = ingredient?.type === 'bun' ? 2 : 1;
+                                const ingredientCount = ingredient?.type === 'bun' ? 2 : ingredient.count || 1;
                                 const price = ingredient?.price || 0;
                                 return totalPrice + price * ingredientCount;
                             }, 0)
