@@ -1,5 +1,5 @@
 
-import { wsActions } from '../actions/actions';
+import { wsActions } from './actions';
 
 export const wsConnect = (url: string) => ({ type: wsActions.wsConnect, url: url });
 

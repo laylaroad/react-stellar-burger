@@ -1,5 +1,9 @@
+import { apiUrl } from '../../src/utils/api';
 
 describe('burger-constructor', function () {
+    const loginPath = '/auth/login';
+    const ordersPath = '/orders';
+
     const ingredientNameClass = '[class^=ingredient-item_ingredient_name__]';
     const burgerIngredientsContainerClass = '[class^=burger-ingredients_container__]';
     const inputClass = '[class^=input__placeholder]';
@@ -67,7 +71,7 @@ describe('burger-constructor', function () {
         cy.get('@input_password').type('65781_quote');
         cy.get('@loginButton').should('be.enabled');
 
-        cy.intercept('POST', 'https://norma.nomoreparties.space/api/auth/login', { fixture: 'login.json' });
+        cy.intercept('POST', `${apiUrl}${loginPath}`, { fixture: 'login.json' });
         cy.get('@loginButton').click();
         cy.location().should((location) => {
             expect(location.pathname).to.equal('/');
@@ -75,7 +79,7 @@ describe('burger-constructor', function () {
 
         //making the order assertion
         cy.get('@orderButton').should('exist');
-        cy.intercept('POST', 'https://norma.nomoreparties.space/api/orders', { fixture: 'order.json' });
+        cy.intercept('POST', `${apiUrl}${ordersPath}`, { fixture: 'order.json' });
         cy.get('@orderButton').click();
         cy.get(modalClass).should('exist');
         cy.get(modalCardClass).should('exist');
