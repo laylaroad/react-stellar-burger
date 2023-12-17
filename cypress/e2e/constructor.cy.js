@@ -42,7 +42,7 @@ describe('burger-constructor', function () {
         cy.get('@orderButton').should('exist').should('be.enabled');
         cy.get('@orderButton').click();
         cy.location().should((location) => {
-            expect(location.pathname).to.equal('/login');
+            expect(location.hash).to.equal('#/login');
         });
 
         //authorization assertion
@@ -83,7 +83,7 @@ describe('burger-constructor', function () {
         cy.contains('булка').should('exist').as('bun').find('[class^=ingredient-item_ingredient_name__]').should('exist');
         cy.get('@bun').click();
         cy.location().should((location) => {
-            expect(location.pathname).to.match(/^\/ingredients\/\w+$/);
+            expect(location.hash).to.match(/^#\/ingredients\/\w+$/);
         });
         cy.get('[class^=modal_modal__]').should('exist');
         cy.get('[class^=modal_modal_card__]').should('exist');
@@ -93,7 +93,7 @@ describe('burger-constructor', function () {
         cy.get('[class^=ingredient-details_ingredient_title__]').should('exist');
         cy.reload(true);
         cy.location().should((location) => {
-            expect(location.pathname).to.match(/^\/ingredients\/\w+$/);
+            expect(location.hash).to.match(/^#\/ingredients\/\w+$/);
         });
         cy.get('[class^=modal_close_button__]').click();
         cy.location().should((location) => {
