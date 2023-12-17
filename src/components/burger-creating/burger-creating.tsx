@@ -27,7 +27,7 @@ const BurgerCreating: FC = () => {
 
                     <div className={styles.mains_wrapper}>
                         {mains.map((item, index: number) => {
-                            return <IngredientsMain item={item} key={item.type + index} index={index} />;
+                            return <IngredientsMain item={item} key={item._customId} index={index} />;
                         })}
                     </div>
 
