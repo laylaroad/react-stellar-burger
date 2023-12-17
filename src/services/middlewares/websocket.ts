@@ -2,6 +2,7 @@ import { Middleware } from 'redux';
 import { RootStore } from '../store';
 
 import * as actions from '../websocket/wsActions';
+import { wsActions } from '../actions/actions';
 import { setAllOrders } from '../../services/reducers/feedReducer';
 import { wsApiHost } from '../../utils/api';
 
@@ -13,7 +14,7 @@ export const socketMiddleware = (): Middleware<{}, RootStore> => {
         const { dispatch } = store;
 
         switch (action.type) {
-            case 'WS_CONNECT':
+            case wsActions.wsConnect:
                 if (socket !== null) {
                     socket.close();
                 }
@@ -47,7 +48,7 @@ export const socketMiddleware = (): Middleware<{}, RootStore> => {
 
                 break;
 
-            case 'WS_DISCONNECT':
+            case wsActions.wsDisconnect:
                 if (socket !== null) {
                     socket.close();
                 }
