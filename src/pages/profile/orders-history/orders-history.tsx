@@ -17,11 +17,11 @@ const OrdersHistory: FC = () => {
     console.log(allOrders);
 
     useEffect(() => {
-        let apiUrl = getApiUrl(userOrdersWsApiPath);
+        let baseUrl = getApiUrl(userOrdersWsApiPath);
 
-        dispatch(wsConnect(apiUrl));
+        dispatch(wsConnect(baseUrl));
         return () => {
-            dispatch(wsDisconnect(apiUrl));
+            dispatch(wsDisconnect(baseUrl));
         };
     }, [location.pathname]);
 

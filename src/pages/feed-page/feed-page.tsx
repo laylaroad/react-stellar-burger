@@ -23,11 +23,11 @@ const FeedPage: FC = () => {
   const allOrders = useAppSelector(selectAllOrders);
 
   useEffect(() => {
-    let apiUrl = getApiUrl(allOrdersWsApiPath);
+    let baseUrl = getApiUrl(allOrdersWsApiPath);
 
-    dispatch(wsConnect(apiUrl));
+    dispatch(wsConnect(baseUrl));
     return () => {
-      dispatch(wsDisconnect(apiUrl));
+      dispatch(wsDisconnect(baseUrl));
     };
   }, [location.pathname]);
 
