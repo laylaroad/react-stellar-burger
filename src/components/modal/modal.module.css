@@ -23,7 +23,6 @@
 .modal_card {
   display: flex;
   justify-content: space-between;
-  box-sizing: border-box;
 }
 
 .close_button {
