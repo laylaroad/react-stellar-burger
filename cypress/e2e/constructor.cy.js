@@ -1,7 +1,7 @@
 
 describe('burger-constructor', function () {
     beforeEach(function () {
-        cy.visit('http://localhost:3000');
+        cy.visit('');
     });
 
     it('constructor does not have ingredients', () => {
