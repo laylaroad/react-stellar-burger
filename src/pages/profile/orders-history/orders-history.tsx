@@ -14,6 +14,7 @@ const OrdersHistory: FC = () => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const allOrders = useAppSelector(selectAllOrders);
+    console.log(allOrders);
 
     useEffect(() => {
         let apiUrl = getApiUrl(userOrdersWsApiPath);
@@ -28,18 +29,17 @@ const OrdersHistory: FC = () => {
         dispatch(modalOpen('order-info'));
     };
 
-
     if (allOrders) {
-        const sortedOrders = allOrders.orders.sort((a: any, b: any) => {
-            const dateA = new Date(a.createdAt) as any;
-            const dateB = new Date(b.createdAt) as any;
-            return dateB - dateA;
-        });
+        // const sortedOrders = allOrders.orders.sort((a: any, b: any) => {
+        //     const dateA = new Date(a.createdAt) as any;
+        //     const dateB = new Date(b.createdAt) as any;
+        //     return dateB - dateA;
+        // });
 
         return (
             <section className={styles.feed}>
                 <ul className={styles.orders}>
-                    {sortedOrders.map((order) => (
+                    {allOrders.orders.map((order) => (
                         <Link
                             className={styles.link}
                             state={{ background: location }}
