@@ -21,12 +21,8 @@ import BurgerCreating from '../burger-creating/burger-creating';
 import OrderDetails from '../order-details/order-details';
 import Modal from '../modal/modal';
 
-
-
-
 const BurgerConstructor: FC = () => {
     {
-
         const dispatch = useAppDispatch();
 
         const price = useAppSelector(selectPrice);
@@ -45,7 +41,6 @@ const BurgerConstructor: FC = () => {
 
         const makeTheOrder: () => void = () => {
             if (user) {
-                // @ts-ignore
                 dispatch(postOrderData({ ingredients: ingredientsAllId }));
                 dispatch(modalOpen('orderDetails'));
                 dispatch(deleteAllIngredients());

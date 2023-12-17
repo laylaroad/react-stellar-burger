@@ -19,12 +19,11 @@ export function checkResponse(res: Response) {
     return res.json().then((err) => Promise.reject(err));
 }
 
-export function request(endPoint: string, options: IRequestOptions) {
+export function request(endPoint: string, options?: IRequestOptions) {
     return fetch(`${apiUrl}/${endPoint}`, options).then(checkResponse);
 }
 
 export async function fetchIngredients() {
-    //@ts-ignore
     return request('ingredients').then((res) => res.data);
 };
 

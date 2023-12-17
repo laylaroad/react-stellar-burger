@@ -6,7 +6,7 @@ import { setUser, setAuthChecked } from '../reducers/userReducer';
 
 export const fetchForgotPass = createAsyncThunk(
     "auth/fetchForgotPass",
-    async (email) => {
+    async (email: string) => {
         const res = await request('password-reset', {
             method: "POST",
             headers: {
