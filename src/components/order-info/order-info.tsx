@@ -11,6 +11,9 @@ import { Ingredient } from '../../types/ingredient-types';
 import { IOrder } from '../../types/order-types';
 
 import { selectAllOrders } from '../../services/selectors/feedSelector';
+
+import { getApiUrl } from '../../utils/api';
+
 interface OrderInfoProps {
     status: boolean;
     isModal: boolean;
@@ -25,9 +28,8 @@ const OrderInfo: FC<OrderInfoProps> = ({ status, isModal, wsApiPath }) => {
 
     useEffect(() => {
         console.log('Connecting to WebSocket...');
-        !isModal && dispatch(wsConnect(wsApiPath));
+        !isModal && dispatch(wsConnect(getApiUrl(wsApiPath)));
     })
-
 
     if (id && allOrders) {
         const currentOrder = allOrders.orders.find((order: IOrder) => { return order._id === id });

@@ -1,14 +1,14 @@
 
 import { wsActions } from '../actions/actions';
 
-export const wsConnect = (apiPath: string) => ({ type: wsActions.wsConnect, apiPath });
+export const wsConnect = (url: string) => ({ type: wsActions.wsConnect, url: url });
 
-export const wsDisconnect = (apiPath: string) => ({ type: wsActions.wsDisconnect, apiPath });
+export const wsDisconnect = (url: string) => ({ type: wsActions.wsDisconnect, url: url });
 
-export const wsDisconnected = (apiPath: string) => ({ type: wsActions.wsDisconnected, apiPath });
+export const wsDisconnected = (url: string) => ({ type: wsActions.wsDisconnected, url: url });
 
-export const wsConnected = (apiPath: string) => ({ type: wsActions.wsConnected, apiPath });
+export const wsConnected = (url: string) => ({ type: wsActions.wsConnected, url: url });
 
-export const wsError = (apiPath: string) => ({ type: wsActions.wsError, apiPath });
+export const wsError = (url: string) => ({ type: wsActions.wsError, url: url });
 
-export const wsClose = (apiPath: string) => ({ type: wsActions.wsClose, apiPath });
+export const wsClose = (url: string) => ({ type: wsActions.wsClose, url: url });

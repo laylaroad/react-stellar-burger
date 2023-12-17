@@ -2,12 +2,10 @@ import { Middleware } from 'redux';
 import { RootStore } from '../store';
 
 import * as actions from '../websocket/wsActions';
-import { wsActions } from '../actions/actions';
 import { setAllOrders } from '../../services/reducers/feedReducer';
-import { wsApiHost } from '../../utils/api';
+import { TwsActions } from '../../services/actions/actions';
 
-export const socketMiddleware = (): Middleware<{}, RootStore> => {
-
+export const socketMiddleware = (wsActions: TwsActions): Middleware<{}, RootStore> => {
     let socket: WebSocket | null = null;
 
     return (store) => (next) => (action) => {
@@ -18,9 +16,8 @@ export const socketMiddleware = (): Middleware<{}, RootStore> => {
                 if (socket !== null) {
                     socket.close();
                 }
-                const accessToken = localStorage.getItem("accessToken")?.split("Bearer ")[1];
-                const url = `${wsApiHost}${action.apiPath}?token=${accessToken}`
-                socket = new WebSocket(url);
+
+                socket = new WebSocket(action.url);
 
                 socket.onopen = (event: any) => {
                     console.log('websocket open', event.target.url);

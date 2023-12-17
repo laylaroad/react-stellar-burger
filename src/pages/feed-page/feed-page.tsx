@@ -13,7 +13,7 @@ import { modalOpen } from '../../services/reducers/modalReducer';
 import { selectAllOrders } from '../../services/selectors/feedSelector';
 
 import { wsConnect, wsDisconnect } from '../../services/websocket/wsActions';
-import { allOrdersWsApiPath } from '../../utils/api';
+import { allOrdersWsApiPath, getApiUrl } from '../../utils/api';
 
 
 const FeedPage: FC = () => {
@@ -23,9 +23,11 @@ const FeedPage: FC = () => {
   const allOrders = useAppSelector(selectAllOrders);
 
   useEffect(() => {
-    dispatch(wsConnect(allOrdersWsApiPath));
+    let apiUrl = getApiUrl(allOrdersWsApiPath);
+
+    dispatch(wsConnect(apiUrl));
     return () => {
-      dispatch(wsDisconnect(allOrdersWsApiPath));
+      dispatch(wsDisconnect(apiUrl));
     };
   }, [location.pathname]);
 

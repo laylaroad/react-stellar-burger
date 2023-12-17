@@ -8,7 +8,7 @@ import { modalOpen } from '../../../services/reducers/modalReducer';
 import { selectAllOrders } from '../../../services/selectors/feedSelector';
 import { wsConnect, wsDisconnect } from '../../../services/websocket/wsActions';
 
-import { userOrdersWsApiPath } from '../../../utils/api';
+import { userOrdersWsApiPath, getApiUrl } from '../../../utils/api';
 
 const OrdersHistory: FC = () => {
     const location = useLocation();
@@ -16,9 +16,11 @@ const OrdersHistory: FC = () => {
     const allOrders = useAppSelector(selectAllOrders);
 
     useEffect(() => {
-        dispatch(wsConnect(userOrdersWsApiPath));
+        let apiUrl = getApiUrl(userOrdersWsApiPath);
+
+        dispatch(wsConnect(apiUrl));
         return () => {
-            dispatch(wsDisconnect(userOrdersWsApiPath));
+            dispatch(wsDisconnect(apiUrl));
         };
     }, [location.pathname]);
 

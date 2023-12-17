@@ -1,6 +1,8 @@
 import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { socketMiddleware } from './middlewares/websocket';
 
+import { wsActions } from './actions/actions';
+
 //reducers
 import ingredientsReducer from './reducers/ingredientsReducer';
 import orderReducer from './reducers/orderReducer';
@@ -23,7 +25,7 @@ export const rootReducer = combineReducers({
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(socketMiddleware());
+    return getDefaultMiddleware().concat(socketMiddleware(wsActions));
   }
 })
 
