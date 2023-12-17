@@ -10,7 +10,7 @@ export const selectPrice = (store: RootStore) => {
     const mains = store.burgerConstructor.mains;
 
     return bun
-        ? 2 * bun.price + mains.reduce((sum: number, thePrice) => sum + thePrice.price, 0)
+        ? 2 * bun.price + mains.reduce((sum, thePrice) => sum + thePrice.price, 0)
         : 0;
 };
 export const selectAllId = (store: RootStore) => {
@@ -18,7 +18,7 @@ export const selectAllId = (store: RootStore) => {
     const mains = store.burgerConstructor.mains;
 
     if (bun && mains) {
-        const mainsId = mains.map((item: IngredientId) => item._id);
+        const mainsId = mains.map((item) => item._id);
         return [...mainsId, bun._id];
     }
 

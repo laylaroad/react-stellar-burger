@@ -30,7 +30,7 @@ const OrdersHistory: FC = () => {
 
 
     if (allOrders) {
-        const sortedOrders = allOrders.orders.toSorted((a: any, b: any) => {
+        const sortedOrders = allOrders.orders.sort((a: any, b: any) => {
             const dateA = new Date(a.createdAt) as any;
             const dateB = new Date(b.createdAt) as any;
             return dateB - dateA;
@@ -39,7 +39,7 @@ const OrdersHistory: FC = () => {
         return (
             <section className={styles.feed}>
                 <ul className={styles.orders}>
-                    {sortedOrders.map((order: IOrder) => (
+                    {sortedOrders.map((order) => (
                         <Link
                             className={styles.link}
                             state={{ background: location }}

@@ -43,7 +43,7 @@ const FeedPage: FC = () => {
         </h1>
         <section className={styles.feed}>
           <ul className={styles.order_column}>
-            {allOrders.orders.map((order: IOrder) => (
+            {allOrders.orders.map((order) => (
               <Link
                 className={styles.link}
                 state={{ background: location }}

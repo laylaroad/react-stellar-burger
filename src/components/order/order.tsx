@@ -21,8 +21,8 @@ const Order: FC<IOrderProps> = ({ order, showOrderStatus, status }) => {
 
   const ingredientsArray = useSelector(selectIngredients);
   const orderIngredientsIds = order.ingredients.slice(0, 6);
-  const orderIngredients = orderIngredientsIds.map((ingredientId: string) => {
-    return ingredientsArray.find((ingredient: Ingredient) => ingredient._id === ingredientId);
+  const orderIngredients = orderIngredientsIds.map((ingredientId) => {
+    return ingredientsArray.find((ingredient) => ingredient._id === ingredientId);
   })
 
 
@@ -51,7 +51,7 @@ const Order: FC<IOrderProps> = ({ order, showOrderStatus, status }) => {
             <p className={`${styles.status} text text_type_main-default`}>{statusText}</p>}
           <div className={styles.card_footer}>
             <div className={styles.images}>
-              {orderIngredients.map((ingredient: Ingredient | undefined, index: Key | undefined) => (
+              {orderIngredients.map((ingredient, index) => (
                 <div key={index} className={styles[`image_${index}`]}>
                   <img
                     className={styles.image}
@@ -63,7 +63,7 @@ const Order: FC<IOrderProps> = ({ order, showOrderStatus, status }) => {
 
               <span className={`${styles.order_sum} text text_type_digits-default`}>
                 {orderIngredients.reduce(
-                  (totalPrice: number, ingredient: Ingredient | undefined) => {
+                  (totalPrice, ingredient) => {
                     const ingredientCount = ingredient?.type === 'bun' ? 2 : 1;
                     const ingredientPrice = ingredient?.price ?? 0;
                     return totalPrice + ingredientPrice * ingredientCount;

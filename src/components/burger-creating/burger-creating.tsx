@@ -26,7 +26,7 @@ const BurgerCreating: FC = () => {
                         extraClass={`${styles.bun} mr-8`} />
 
                     <div className={styles.mains_wrapper}>
-                        {mains.map((item, index: number) => {
+                        {mains.map((item, index) => {
                             return <IngredientsMain item={item} key={item._customId} index={index} />;
                         })}
                     </div>
