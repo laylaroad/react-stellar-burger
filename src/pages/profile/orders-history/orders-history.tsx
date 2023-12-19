@@ -4,45 +4,42 @@ import { Link, useLocation } from 'react-router-dom';
 import Order from '../../../components/order/order';
 import { useAppDispatch, useAppSelector } from '../../../hooks/react-redux';
 import { IOrder } from '../../../types/order-types';
-import { setCurrentOrder } from '../../../services/reducers/ordersFeedReducer';
 import { modalOpen } from '../../../services/reducers/modalReducer';
 import { selectAllOrders } from '../../../services/selectors/feedSelector';
-import { wsConnect, wsDisconnect } from '../../../services/reducers/wsActions';
+import { wsConnect, wsDisconnect } from '../../../services/actions/wsActions';
 
-import { userOrdersWsApiPath } from '../../../utils/api';
-interface IOrdersHistoryProps {
-    order?: IOrder | null;
-}
+import { userOrdersWsApiPath, getApiUrl } from '../../../utils/api';
 
-const OrdersHistory: FC<IOrdersHistoryProps> = ({ order }) => {
+const OrdersHistory: FC = () => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const allOrders = useAppSelector(selectAllOrders);
+    console.log(allOrders);
 
     useEffect(() => {
-        dispatch(wsConnect(userOrdersWsApiPath));
+        let baseUrl = getApiUrl(userOrdersWsApiPath);
+
+        dispatch(wsConnect(baseUrl));
         return () => {
-            dispatch(wsDisconnect(userOrdersWsApiPath));
+            dispatch(wsDisconnect(baseUrl));
         };
     }, [location.pathname]);
 
     const modalOrderInfo = () => {
-        dispatch(setCurrentOrder(order))
         dispatch(modalOpen('order-info'));
     };
 
-
     if (allOrders) {
-        const sortedOrders = allOrders.orders.toSorted((a: any, b: any) => {
-            const dateA = new Date(a.createdAt) as any;
-            const dateB = new Date(b.createdAt) as any;
-            return dateB - dateA;
-        });
+        // const sortedOrders = allOrders.orders.sort((a: any, b: any) => {
+        //     const dateA = new Date(a.createdAt) as any;
+        //     const dateB = new Date(b.createdAt) as any;
+        //     return dateB - dateA;
+        // });
 
         return (
             <section className={styles.feed}>
                 <ul className={styles.orders}>
-                    {sortedOrders.map((order: IOrder) => (
+                    {allOrders.orders.map((order) => (
                         <Link
                             className={styles.link}
                             state={{ background: location }}

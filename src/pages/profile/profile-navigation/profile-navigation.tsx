@@ -1,5 +1,5 @@
 import styles from './profile-navigation.module.css';
-import { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 import { logout } from '../../../services/thunk/user-thunk';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks/react-redux';
@@ -10,11 +10,12 @@ interface ProfileNavigationProps {
 
 const ProfileNavigation: FC<ProfileNavigationProps> = ({ isActive }) => {
 
-    const dispatch = useAppDispatch();
 
     const isActiveLink = isActive ? `${styles.link_active}` : `${styles.link_disactive}`;
 
+    const dispatch = useAppDispatch();
     const handleLogOut = () => {
+        console.log('выход');
         dispatch(logout());
     };
 

@@ -9,35 +9,29 @@ import Order from '../../components/order/order';
 import OrderSummary from '../../components/order-summary/order-summary';
 
 import { IOrder } from '../../types/order-types';
-import { setCurrentOrder } from "../../services/reducers/ordersFeedReducer";
 import { modalOpen } from '../../services/reducers/modalReducer';
 import { selectAllOrders } from '../../services/selectors/feedSelector';
 
-import { wsConnect, wsDisconnect } from '../../services/reducers/wsActions';
-import { allOrdersWsApiPath } from '../../utils/api';
+import { wsConnect, wsDisconnect } from '../../services/actions/wsActions';
+import { allOrdersWsApiPath, getApiUrl } from '../../utils/api';
 
-interface IFeedPageProps {
-  order?: IOrder | null;
-}
 
-const FeedPage: FC<IFeedPageProps> = ({ order }) => {
-
+const FeedPage: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
 
   const allOrders = useAppSelector(selectAllOrders);
 
   useEffect(() => {
-    dispatch(wsConnect(allOrdersWsApiPath));
+    let baseUrl = getApiUrl(allOrdersWsApiPath);
+
+    dispatch(wsConnect(baseUrl));
     return () => {
-      dispatch(wsDisconnect(allOrdersWsApiPath));
+      dispatch(wsDisconnect(baseUrl));
     };
   }, [location.pathname]);
 
-
-
   const modalOrderInfo = () => {
-    dispatch(setCurrentOrder(order))
     dispatch(modalOpen('order-info'));
   };
 
@@ -49,7 +43,7 @@ const FeedPage: FC<IFeedPageProps> = ({ order }) => {
         </h1>
         <section className={styles.feed}>
           <ul className={styles.order_column}>
-            {allOrders.orders.map((order: IOrder) => (
+            {allOrders.orders.map((order) => (
               <Link
                 className={styles.link}
                 state={{ background: location }}

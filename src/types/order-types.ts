@@ -18,3 +18,11 @@ export type IOrders = {
     totalToday: number;
 };
 
+
+export interface IPostOrder {
+    "name": string,
+    "order": {
+        "number": number
+    },
+    "success": boolean
+}

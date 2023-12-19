@@ -1,10 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { checkResponse, apiUrl } from '../../utils/api';
-import { deleteIngredient } from './burgerConstructorReducer';
-import { IOrders } from '../../types/order-types';
 
 type Ingredient = {
-  IngredientId: string[];
+  ingredients: string[];
 };
 
 interface OrderState {
@@ -20,26 +18,25 @@ interface OrderData {
   };
 }
 
-export const postOrderData = createAsyncThunk<OrderData, Ingredient>('order/orderData', async (ingredients, thunkAPI) => {
-  const orderRequestConfig = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      authorization: localStorage.getItem('accessToken') || '',
-    },
-    body: JSON.stringify(ingredients),
-  };
-  const response = await fetch(`${apiUrl}/orders`, orderRequestConfig);
-  const data = await checkResponse(response);
-  //@ts-ignore
-  thunkAPI.dispatch(deleteIngredient());
+export const postOrderData =
+  createAsyncThunk<OrderData, Ingredient>('order/orderData', async (ingredients) => {
+    const orderRequestConfig = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: localStorage.getItem('accessToken') || '',
+      },
+      body: JSON.stringify(ingredients),
+    };
+    const response = await fetch(`${apiUrl}/orders`, orderRequestConfig);
+    const data = await checkResponse(response);
 
-  return data;
-});
-
+    return data;
+  });
 
 
-const initialState: OrderState = {
+
+export const initialState: OrderState = {
   isLoading: false,
   isError: false,
   isSuccess: false,

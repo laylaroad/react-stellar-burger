@@ -9,7 +9,7 @@ interface BurgerConstructorState {
   isError: string | null;
 }
 
-const initialState: BurgerConstructorState = {
+export const initialState: BurgerConstructorState = {
   bun: null,
   mains: [],
   isLoading: false,

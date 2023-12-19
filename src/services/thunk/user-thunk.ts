@@ -6,7 +6,7 @@ import { setUser, setAuthChecked } from '../reducers/userReducer';
 
 export const fetchForgotPass = createAsyncThunk(
     "auth/fetchForgotPass",
-    async (email) => {
+    async (email: string) => {
         const res = await request('password-reset', {
             method: "POST",
             headers: {
@@ -55,7 +55,6 @@ export const login = createAsyncThunk(
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
             dispatch(setUser(data.user));
-            console.log(data);
             dispatch(setAuthChecked(true));
         } else {
             return Promise.reject("Ошибка данных с сервера");
@@ -79,8 +78,8 @@ export const logout = createAsyncThunk(
                 token,
             })
         });
-        const data = await checkResponse(res);
-
+        const data = res;
+        console.log(data);
         if (data.success) {
             localStorage.removeItem('refsreshToken');
             localStorage.removeItem('accessToken');
@@ -104,7 +103,6 @@ export const getUserData = createAsyncThunk(
         });
 
         const data = res;
-
 
         if (data.success) {
             return data;

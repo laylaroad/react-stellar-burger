@@ -9,8 +9,8 @@ const OrderSummary: FC = () => {
 
     const allOrders = useAppSelector(selectAllOrders);
 
-    const getReadyNumbers = allOrders?.orders.filter((item: IOrder) => item.status === 'done')
-    const getInProcessNumbers = allOrders?.orders.filter((item: IOrder) => item.status === 'pending')
+    const getReadyNumbers = allOrders?.orders.filter((item) => item.status === 'done')
+    const getInProcessNumbers = allOrders?.orders.filter((item) => item.status === 'pending')
 
     return (
         <section className={styles.order_summary}>
@@ -19,7 +19,7 @@ const OrderSummary: FC = () => {
                     <h4 className="text text_type_main-medium">Готовы:</h4>
 
                     <ul className={`${styles.orders_done_list} text_type_digits-default`}>
-                        {getReadyNumbers?.map((item: IOrder) => (
+                        {getReadyNumbers?.map((item) => (
                             <li key={item._id}
                                 className={styles.numbers_style}>
                                 {item.number}
@@ -32,7 +32,7 @@ const OrderSummary: FC = () => {
                 <div className={styles.orders_column}>
                     <h4 className="text text_type_main-medium">В работе:</h4>
                     <ul className={`${styles.orders_in_work} text_type_digits-default`}>
-                        {getInProcessNumbers?.map((item: IOrder) => (
+                        {getInProcessNumbers?.map((item) => (
                             <li key={item._id}
                                 className={styles.order_in_process_numbers}> {item.number}</li>
                         ))}
@@ -43,9 +43,9 @@ const OrderSummary: FC = () => {
 
             <div className={styles.total}>
                 <h3 className="text text_type_main-medium">Выполнено за все время</h3>
-                <p className={`${styles.numbers} text text_type_digits-large`}>{allOrders.total}</p>
+                <p className={`${styles.numbers} text text_type_digits-large`}>{allOrders?.total}</p>
                 <h3 className="text text_type_main-medium">Выполнено за сегодня</h3>
-                <p className={`${styles.numbers} text text_type_digits-large`}>{allOrders.totalToday}</p>
+                <p className={`${styles.numbers} text text_type_digits-large`}>{allOrders?.totalToday}</p>
             </div>
         </section>
     )

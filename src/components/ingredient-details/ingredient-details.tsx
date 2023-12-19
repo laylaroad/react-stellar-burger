@@ -11,7 +11,7 @@ const IngredientDetails: FC = () => {
 
     const { id } = useParams();
     const ingredientsArray = useAppSelector(selectIngredients);
-    const ingredient = ingredientsArray.find((ingredient: Ingredient) => ingredient._id === id);
+    const ingredient = ingredientsArray.find((ingredient) => ingredient._id === id);
     if (!ingredient) return null;
 
     return (

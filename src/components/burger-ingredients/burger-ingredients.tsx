@@ -68,7 +68,7 @@ const BurgerIngredients: FC = () => {
                 Булки
               </h3>
               <div className={`${styles.ingredients} pl-4`}>
-                {ingredients.map((ingredient: Ingredient) => {
+                {ingredients.map((ingredient) => {
                   if (ingredient.type === 'bun') {
                     return <IngredientItem key={ingredient._id} _id={ingredient._id} ingredient={ingredient} />;
                   }
@@ -80,7 +80,7 @@ const BurgerIngredients: FC = () => {
               </h3>
 
               <div className={`${styles.ingredients} pl-4`}>
-                {ingredients.map((ingredient: Ingredient) => {
+                {ingredients.map((ingredient) => {
                   if (ingredient.type === 'sauce') {
                     return <IngredientItem key={ingredient._id} _id={ingredient._id} ingredient={ingredient} />;
                   }
@@ -92,7 +92,7 @@ const BurgerIngredients: FC = () => {
               </h3>
 
               <div className={`${styles.ingredients} pl-4`}>
-                {ingredients.map((ingredient: Ingredient) => {
+                {ingredients.map((ingredient) => {
                   if (ingredient.type === 'main') {
                     return <IngredientItem key={ingredient._id} _id={ingredient._id} ingredient={ingredient} />;
                   }

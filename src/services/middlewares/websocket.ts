@@ -1,25 +1,23 @@
 import { Middleware } from 'redux';
 import { RootStore } from '../store';
 
-import * as actions from '../../services/reducers/wsActions';
+import * as actions from '../actions/wsActions';
 import { setAllOrders } from '../../services/reducers/feedReducer';
-import { wsApiHost } from '../../utils/api';
+import { TwsActions } from '../../services/actions/actions';
 
-export const socketMiddleware = (): Middleware<{}, RootStore> => {
-
+export const socketMiddleware = (wsActions: TwsActions): Middleware<{}, RootStore> => {
     let socket: WebSocket | null = null;
 
     return (store) => (next) => (action) => {
         const { dispatch } = store;
 
         switch (action.type) {
-            case 'WS_CONNECT':
+            case wsActions.wsConnect:
                 if (socket !== null) {
                     socket.close();
                 }
-                const accessToken = localStorage.getItem("accessToken")?.split("Bearer ")[1];
-                const url = `${wsApiHost}${action.apiPath}?token=${accessToken}`
-                socket = new WebSocket(url);
+
+                socket = new WebSocket(action.url);
 
                 socket.onopen = (event: any) => {
                     console.log('websocket open', event.target.url);
@@ -47,7 +45,7 @@ export const socketMiddleware = (): Middleware<{}, RootStore> => {
 
                 break;
 
-            case 'WS_DISCONNECT':
+            case wsActions.wsDisconnect:
                 if (socket !== null) {
                     socket.close();
                 }
