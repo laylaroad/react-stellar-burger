@@ -21,6 +21,7 @@ const Register: FC = () => {
 
         try {
             dispatch(register({ email, password, name }));
+            console.log('Регистрация прошла успешно', register);
             navigate("/");
         } catch (error) {
             console.error("Ошибка при регистрации пользователя", error);
