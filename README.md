@@ -4,7 +4,7 @@
 
 A web application for creating cosmic burgers.
 
-Application features:
+##Application features:
 
 - User registration
 - Assembling complete burgers using the implemented React DnD technology
@@ -13,7 +13,7 @@ Application features:
 - Viewing the history of all orders, even without being a registered user
 - Real-time updates of order history and counts without page refreshes, thanks to WebSocket technology
 
-Technologies:
+##Technologies:
 
 - React (DnD, Router)
 - TypeScript
