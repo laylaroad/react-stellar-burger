@@ -1,19 +1,19 @@
-# Проект Stellar Burger
+# Study project Stellar Burger
 
-# Описание проекта
+# Project Description
 
-Веб-приложение для создания космических бургеров.
+A web application for creating cosmic burgers.
 
-Возможности приложения:
+Application features:
 
-- возможность зарегистрироваться;
-- собирать целые бургеры с помощью реализованной технологии React DnD;
-- формировать собственные заказы;
-- заходить в собственный профиль, где можно менять свои персональные данные и видеть историю собственных заказов бургерной;
-- просматривать историю всех заказов, даже если вы не авторизованный пользователь;
-- история заказов и их количество меняются без обновления страницы благодаря технологии WebSocket.
+- User registration;
+- Assembling complete burgers using the implemented React DnD technology;
+- Placing custom orders;
+- Accessing a personal profile to update personal information and view the history of personal burger orders;
+- Viewing the history of all orders, even without being a registered user;
+- Real-time updates of order history and counts without page refreshes, thanks to WebSocket technology.
 
-Стек:
+Technologies:
 
 - React (DnD, Router)
 - TypeScript
@@ -23,4 +23,4 @@
 - Cypress
 - Jest
 
-[Посмотреть проект на GitHub Pages](https://laylaroad.github.io/react-stellar-burger/)
+[View the project on GitHub Pages](https://laylaroad.github.io/react-stellar-burger/)
