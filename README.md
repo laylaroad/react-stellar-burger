@@ -1,7 +1,5 @@
 # Study project Stellar Burger
 
-![Screenshot of React Stellar Burger](screenshot_burger.png)
-
 # Project Description
 
 A web application for creating cosmic burgers.
