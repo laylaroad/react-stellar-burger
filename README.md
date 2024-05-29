@@ -1,5 +1,7 @@
 # Study project Stellar Burger
 
+![Screenshot of React Stellar Burger](https://github.com/laylaroad/react-stellar-burger/tree/gh-pages)
+
 # Project Description
 
 A web application for creating cosmic burgers.
