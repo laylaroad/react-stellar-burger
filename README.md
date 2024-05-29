@@ -1,6 +1,6 @@
 # Study project Stellar Burger
 
-![Screenshot of React Stellar Burger](https://github.com/laylaroad/react-stellar-burger/tree/gh-pages)
+![Screenshot of React Stellar Burger](screenshot_burger.png)
 
 # Project Description
 
